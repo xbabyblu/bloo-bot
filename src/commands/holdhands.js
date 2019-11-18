@@ -1,7 +1,7 @@
 const { Command } = require('chop-tools');
 // cute stuff c;
 module.exports = new Command({
-  name: 'hold hands',
+  name: 'hold',
   description: 'Tell someone you want to hold their hand :heart:',
   args: ['target'],
   delete: true,
