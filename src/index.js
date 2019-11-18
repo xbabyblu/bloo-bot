@@ -30,6 +30,11 @@ function listen(message, words) {
   return content.match(wordRegex);
 }
 
+const COMMON_WORDS = {
+  me: '(i(\'m|\'ve|\'ll)|imma)*',
+  action: '(want|wanna|gonna|going to|will)',
+};
+
 client.on('message', message => {
   if (message.author.bot) {
     return;
@@ -91,16 +96,23 @@ client.on('message', message => {
     );
     return;
   }
-  if (listen(message, ['i(\'m|\'ve)*', '(want|wanna|gonna)', '(off|kill)', 'myself'])) {
+  if (listen(message, ['i(\'m|\'ve)*', '(want|wanna|gonna|going to)', '(off|kill)', 'myself'])) {
     // the message has *kill myself* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
     return;
   }
-
+  // im stupid okay i was looking at the one above -3-
+  if (listen(message, ['(i(\'m|\'ve|\'ll)|imma)*', '(off|offing|kill)', 'myself'])) {
+    // the message has *kill myself* in it
+    message.channel.send(
+      'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
+    );
+    return;
+  }
   if (listen(message, ['kill', 'you'])) {
-    // the message has HOMICIDE in it 👍
+    // the message has HOMICIDE in it 👍:thumbsup:
     message.channel.send('Yeaaaaaaaaaaahhhh..... I don\'t think that is a good idea. Let\'s all take a breather now. \n I shall bring good food and we can all sit down and talk this out! o3o ');
     return;
   }
@@ -115,7 +127,15 @@ client.on('message', message => {
   if (listen(message, ['my', 'favorite', 'food'])) {
     // the message has my favorite food is in it
     message.channel.send(
-      'I like it too! Well. if robots could eat of course, i have no taste buds... but i am sure that is delicious!',
+      'I like that too! Well. If robots could eat of course, I have no taste buds... but I am sure that it is delicious!',
+    );
+    return;
+  }
+  // 😢
+  if (listen(message, ['bloo', 'go', 'away'])) {
+    // the message has my favorite food is in it
+    message.channel.send(
+      ':c I\'m sorry.... Call me when you need me, I\'ll be here.. :pensive:',
     );
     return;
   }
