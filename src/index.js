@@ -13,27 +13,33 @@ client.on('error', err => {
   console.log('[Bloo] Bruuuuuh, a discord error happened.', err);
 });
 
+const COMMON_WORDS = {
+  me: '(i(\'m|\'ve|\'ll)|imma)*',
+  action: '(want|wanna|gonna|going to|will)',
+};
+
 function listen(message, words) {
+  // replace placeholder with command word
+  function commonWord(placeholder) {
+    const w = placeholder.replace(/(\{|\})/, '');
+    if (COMMON_WORDS[w]) return COMMON_WORDS[w];
+    return placeholder;
+  }
   // get the content of the message and put it all to lower case
   const content = message.content.toLowerCase();
 
   // regular expression to check if string contains a word
   const createRegex = (w) => new RegExp(`(\\s+${w}\\s+|\\s+${w}$|^${w}\\s+|^${w}$)`);
-  const wordRegex = createRegex(words);
+  const wordRegex = createRegex(commonWord(words));
 
   // if the words variable is an array check if all of its words are in content
   if (Array.isArray(words)) {
-    return words.every(w => content.match(createRegex(w)));
+    return words.map(commonWord).every(w => content.match(createRegex(w)));
   }
 
   // if words is not an array check if it is in content
   return content.match(wordRegex);
 }
-
-const COMMON_WORDS = {
-  me: '(i(\'m|\'ve|\'ll)|imma)*',
-  action: '(want|wanna|gonna|going to|will)',
-};
 
 client.on('message', message => {
   if (message.author.bot) {
@@ -104,7 +110,7 @@ client.on('message', message => {
     return;
   }
   // im stupid okay i was looking at the one above -3-
-  if (listen(message, ['(i(\'m|\'ve|\'ll)|imma)*', '(off|offing|kill)', 'myself'])) {
+  if (listen(message, ['{me}', '(off|offing|kill)', 'myself'])) {
     // the message has *kill myself* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
@@ -133,7 +139,7 @@ client.on('message', message => {
   }
   // 😢
   if (listen(message, ['bloo', 'go', 'away'])) {
-    // the message has my favorite food is in it
+    // the message.... if anyone literally says this imma smack them.
     message.channel.send(
       ':c I\'m sorry.... Call me when you need me, I\'ll be here.. :pensive:',
     );
