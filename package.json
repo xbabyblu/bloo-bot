@@ -1,7 +1,7 @@
 {
   "name": "bloo",
   "version": "1.0.0",
-  "description": "",
+  "description": "empathetic bot",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -9,7 +9,7 @@
     "format": "prettier --single-quote --trailing-comma all ./src/**/* --write"
   },
   "keywords": [],
-  "author": "",
+  "author": "xlilblu",
   "license": "MIT",
   "dependencies": {
     "chop-tools": "github:joaquimnet/chop-tools#master",
@@ -22,5 +22,8 @@
     "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1"
+  },
+  "engines": {
+    "node": "13.1.0"
   }
 }
