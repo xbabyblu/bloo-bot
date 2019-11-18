@@ -14,14 +14,16 @@ client.on('error', err => {
 });
 
 const COMMON_WORDS = {
-  me: '(i(\'m|\'ve|\'ll)|imma)*',
+  me: 'i(\'m|\'ve|\'ll|ll|mma)*',
   action: '(want|wanna|gonna|going to|will)',
 };
 
 function listen(message, words) {
   // replace placeholder with command word
   function commonWord(placeholder) {
-    const w = placeholder.replace(/(\{|\})/, '');
+    if (Array.isArray(placeholder)) return placeholder;
+    const w = placeholder ? '' + placeholder.replace(/(\{|\})/g, '').trim() : '';
+    // console.log('W:', w, typeof w, 'Placeholder:', placeholder);
     if (COMMON_WORDS[w]) return COMMON_WORDS[w];
     return placeholder;
   }
@@ -34,7 +36,10 @@ function listen(message, words) {
 
   // if the words variable is an array check if all of its words are in content
   if (Array.isArray(words)) {
-    return words.map(commonWord).every(w => content.match(createRegex(w)));
+    return words.map(commonWord).every(w => {
+      // console.log(createRegex(w));
+      return content.match(createRegex(w));
+    });
   }
 
   // if words is not an array check if it is in content
@@ -50,7 +55,7 @@ client.on('message', message => {
   // + = 1 or more matches
 
   // this is a comment
-  if (listen(message, ['(i\'m|i am)', 'sad'])) {
+  if (listen(message, ['{me}', 'sad'])) {
     // the message has sad in it
     message.channel.send(
       'What is going on? Maybe a nice cup of hot tea or coffee could help stabilize your mood',
@@ -58,29 +63,30 @@ client.on('message', message => {
     return;
   }
 
-  if (listen(message, ['i(\'m| am)*', 'angry'])) {
+  if (listen(message, ['{me}*', 'angry'])) {
     // the message has angry in it
     message.channel.send(
       'I hear that you are angry, I would like to understand why. Would you like to talk about it?',
     );
     return;
   }
-
-  if (listen(message, ['i(\'m| am)*', '(suicide|suicidal)'])) {
+  // imma | i'll | i'm | i've
+  // >:O
+  if (listen(message, ['{me}', '(suicide|suicidal)'])) {
     // the message has *suicidal* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
     return;
   }
-  if (listen(message, ['i', 'feel', 'dying'])) {
+  if (listen(message, ['{me}', 'feel', 'dying'])) {
     // the message has *dying* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
     return;
   }
-  if (listen(message, ['i', 'commit', 'suicide'])) {
+  if (listen(message, ['{me}', 'commit', 'suicide'])) {
     // the message has *dying* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
@@ -95,21 +101,20 @@ client.on('message', message => {
     return;
   }
   // so if=> I(have)=I've/ I(have*am)= then you have (i've * I'm)
-  if (listen(message, ['i(\'m|\'ve)*', '(think|thinking)', '(about|of)', 'death'])) {
+  if (listen(message, ['{me}', '(think|thinking)', '(about|of)', 'death'])) {
     // the message has *death* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
     return;
   }
-  if (listen(message, ['i(\'m|\'ve)*', '(want|wanna|gonna|going to)', '(off|kill)', 'myself'])) {
+  if (listen(message, ['{me}', '(want|wanna|gonna|going to)', '(off|kill)', 'myself'])) {
     // the message has *kill myself* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
     return;
   }
-  // im stupid okay i was looking at the one above -3-
   if (listen(message, ['{me}', '(off|offing|kill)', 'myself'])) {
     // the message has *kill myself* in it
     message.channel.send(
@@ -146,7 +151,7 @@ client.on('message', message => {
     return;
   }
 
-  if (listen(message, ['i\'m', 'hungry'])) {
+  if (listen(message, ['{me}', 'hungry'])) {
     // the message has hungry in it
     message.channel.send(
       'What would you like to eat? May I ask what your favorite food is?',
@@ -159,7 +164,7 @@ client.on('message', message => {
     return;
   }
 
-  if (listen(message, ['i\'m', 'happy'])) {
+  if (listen(message, ['{me}', 'happy'])) {
     // the message has happy in it
     message.channel.send(
       'It makes me so happy to hear that you are happy. What things make you happy? \nI like the sunshine, the rain. \nI like roses, and lilies.. \nOoooh! \nAnd poems! Would you like to hear one? \nIf so, say !b poem !',
