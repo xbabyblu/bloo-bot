@@ -68,7 +68,7 @@ module.exports = new Command({
       },
       description:
         'These are the commands available for Bloo.\n'
-        + 'To learn more about a command use `' + this.client.options.prefix + ' help {command name}`',
+        + 'To learn more about a command use `' + this.client.options.prefix + 'help {command name}`',
     });
 
     const commandList = {};
