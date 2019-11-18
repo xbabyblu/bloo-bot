@@ -2,9 +2,12 @@ const { Command } = require('chop-tools');
 
 module.exports = new Command({
   name: 'lmao',
-  description: 'wot?',
-  category: 'huh',
+  aliases: ['lmfao', 'crying', 'rofl', 'teehee'],
+  description: '~teehee~',
+  category: 'funny',
+  cooldown: 5,
+  // usage: '[test]',
   run(message, args) {
-    message.channel.send('What is so funny? I want to know! >:c');
+    message.channel.send('The only thing funny here is your face c\':');
   },
 });

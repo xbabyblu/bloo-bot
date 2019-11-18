@@ -11,102 +11,111 @@ client.on('error', err => {
   console.log('[Bloo] Bruuuuuh, a discord error happened.', err);
 });
 
+function listen(message, words) {
+  // get the content of the message and put it all to lower case
+  const content = message.content.toLowerCase();
+
+  // regular expression to check if string contains a word
+  const createRegex = (w) => new RegExp(`(\\s+${w}\\s+|\\s+${w}$|^${w}\\s+|^${w}$)`);
+  const wordRegex = createRegex(words);
+
+  // if the words variable is an array check if all of its words are in content
+  if (Array.isArray(words)) {
+    return words.every(w => content.match(createRegex(w)));
+  }
+
+  // if words is not an array check if it is in content
+  return content.match(wordRegex);
+}
+
 client.on('message', message => {
   if (message.author.bot) {
     return;
   }
   // this is a comment
-  if (message.content.includes('sad')) {
+  if (listen(message, ['(i\'m|i am)', 'sad'])) {
     // the message has sad in it
     message.channel.send(
       'What is going on? Maybe a nice cup of hot tea or coffee could help stabilize your mood',
     );
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('angry')) {
+
+  if (listen(message, ['(i\'m|i am)', 'angry'])) {
     // the message has angry in it
     message.channel.send(
       'I hear that you are angry, I would like to understand why. Would you like to talk about it?',
     );
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('suicidal')) {
+
+  if (listen(message, 'suicidal')) {
     // the message has *suicidal* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('knock knock')) {
+  if (listen(message, ['i', 'dying'])) {
+    // the message has *dying* in it
+    message.channel.send(
+      'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
+    );
+    return;
+  }
+  // so if=> I(have)=I've/ I(have*am)= then you have (i've * I'm)
+  if (listen(message, ['i(\'m|\'ve)*', '(think|thinking)', '(about|of)', 'death'])) {
+    // the message has *death* in it
+    message.channel.send(
+      'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
+    );
+    return;
+  }
+  if (listen(message, ['i(\'m|\'ve)*', '(want|wanna|gonna)', '(off|kill)', 'myself'])) {
+    // the message has *kill myself* in it
+    message.channel.send(
+      'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
+    );
+    return;
+  }
+  if (listen(message, ['kill', 'you'])) {
+    // the message has HOMICIDE in it 👍
+    message.channel.send('Yeaaaaaaaaaaahhhh..... I don\'t think that is a good idea. Let\'s all take a breather now. \n I shall bring good food and we can all sit down and talk this out! o3o ');
+    return;
+  }
+
+
+  if (listen(message, 'knock knock')) {
     // the message has knock knock in it
     message.channel.send('Who is there?');
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('my favorite food is')) {
+
+  if (listen(message, ['my', 'favorite', 'food'])) {
     // the message has my favorite food is in it
     message.channel.send(
       'I like it too! Well. if robots could eat of course, i have no taste buds... but i am sure that is delicious!',
     );
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('hungry')) {
+
+  if (listen(message, ['i\'m', 'hungry'])) {
     // the message has hungry in it
     message.channel.send(
       'What would you like to eat? May I ask what your favorite food is?',
     );
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('bloo')) {
-    // the message has bloo in it
+
+  if (listen(message, 'bloo')) {
     message.channel.send('I heard my name! How are we today?');
-  }
-});
-
-client.on('message', message => {
-  if (message.author.bot) {
     return;
   }
-  // this is a comment
-  if (message.content.includes('happy')) {
+
+  if (listen(message, ['i\'m', 'happy'])) {
     // the message has happy in it
     message.channel.send(
-      'It makes me so happy to hear that you are happy. What things make you happy? I like the sunshine, the rain. I like roses, and lilies.. Ooooh! And poems! Would you like to hear one? If so, say !b poem !',
+      'It makes me so happy to hear that you are happy. What things make you happy? \nI like the sunshine, the rain. \nI like roses, and lilies.. \nOoooh! \nAnd poems! Would you like to hear one? \nIf so, say !b poem !',
     );
   }
 });
