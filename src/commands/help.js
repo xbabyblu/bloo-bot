@@ -1,6 +1,8 @@
 const { Command } = require('chop-tools');
 const { MessageEmbed } = require('discord.js');
 
+const { CATEGORY_EMOJIS } = require('../util/constants.js');
+
 module.exports = new Command({
   name: 'help',
   description: 'Let me help you!',
@@ -81,7 +83,7 @@ module.exports = new Command({
     cats.sort();
     cats.forEach((category) => {
       embed.addField(
-        `${/*CATEGORY_EMOJIS[category] ||*/ ':page_facing_up:'} ${category}`,
+        `${CATEGORY_EMOJIS[category] || ':page_facing_up:'} ${category}`,
         '>' + commandList[category]
           .filter(c => !c.hidden)
           .sort((a, b) => a < b)
@@ -92,4 +94,3 @@ module.exports = new Command({
     return message.channel.send(embed);
   },
 });
-

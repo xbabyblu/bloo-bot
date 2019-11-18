@@ -32,6 +32,10 @@ client.on('message', message => {
   if (message.author.bot) {
     return;
   }
+
+  // * = 0 or more matches
+  // + = 1 or more matches
+
   // this is a comment
   if (listen(message, ['(i\'m|i am)', 'sad'])) {
     // the message has sad in it
@@ -41,7 +45,7 @@ client.on('message', message => {
     return;
   }
 
-  if (listen(message, ['(i\'m|i am)', 'angry'])) {
+  if (listen(message, ['i(\'m| am)*', 'angry'])) {
     // the message has angry in it
     message.channel.send(
       'I hear that you are angry, I would like to understand why. Would you like to talk about it?',
@@ -49,14 +53,28 @@ client.on('message', message => {
     return;
   }
 
-  if (listen(message, 'suicidal')) {
+  if (listen(message, ['i(\'m| am)*', '(suicide|suicidal)'])) {
     // the message has *suicidal* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
     );
     return;
   }
-  if (listen(message, ['i', 'dying'])) {
+  if (listen(message, ['i', 'feel', 'dying'])) {
+    // the message has *dying* in it
+    message.channel.send(
+      'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
+    );
+    return;
+  }
+  if (listen(message, ['i', 'commit', 'suicide'])) {
+    // the message has *dying* in it
+    message.channel.send(
+      'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
+    );
+    return;
+  }
+  if (listen(message, ['(take|taking)', '(own|my)', 'life'])) {
     // the message has *dying* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',

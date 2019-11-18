@@ -3,7 +3,7 @@ const { Command } = require('chop-tools');
 module.exports = new Command({
   name: 'cute',
   aliases: ['pretty'],
-  description: 'Tell someone they\'re cute',
+  description: 'Tell someone they\'re cute :smiling_face_with_3_hearts:',
   args: ['target'],
   delete: true,
   category: 'interations',
