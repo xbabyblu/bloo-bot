@@ -98,6 +98,7 @@ client.on('message', message => {
     );
     return;
   }
+
   if (listen(message, ['kill', 'you'])) {
     // the message has HOMICIDE in it 👍
     message.channel.send('Yeaaaaaaaaaaahhhh..... I don\'t think that is a good idea. Let\'s all take a breather now. \n I shall bring good food and we can all sit down and talk this out! o3o ');
