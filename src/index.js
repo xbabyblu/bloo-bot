@@ -1,5 +1,7 @@
 require('dotenv').config();
 const ChopTools = require('chop-tools');
+const express = require('express');
+
 
 const client = new ChopTools.Client();
 
@@ -137,6 +139,11 @@ client.on('message', message => {
     );
   }
 });
+
+// web server to keep Bloo AWOKENED
+const app = express();
+app.get('*', (req, res) => res.end('Bloo'));
+app.listen(process.env.PORT || 3000);
 
 client
   .login(process.env.TOKEN)
