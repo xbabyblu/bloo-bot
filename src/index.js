@@ -9,8 +9,15 @@ client.on('ready', () => {
   console.log(`[Bloo] It's discord time! [${client.user.tag}]`);
   client.user.setActivity('in a field of flowers', { type: 'PLAYING' });
 });
+
 client.on('error', err => {
   console.log('[Bloo] Bruuuuuh, a discord error happened.', err);
+});
+
+// Middleware to log command calls
+client.use((call, next) => {
+  console.log(`[${(new Date()).toLocaleTimeString()}] ${call.callerTag}: ${call.message.content}`);
+  next();
 });
 
 const COMMON_WORDS = {
@@ -36,10 +43,7 @@ function listen(message, words) {
 
   // if the words variable is an array check if all of its words are in content
   if (Array.isArray(words)) {
-    return words.map(commonWord).every(w => {
-      // console.log(createRegex(w));
-      return content.match(createRegex(w));
-    });
+    return words.map(commonWord).every(w => content.match(createRegex(w)));
   }
 
   // if words is not an array check if it is in content
