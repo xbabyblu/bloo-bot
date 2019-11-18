@@ -14,7 +14,7 @@ client.on('error', err => {
   console.log('[Bloo] Bruuuuuh, a discord error happened.', err);
 });
 
-// Middleware to log command calls
+// Middleware to log command calls :thumbsup:👍
 client.use((call, next) => {
   console.log(`[${(new Date()).toLocaleTimeString()}] ${call.callerTag}: ${call.message.content}`);
   next();
