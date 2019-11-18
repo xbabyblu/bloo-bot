@@ -25,6 +25,7 @@ module.exports = {
     'new-cap': 'off',
     'no-console': 'off',
     'arrow-parens': 'off',
-    'prefer-template': 'off'
+    'prefer-template': 'off',
+    'operator-linebreak': 'off',
   },
 };

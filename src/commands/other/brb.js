@@ -8,8 +8,6 @@ module.exports = new Command({
   delete: true,
   hidden: true,
   run(message, args) {
-    message.channel.send(
-      'xlilblu has said \'brb, gotta wizz\'',
-    );
+    message.channel.send("xlilblu has said 'brb, gotta wizz' 🚽");
   },
 });

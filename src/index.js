@@ -2,7 +2,6 @@ require('dotenv').config();
 const ChopTools = require('chop-tools');
 const express = require('express');
 
-
 const client = new ChopTools.Client();
 
 client.on('ready', () => {
@@ -16,12 +15,16 @@ client.on('error', err => {
 
 // Middleware to log command calls :thumbsup:👍
 client.use((call, next) => {
-  console.log(`[${(new Date()).toLocaleTimeString()}] ${call.callerTag}: ${call.message.content}`);
+  console.log(
+    `[${new Date().toLocaleTimeString()}] ${call.callerTag}: ${
+      call.message.content
+    }`,
+  );
   next();
 });
 
 const COMMON_WORDS = {
-  me: 'i(\'m|\'ve|\'ll|ll|mma)*',
+  me: "i('m|'ve|'ll|ll|mma)*",
   action: '(want|wanna|gonna|going to|will)',
 };
 
@@ -29,7 +32,9 @@ function listen(message, words) {
   // replace placeholder with command word
   function commonWord(placeholder) {
     if (Array.isArray(placeholder)) return placeholder;
-    const w = placeholder ? '' + placeholder.replace(/(\{|\})/g, '').trim() : '';
+    const w = placeholder
+      ? '' + placeholder.replace(/(\{|\})/g, '').trim()
+      : '';
     // console.log('W:', w, typeof w, 'Placeholder:', placeholder);
     if (COMMON_WORDS[w]) return COMMON_WORDS[w];
     return placeholder;
@@ -38,7 +43,8 @@ function listen(message, words) {
   const content = message.content.toLowerCase();
 
   // regular expression to check if string contains a word
-  const createRegex = (w) => new RegExp(`(\\s+${w}\\s+|\\s+${w}$|^${w}\\s+|^${w}$)`);
+  const createRegex = w =>
+    new RegExp(`(\\s+${w}\\s+|\\s+${w}$|^${w}\\s+|^${w}$)`);
   const wordRegex = createRegex(commonWord(words));
 
   // if the words variable is an array check if all of its words are in content
@@ -112,7 +118,14 @@ client.on('message', message => {
     );
     return;
   }
-  if (listen(message, ['{me}', '(want|wanna|gonna|going to)', '(off|kill)', 'myself'])) {
+  if (
+    listen(message, [
+      '{me}',
+      '(want|wanna|gonna|going to)',
+      '(off|kill)',
+      'myself',
+    ])
+  ) {
     // the message has *kill myself* in it
     message.channel.send(
       'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.',
@@ -128,10 +141,11 @@ client.on('message', message => {
   }
   if (listen(message, ['kill', 'you'])) {
     // the message has HOMICIDE in it 👍:thumbsup:
-    message.channel.send('Yeaaaaaaaaaaahhhh..... I don\'t think that is a good idea. Let\'s all take a breather now. \n I shall bring good food and we can all sit down and talk this out! o3o ');
+    message.channel.send(
+      "Yeaaaaaaaaaaahhhh..... I don't think that is a good idea. Let's all take a breather now. \n I shall bring good food and we can all sit down and talk this out! o3o ",
+    );
     return;
   }
-
 
   if (listen(message, 'knock knock')) {
     // the message has knock knock in it
@@ -150,7 +164,7 @@ client.on('message', message => {
   if (listen(message, ['bloo', 'go', 'away'])) {
     // the message.... if anyone literally says this imma smack them.
     message.channel.send(
-      ':c I\'m sorry.... Call me when you need me, I\'ll be here.. :pensive:',
+      ":c I'm sorry.... Call me when you need me, I'll be here.. :pensive:",
     );
     return;
   }

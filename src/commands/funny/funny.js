@@ -8,6 +8,6 @@ module.exports = new Command({
   cooldown: 5,
   // usage: '[test]',
   run(message, args) {
-    message.channel.send('The only thing funny here is your face c\':');
+    message.channel.send("The only thing funny here is your face c':");
   },
 });

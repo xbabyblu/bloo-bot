@@ -1,12 +1,12 @@
 const { Command } = require('chop-tools');
 const { MessageEmbed } = require('discord.js');
 
-const { CATEGORY_EMOJIS } = require('../util/constants.js');
+const { CATEGORY_EMOJIS } = require('../../util/constants.js');
 
 module.exports = new Command({
   name: 'help',
   description: 'Let me help you!',
-  category: 'help',
+  category: 'info',
   runIn: ['text', 'dm'],
   run(message, args) {
     // return help about specific command
@@ -39,24 +39,21 @@ module.exports = new Command({
       if (command.usage) {
         embed.addField(
           ':book: Usage',
-          `\`\`\`${this.client.options.prefix}${command.name} ${command.usage}\`\`\``
-            + '```python\n'
-            + '# Remove the brackets.\n'
-            + '# {} = Required arguments\n'
-            + '# [] = Optional arguments.```',
+          `\`\`\`${this.client.options.prefix}${command.name} ${command.usage}\`\`\`` +
+            '```python\n' +
+            '# Remove the brackets.\n' +
+            '# {} = Required arguments\n' +
+            '# [] = Optional arguments.```',
         );
       }
       if (command.example) {
-        const commandExampleStart = `${this.client.options.prefix}${command.name} `;
-        embed.addField(
-          ':ledger: Example',
-          Array.isArray(command.example)
-            ? command.example.reduce(
-              (acc, cur) => `${acc} \`\`\`${commandExampleStart}${cur}\`\`\``,
-              '',
-            )
-            : `\`\`\`${commandExampleStart}${command.example}\`\`\``,
-        );
+        const start = `${this.client.options.prefix}${command.name} `;
+        const e = command.example;
+        const isArr = Array.isArray(e);
+        const examples = isArr
+          ? e.reduce((a, c) => `${a} \`\`\`${start}${c}\`\`\``, '')
+          : `\`\`\`${start}${e}\`\`\``;
+        embed.addField(':ledger: Example', examples);
       }
       return message.channel.send(embed);
     }
@@ -69,25 +66,31 @@ module.exports = new Command({
         icon_url: this.client.user.avatarURL(),
       },
       description:
-        'These are the commands available for Bloo.\n'
-        + 'To learn more about a command use `' + this.client.options.prefix + 'help {command name}`',
+        'These are the commands available for Bloo.\n' +
+        'To learn more about a command use `' +
+        this.client.options.prefix +
+        'help {command name}`',
     });
 
     const commandList = {};
 
-    this.client.commands.forEach((c) => {
-      commandList[c.category || 'other'] = [...(commandList[c.category || 'other'] || []), c];
+    this.client.commands.forEach(c => {
+      commandList[c.category || 'other'] = [
+        ...(commandList[c.category || 'other'] || []),
+        c,
+      ];
     });
 
     const cats = Object.keys(commandList);
     cats.sort();
-    cats.forEach((category) => {
+    cats.forEach(category => {
       embed.addField(
         `${CATEGORY_EMOJIS[category] || ':page_facing_up:'} ${category}`,
-        '>' + commandList[category]
-          .filter(c => !c.hidden)
-          .sort((a, b) => a < b)
-          .reduce((acc, cur) => `${acc} \`${cur.name}\``, ''),
+        '>' +
+          commandList[category]
+            .filter(c => !c.hidden)
+            .sort((a, b) => a < b)
+            .reduce((acc, cur) => `${acc} \`${cur.name}\``, ''),
       );
     });
 
