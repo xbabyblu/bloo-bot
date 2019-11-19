@@ -2,7 +2,7 @@ const { Command } = require('chop-tools');
 
 module.exports = new Command({
   name: 'spaghetti',
-  description: 'food?',
+  description: 'italian goodness',
   category: 'food',
   run(message, args) {
     message.channel.send(

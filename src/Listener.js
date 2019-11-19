@@ -18,6 +18,7 @@ module.exports = class Listener {
         run(message);
         // set cooldown
         this.cooldowns.set(author.id, Date.now() + this.cooldown * 1000);
+        return true;
       }
     }
   }

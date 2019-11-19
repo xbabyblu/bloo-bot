@@ -2,7 +2,7 @@ const { Command } = require('chop-tools');
 
 module.exports = new Command({
   name: 'popcorn',
-  description: 'food?',
+  description: 'someone woke up one morning and said "I\'m going to put corn in a pan and see what happens..." and **BOOM** We have popcorn.',
   category: 'food',
   run(message, args) {
     message.channel.send(

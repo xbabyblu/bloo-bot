@@ -2,7 +2,7 @@ const { Command } = require('chop-tools');
 
 module.exports = new Command({
   name: 'Coffee',
-  aliases: ['Kaffe'],
+  aliases: ['kaffe'], // 😭 café 🍵
   description: 'A warm beverage, where yes... People get addicted to. It is good for you and gives you a nice boost of caffeine',
   category: 'food',
   run(message, args) {

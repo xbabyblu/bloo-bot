@@ -1,7 +1,7 @@
 require('dotenv').config();
 const ChopTools = require('chop-tools');
-const express = require('express');
 
+const web = require('./web');
 const applyListeners = require('./listeners/listeners');
 
 const client = new ChopTools.Client();
@@ -28,10 +28,8 @@ client.use((call, next) => {
 // Listeners
 applyListeners(client);
 
-// web server to keep Bloo AWOKENED
-const app = express();
-app.get('*', (req, res) => res.end('Bloo'));
-app.listen(process.env.PORT || 3000);
+// Express Server
+web();
 
 client
   .login(process.env.TOKEN)
