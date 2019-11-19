@@ -2,13 +2,9 @@ require('dotenv').config();
 const ChopTools = require('chop-tools');
 const express = require('express');
 
-const client = new ChopTools.Client();
+const applyListeners = require('./listeners/listeners');
 
-// Message listeners
-const suicideListeners = require('./listeners/suicide');
-const emotionListeners = require('./listeners/emotions');
-const blooListeners = require('./listeners/bloo');
-const miscListeners = require('./listeners/misc');
+const client = new ChopTools.Client();
 
 client.on('ready', () => {
   console.log(`[Bloo] It's discord time! [${client.user.tag}]`);
@@ -29,11 +25,8 @@ client.use((call, next) => {
   next();
 });
 
-// Bloo will listen to messages and respond when she finds the appropriate trigger words
-emotionListeners(client);
-blooListeners(client);
-miscListeners(client);
-suicideListeners(client);
+// Listeners
+applyListeners(client);
 
 // web server to keep Bloo AWOKENED
 const app = express();
