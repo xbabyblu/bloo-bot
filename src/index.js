@@ -30,13 +30,10 @@ client.use((call, next) => {
 });
 
 // Bloo will listen to messages and respond when she finds the appropriate trigger words
-client.on('message', message => {
-  if (message.author.bot) return;
-  suicideListeners(message);
-  emotionListeners(message);
-  blooListeners(message);
-  miscListeners(message);
-});
+emotionListeners(client);
+blooListeners(client);
+miscListeners(client);
+suicideListeners(client);
 
 // web server to keep Bloo AWOKENED
 const app = express();

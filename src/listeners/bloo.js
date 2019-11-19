@@ -1,17 +1,26 @@
+const Listener = require('../Listener');
 const listen = require('../util/listen');
 
-module.exports = function blooListeners(message) {
+module.exports = function blooListeners(client) {
   // 😢
-  if (listen(message, ['bloo', 'go', 'away'])) {
-    // the message.... if anyone literally says this imma smack them.
-    message.channel.send(
-      ":c I'm sorry.... Call me when you need me, I'll be here.. :pensive:",
-    );
-    return;
-  }
+  const goAway = new Listener({
+    client,
+    words: ['bloo', 'go', 'away'],
+    cooldown: 1,
+    run(message) {
+      // the message.... if anyone literally says this imma smack them.
+      message.channel.send(
+        ":c I'm sorry.... Call me when you need me, I'll be here.. :pensive:",
+      );
+    },
+  });
 
-  // order matters
-  if (listen(message, 'bloo')) {
-    message.channel.send('I heard my name! How are we today?');
-  }
+  const bloo = new Listener({
+    client,
+    words: 'bloo',
+    cooldown: 5,
+    run(message) {
+      message.channel.send('I heard my name! How are we today?');
+    }
+  })
 };
