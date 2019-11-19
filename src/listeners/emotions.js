@@ -67,10 +67,11 @@ module.exports = function emotionListeners(message) {
   // }
 
   if (listen(message, ['{me}', 'sad'])) {
-    // the message has hungry in it
+    // the message has sad in it
     Prompter.message(message.channel, {
       question: 'What is going on? Maybe a nice cup of hot tea or coffee could help stabilize your mood.',
       userId: message.author.id,
+      cooldown: 30000,
       max: 1,
       timeout: 10000,
       delete: false,
