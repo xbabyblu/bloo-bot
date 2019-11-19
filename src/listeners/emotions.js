@@ -58,6 +58,7 @@ module.exports = function emotionListeners(message) {
     );
   });
 
+  // bugged
   sad.listen(message, msg => {
     Prompter.message(message.channel, {
       question: 'What is going on? Maybe a nice cup of hot tea or coffee could help stabilize your mood.',

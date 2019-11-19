@@ -5,7 +5,7 @@ module.exports = function makeEmbed(text, image, message) {
     author: { name: message.author.username, iconURL: message.author.avatarURL() },
     footer: {
       text: '<3',
-      icon_url: this.client.user.avatarURL(),
+      icon_url: message.client.user.avatarURL(),
     },
     description: text,
   };
