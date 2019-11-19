@@ -5,6 +5,7 @@ module.exports = new Command({
   aliases: ['lmfao', 'crying', 'rofl', 'teehee'],
   description: '~teehee~',
   category: 'funny',
+  delete: true,
   cooldown: 5,
   // usage: '[test]',
   run(message, args) {

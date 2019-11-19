@@ -2,7 +2,7 @@ const Prompter = require('discordjs-prompter');
 
 const listen = require('../util/listen');
 
-const ME = '(i|me|my)';
+const ME = '\\s+(i|me|my|am)\\s+|^(i|me|my|am)\\s+||\\s+(i|me|my|am)$';
 
 function firstToSecondPerson(match) {
   switch (match.trim()) {
@@ -12,6 +12,8 @@ function firstToSecondPerson(match) {
       return ' you ';
     case 'my':
       return ' your ';
+    case 'am':
+      return ' are ';
     default:
       return '';
   }
@@ -83,7 +85,7 @@ module.exports = function emotionListeners(message) {
         const response = responses.first();
 
         // Respond
-        message.channel.send(`You are sad because ${response.replace(new RegExp(`${ME}`, 'g'), firstToSecondPerson)}, right? I am sorry you are going through this. But without the bad things in life, we would not know how to enjoy the good things. That's the beauty in life.`);
+        message.channel.send(`You are sad because ${response}, right? I am sorry you are going through this. But without the bad things in life, we would not know how to enjoy the good things. That's the beauty in life.`);
       });
     return;
   }
