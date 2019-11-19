@@ -64,7 +64,6 @@ module.exports = function emotionListeners(message) {
       userId: message.author.id,
       max: 1,
       timeout: 10000,
-      delete: false,
     })
       .then(responses => {
         // If no responses, the time ran out

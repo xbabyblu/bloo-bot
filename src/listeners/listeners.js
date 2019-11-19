@@ -3,6 +3,7 @@ const blooListeners = require('./bloo');
 const miscListeners = require('./misc');
 const suicideListeners = require('./suicide');
 const anxietyListeners = require('./anxiety');
+const depressedListeners = require('./depressed');
 
 module.exports = function applyListerners(client) {
   client.on('message', message => {
@@ -12,5 +13,6 @@ module.exports = function applyListerners(client) {
     miscListeners(message);
     suicideListeners(message);
     anxietyListeners(message);
+    depressedListeners(message);
   });
 };
