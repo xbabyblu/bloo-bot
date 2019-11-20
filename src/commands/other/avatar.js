@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const { MessageEmbed } = require('discord.js');
 
 const makeEmbed = require('../../util/makeEmbed');
 
