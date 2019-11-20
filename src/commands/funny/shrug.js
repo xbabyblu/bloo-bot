@@ -5,6 +5,7 @@ module.exports = new Command({
   description: 'Shrug~',
   aliases: ['meh'],
   category: 'funny',
+  delete: true,
   run(message) {
     message.channel.send('¯\\_(ツ)_/¯');
   },
