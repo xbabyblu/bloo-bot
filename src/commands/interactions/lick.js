@@ -8,7 +8,10 @@ module.exports = new Command({
   category: 'interactions',
   run(message, args, call) {
     const target = message.mentions.members.first();
-    if (!target) return;
+    if (!target) {
+      message.channel.send("I couldn't find that person.");
+      return;
+    }
     target.user.send(
       `Well.. How do I say this..\n \n${call.callerTag} has licked you. And now, I will proceed to walk away... :zany_face: `,
     );

@@ -40,7 +40,10 @@ module.exports = new Command({
   category: 'interactions',
   run(message, args, call) {
     const target = message.mentions.members.first();
-    if (!target) return;
+    if (!target) {
+      message.channel.send("I couldn't find that person.");
+      return;
+    }
 
     const embed = makeEmbed(
       `\n${call.callerTag} has kissed you.\nMy... you're looking quite flustered.. \nDo you want me to turn a fan on to help you cool down?`,

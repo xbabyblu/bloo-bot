@@ -19,7 +19,10 @@ module.exports = new Command({
   category: 'interactions',
   run(message, args, call) {
     const target = message.mentions.members.first();
-    if (!target) return;
+    if (!target) {
+      message.channel.send("I couldn't find that person.");
+      return;
+    }
     const embed = makeEmbed(
       `\n${call.callerTag} has high-fived you :raised_hand: :pray: good job, on whatever you did to deserve a high-five :grin:`,
       random(images),
