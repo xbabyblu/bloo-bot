@@ -1,3 +1,5 @@
+const sentiment = require('multilang-sentiment');
+
 const Listener = require('../Listener');
 
 const MSG = 'If you are feeling suicidal and located in the United States, please call 1-800-273-8255, you can also text "HELP" to 741741.\nIf you are uncomfortable with either of these, please reach out to someone you trust and/or find a safe place.\nYou are worth more, you matter.\nNo matter how you are feeling, you are valid and strong.';
@@ -47,7 +49,21 @@ const suicide8 = new Listener({
   cooldown: 10,
 });
 
+const suicideBySentiment = new Listener({
+  words: ['(suicide|kill myself|off myself|oof myself|my own life)'],
+  cooldown: 5,
+});
+
 module.exports = function suicideListeners(message) {
+  if (suicideBySentiment.listen(message, msg => {
+    const content = msg.content;
+    const anal = sentiment(content);
+    console.log(anal);
+    if (anal.score < -5) {
+      msg.channel.send(`Detected a possibly suicidal message with a really low sentiment score. (${anal.score})`);
+    }
+    return false;
+  }));
   if (suicide1.listen(message, msg => msg.channel.send(MSG))) return;
   if (suicide2.listen(message, msg => msg.channel.send(MSG))) return;
   if (suicide3.listen(message, msg => msg.channel.send(MSG))) return;
