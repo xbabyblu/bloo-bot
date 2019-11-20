@@ -1,7 +1,6 @@
 const Prompter = require('discordjs-prompter');
 
 const Listener = require('../Listener');
-const listen = require('../util/listen');
 
 const angry = new Listener({
   words: ['{me}', 'angry'],
@@ -24,9 +23,8 @@ const sad = new Listener({
 });
 
 module.exports = function emotionListeners(message) {
-
   angry.listen(message, msg => {
-    message.channel.send(
+    msg.channel.send(
       'I hear that you are angry, I would like to understand why. Would you like to talk about it?',
     );
   });
@@ -41,14 +39,14 @@ module.exports = function emotionListeners(message) {
       .then(responses => {
         // If no responses, the time ran out
         if (!responses.size) {
-          message.channel.send('No time for questions? I see.');
+          msg.channel.send('No time for questions? I see.');
           return;
         }
         // Gets the first message in the collection
         const response = responses.first();
 
         // Respond
-        message.channel.send(`**${response}** Is that so?`);
+        msg.channel.send(`**${response}** Is that so?`);
       });
   });
 
@@ -75,9 +73,11 @@ module.exports = function emotionListeners(message) {
         // Gets the first message in the collection
         const response = responses.first();
 
-        //* proper response to sadness: Empathetic response formula => Good Feeling Words, Tentafier, & Situation
+        // Proper response to sadness:
+        // Empathetic response formula => Good Feeling Words, Tentafier, & Situation
         // i.e: "i am sad that my parents are going through a divorce", proper response would be
-        // "I understand that you are feeling SAD that you are going through such. You are strong for talking about it"
+        // "I understand that you are feeling SAD that you are going through such.
+        // You are strong for talking about it"
         // so how can we make a robot do a simplier version of such?
         // "You're upset because (x) right? I'm sorry you are going through this.
         // Everything is going to work out in the end, we go through things for a reason.

@@ -1,5 +1,4 @@
 const Listener = require('../Listener');
-const listen = require('../util/listen');
 
 const murder = new Listener({
   words: ['kill', 'you'],

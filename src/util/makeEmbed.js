@@ -14,4 +14,4 @@ module.exports = function makeEmbed(text, image, message) {
   embed.setImage(image);
 
   return embed;
-}
+};

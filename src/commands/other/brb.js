@@ -7,7 +7,7 @@ module.exports = new Command({
   category: 'other',
   delete: true,
   hidden: true,
-  run(message, args) {
+  run(message) {
     message.channel.send("xlilblu has said 'brb, gotta wizz' 🚽");
   },
 });

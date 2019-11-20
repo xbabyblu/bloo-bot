@@ -18,6 +18,7 @@ class Listener {
         run(message);
         // set cooldown
         this.cooldowns.set(author.id, Date.now() + this.cooldown * 1000);
+        // eslint-disable-next-line consistent-return
         return true;
       }
     }
@@ -26,7 +27,7 @@ class Listener {
   toString() {
     return `Listener [${this.words.join(' ')}]`;
   }
-};
+}
 
 Listener[Symbol.toStringTag] = 'Listener';
 

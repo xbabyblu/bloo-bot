@@ -4,7 +4,7 @@ module.exports = new Command({
   name: 'ping',
   description: 'Ping!',
   category: 'testing',
-  run(message, args) {
+  run(message) {
     message.channel.send('Pong.');
   },
 });

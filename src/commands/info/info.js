@@ -6,7 +6,7 @@ module.exports = new Command({
   description: 'Shows some info about Bloo.',
   category: 'info',
   aliases: ['stats'],
-  run(message, args) {
+  run(message) {
     const guilds = this.client.guilds.size;
     const users = this.client.users.size;
     const uptime = this.client.uptime;

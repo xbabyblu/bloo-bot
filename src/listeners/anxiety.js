@@ -22,8 +22,9 @@ module.exports = function blooListeners(message) {
   anxiety.listen(message, msg => {
     console.log('anxiety');
     msg.channel.send(
-      'I\'m hearing that you\'re having feelings of anxiety, if I\'m correct. \nI personally hate anxiety and I understand just how bad it can feel. \nNever knowing if it is going to leave, unsure of your comfort zones/things. \nBut like the leaves in the fall, anxiety does wither away. \nIt\'s like the seasons, and I promise, \n**you will be okay in the end.**');
+      'I\'m hearing that you\'re having feelings of anxiety, if I\'m correct. \nI personally hate anxiety and I understand just how bad it can feel. \nNever knowing if it is going to leave, unsure of your comfort zones/things. \nBut like the leaves in the fall, anxiety does wither away. \nIt\'s like the seasons, and I promise, \n**you will be okay in the end.**',
+    );
   });
 };
 
-// 🚽 
+// 🚽

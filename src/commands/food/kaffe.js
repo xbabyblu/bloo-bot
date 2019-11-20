@@ -5,7 +5,7 @@ module.exports = new Command({
   aliases: ['kaffe'], // 😭 café 🍵
   description: 'A warm beverage, where yes... People get addicted to. It is good for you and gives you a nice boost of caffeine',
   category: 'food',
-  run(message, args) {
+  run(message) {
     message.channel.send(
       'I enjoy my coffee with extra creme and light sugar. Sometimes adding a nice swirl of cinnamon.',
     );

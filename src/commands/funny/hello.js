@@ -4,7 +4,7 @@ module.exports = new Command({
   name: 'Hello',
   description: 'greetings!',
   category: 'funny',
-  run(message, args) {
+  run(message) {
     message.channel.send('Yeehaw!');
   },
 });
