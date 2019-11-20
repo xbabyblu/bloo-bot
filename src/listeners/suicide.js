@@ -49,6 +49,11 @@ const suicide8 = new Listener({
   cooldown: 10,
 });
 
+const suicide9 = new Listener({
+  words: ['{me}', '(want|wanted|wanna)', 'die'],
+  cooldown: 10,
+});
+
 const suicideBySentiment = new Listener({
   words: ['(suicide|kill myself|off myself|oof myself|my own life)'],
   cooldown: 5,
@@ -57,6 +62,7 @@ const suicideBySentiment = new Listener({
 module.exports = function suicideListeners(message) {
   if (suicideBySentiment.listen(message, msg => {
     const content = msg.content;
+    // (Anal)ysis
     const anal = sentiment(content);
     console.log(anal);
     if (anal.score < -5) {
@@ -71,5 +77,16 @@ module.exports = function suicideListeners(message) {
   if (suicide5.listen(message, msg => msg.channel.send(MSG))) return;
   if (suicide6.listen(message, msg => msg.channel.send(MSG))) return;
   if (suicide7.listen(message, msg => msg.channel.send(MSG))) return;
-  if (suicide8.listen(message, msg => msg.channel.send(MSG)));
+  if (suicide8.listen(message, msg => msg.channel.send(MSG))) return;
+  if (suicide9.listen(message, msg => {
+    const content = msg.content;
+    // (Anal)ysis
+    const anal = sentiment(content);
+    console.log(anal);
+    if (anal.score > 4) {
+      // return false here means it will just go to the next listener
+      return false;
+    }
+    msg.channel.send(MSG);
+  }));
 };
