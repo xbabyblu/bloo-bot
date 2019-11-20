@@ -5,6 +5,7 @@ module.exports = new Command({
   name: 'kill',
   description: 'Kills Bloo.',
   hidden: true,
+  // delete is not needed here since the prompter will delete the message
   // delete: true,
   run(message, args, call) {
     Prompter.reaction(message.channel, {
