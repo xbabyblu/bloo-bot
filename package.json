@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "format": "prettier --single-quote --trailing-comma all ./src/**/* --write"
+    "format": "prettier --single-quote --trailing-comma all ./src/**/* --write",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix"
   },
   "keywords": [],
   "author": "xlilblu",
