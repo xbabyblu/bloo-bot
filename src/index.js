@@ -1,6 +1,7 @@
 require('dotenv').config();
 const ChopTools = require('chop-tools');
 
+const terminate = require('./util/terminate');
 const web = require('./web');
 const applyListeners = require('./listeners/listeners');
 
@@ -12,10 +13,10 @@ client.on('ready', () => {
 });
 
 client.on('error', err => {
-  console.log('[Bloo] Bruuuuuh, a discord error happened.', err);
+  console.log('[Bloo] A discord error happened.', err);
 });
 
-// Middleware to log command calls :thumbsup:👍
+// Middleware to log command calls
 client.use((call, next) => {
   console.log(
     `[${new Date().toLocaleTimeString()}] ${call.callerTag}: ${
@@ -29,7 +30,7 @@ client.use((call, next) => {
 applyListeners(client);
 
 // Express Server
-web();
+const webServer = web();
 
 client
   .login(process.env.TOKEN)
@@ -40,3 +41,10 @@ client
     console.log('[Bloo] Could not login to Discord. Exiting...', err);
     process.exit(1);
   });
+
+// Application Shutdown
+const exitHandler = terminate(webServer, client, { timeout: 500 });
+process.on('uncaughtException', exitHandler(1, 'Uncaught Exception'));
+process.on('unhandledRejection', exitHandler(1, 'Unhandled Rejection'));
+process.on('SIGTERM', exitHandler(0, 'SIGTERM'));
+process.on('SIGINT', exitHandler(0, 'SIGINT'));
