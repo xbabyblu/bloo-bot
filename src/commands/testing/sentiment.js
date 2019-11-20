@@ -9,7 +9,9 @@ module.exports = new Command({
   run(message, args) {
     // do stuff
     const c = message.content;
-    const s = sentiment(c.substr(c.indexOf(args[0])));
+    // this extracts "!b sentiment" from the message content.
+    const content = c.substr(c.indexOf(args[0]));
+    const s = sentiment(content);
     console.log(s);
 
     message.channel.send(

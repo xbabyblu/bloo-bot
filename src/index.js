@@ -21,7 +21,7 @@ client.use((call, next) => {
   console.log(
     `[${new Date().toLocaleTimeString()}] ${call.callerTag}: ${
       call.message.content
-    }`,
+    } | ${call.}`,
   );
   next();
 });

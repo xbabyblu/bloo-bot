@@ -4,32 +4,36 @@ const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
 
 const images = [
-  'https://tenor.com/view/cry-crying-cries-anime-girl-gif-4553386',
-  'https://tenor.com/view/anime-cry-crying-sobbing-sad-gif-3532071',
-  'https://tenor.com/view/anime-cry-girl-gif-14682297',
-  'https://tenor.com/view/crying-anime-sadness-black-and-white-gif-15240245',
-  'https://tenor.com/view/umaru-himouto-anime-chibi-crying-gif-4695458',
-  'https://tenor.com/view/killua-anime-crying-gif-5012100',
-  'https://tenor.com/view/anohana-tears-sad-cry-sorrow-gif-5081296',
-  'https://tenor.com/view/cry-anime-sad-mad-sadness-gif-5580602',
-  'https://tenor.com/view/anime-umaru-cry-crying-tears-gif-5184314',
+  'https://i.imgur.com/ThDbgNw.gif',
+  'https://i.imgur.com/PyhmUyc.gif',
+  'https://i.imgur.com/Sw7DkmV.gif',
+  'https://i.imgur.com/2FdKZ5w.gif',
+  'https://i.imgur.com/bXU7o09.gif',
+  'https://i.imgur.com/GKak80b.gif',
+  'https://i.imgur.com/QHirnVI.gif',
+  'https://i.imgur.com/z25Olxh.gif',
+  'https://i.imgur.com/sNw2h2n.gif',
 ];
 
 module.exports = new Command({
   name: 'cry',
   description: 'sometimes.. you just gotta cry it out',
-  args: ['target'],
+  // args: ['target'],
   aliases: ['sob', 'tear'],
   category: 'reactions',
   run(message, args, call) {
     const target = message.mentions.members.first();
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
+
+    let cryingMessage;
+    if (target) {
+      // Peepeepoopoo 👁‍🗨 ✔✔✔✔
+      cryingMessage = `${target.user} made <@${call.caller}> cry, what did you do? :'c `;
+    } else {
+      cryingMessage = `<@${call.caller}>'s crying :'(`;
     }
 
     const embed = makeEmbed(
-      `You made <@${call.caller}> cry.. What did you do ${target.user}?`,
+      cryingMessage,
       random(images),
       message,
     );

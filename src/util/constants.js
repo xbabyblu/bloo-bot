@@ -7,6 +7,7 @@ const CATEGORY_EMOJIS = {
   funny: ':zany_face:',
   happy: ':nerd:',
   info: ':blue_book:',
+  reactions: ':pleading_face:',
 };
 
 module.exports = {
