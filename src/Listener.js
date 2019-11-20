@@ -1,7 +1,7 @@
 const listen = require('./util/listen');
 
-module.exports = class Listener {
-  constructor({ client, words, cooldown }) {
+class Listener {
+  constructor({ words, cooldown }) {
     if (!words || !cooldown) throw new Error('A listener requires words and cooldown.');
     this.words = words;
     this.cooldown = cooldown;
@@ -22,4 +22,12 @@ module.exports = class Listener {
       }
     }
   }
+
+  toString() {
+    return `Listener [${this.words.join(' ')}]`;
+  }
 };
+
+Listener[Symbol.toStringTag] = 'Listener';
+
+module.exports = Listener;
