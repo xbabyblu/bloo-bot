@@ -2,6 +2,7 @@ const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
+const findPerson = require('../../util/findPerson');
 
 const images = [
   'https://imgur.com/a/OiwUVEK',
@@ -17,12 +18,12 @@ module.exports = new Command({
   // args: ['target'],
   aliases: [],
   category: 'reactions',
-  run(message, args, call) {
-    const target = message.mentions.members.first();
+  async run(message, args, call) {
+    const target = await findPerson(message.mentions.members.first());
 
     let cryingMessage;
     if (target) {
-      cryingMessage = `<@${call.caller}> is smug. How do you feel ${target.user}? ~`;
+      cryingMessage = `<@${call.caller}> is smug. How do you feel ${target}? ~`;
     } else {
       cryingMessage = `<@${call.caller}> is feeling awfully smug ~ `;
     }

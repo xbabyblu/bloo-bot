@@ -83,6 +83,7 @@ module.exports = function suicideListeners(message) {
     // (Anal)ysis
     const anal = sentiment(content);
     console.log(anal);
+    // If anal score is high then its a false positive
     if (anal.score > 4) {
       // return false here means it will just go to the next listener
       return false;
