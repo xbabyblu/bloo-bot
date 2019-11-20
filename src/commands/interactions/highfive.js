@@ -23,7 +23,7 @@ module.exports = new Command({
     const embed = makeEmbed(
       `\n${call.callerTag} has high-fived you :raised_hand: :pray: good job, on whatever you did to deserve a high-five :grin:`,
       random(images),
-      message
+      message,
     );
     target.user.send({ embed });
   },

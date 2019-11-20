@@ -3,6 +3,7 @@ const { Command } = require('chop-tools');
 module.exports = new Command({
   name: 'PatPat',
   description: 'a gentle way of saying.. there-there.',
+  aliases: ['pat'],
   args: ['target'],
   delete: true,
   category: 'interactions',
