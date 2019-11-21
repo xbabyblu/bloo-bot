@@ -1,5 +1,10 @@
 const { Command } = require('chop-tools');
-const { MessageEmbed } = require('discord.js');
+
+const createInteractionCommand = require('../../util/createInteractionCommand');
+
+const images = [
+  'https://media1.tenor.com/images/8f8ba3baeecdf28f3e0fa7d4ce1a8586/tenor.gif?itemid=12668750',
+];
 
 module.exports = new Command({
   name: 'cuddle',
@@ -8,24 +13,12 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   run(message, args, call) {
-    const target = message.mentions.members.first();
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
-    if (target.user.bot) return;
+    const cuddle = createInteractionCommand(
+      `\n${call.callerTag} has decided that they want to cuddle you. Hope I didn't make it weird o3o :hugging:`,
+      images,
+      message,
+    );
 
-    const embedData = {
-      author: { name: message.author.username, iconURL: message.author.avatarURL() },
-      footer: {
-        text: '<3',
-        icon_url: this.client.user.avatarURL(),
-      },
-      description: `\n${call.callerTag} has decided that they want to cuddle you. Hope I didn't make it weird o3o :hugging: `,
-    };
-
-    const embed = new MessageEmbed(embedData);
-    embed.setImage('https://media1.tenor.com/images/8f8ba3baeecdf28f3e0fa7d4ce1a8586/tenor.gif?itemid=12668750');
-    target.user.send({ embed });
+    cuddle().catch(console.log);
   },
 });

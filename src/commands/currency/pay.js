@@ -2,11 +2,11 @@ const { Command } = require('chop-tools');
 
 const Currency = require('../../services/currency');
 const format = require('../../util/format');
-// const { BEAN_EMOJI } = require('../../config/constants');
+const { INK_EMOJI } = require('../../util/constants');
 
 module.exports = new Command({
   name: 'pay',
-  description: 'Pays someone the specified amount of [CURRENCY NAME HERE].',
+  description: 'Pays someone the specified amount of Blue Ink' + INK_EMOJI,
   category: 'currency',
   usage: '{@mention} {amount}',
   args: ['mention', 'amount'],
@@ -43,7 +43,7 @@ module.exports = new Command({
       const [bal] = await Currency.transfer(call.caller, userMention.id, amount);
       message.channel.send(
         format(
-          `**${message.author.username}**, you sent **${amount}**[EMOJI HERE] to **${userMention.username}**.`,
+          `**${message.author.username}**, you sent **${amount}**${INK_EMOJI} to **${userMention.username}**.`,
           `Your new balance is **${bal}**`,
         ),
       );

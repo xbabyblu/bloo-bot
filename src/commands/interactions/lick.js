@@ -1,8 +1,6 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-const findPerson = require('../../util/findPerson');
+const createInteractionCommand = require('../../util/createInteractionCommand');
 
 const images = [
   'https://imgur.com/a/KEhFwBS',
@@ -20,19 +18,12 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    const target = await findPerson(message.mentions.members.first());
-
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
-
-    const embed = makeEmbed(
+    const lick = createInteractionCommand(
       `Well.. How do I say this..\n \n${call.callerTag} has licked you. And now, I will proceed to walk away... :zany_face: `,
-      random(images),
+      images,
       message,
     );
 
-    target.send({ embed });
+    lick().catch(console.log);
   },
 });

@@ -13,4 +13,5 @@ const CATEGORY_EMOJIS = {
 
 module.exports = {
   CATEGORY_EMOJIS,
+  INK_EMOJI: '<:blue:647188962376417280>',
 };

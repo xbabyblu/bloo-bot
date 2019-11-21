@@ -1,8 +1,6 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-const findPerson = require('../../util/findPerson');
+const createInteractionCommand = require('../../util/createInteractionCommand');
 
 const images = [
   'https://imgur.com/a/Woxs1Wo',
@@ -23,19 +21,12 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    const target = await findPerson(message.mentions.members.first());
-
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
-
-    const embed = makeEmbed(
+    const punch = createInteractionCommand(
       `\n${call.callerTag} has punched you, and may I suggest... stop doing whatever caused them to do so? :grin:`,
-      random(images),
+      images,
       message,
     );
 
-    target.user.send({ embed });
+    punch().catch(console.log);
   },
 });

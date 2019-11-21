@@ -1,8 +1,6 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-const findPerson = require('../../util/findPerson');
+const createInteractionCommand = require('../../util/createInteractionCommand');
 
 const images = [
   'https://media1.tenor.com/images/d9789c904472970f6654633ac2b03aa1/tenor.gif?itemid=4746486',
@@ -19,19 +17,13 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    const target = await findPerson(message.mentions.members.first());
-
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
-
-    const embed = makeEmbed(
+    const highfive = createInteractionCommand(
       `\n${call.callerTag} has high-fived you :raised_hand: :pray: good job, on whatever you did to deserve a high-five :grin:`,
-      random(images),
+      images,
       message,
     );
 
-    target.send({ embed });
+    highfive().catch(console.log);
   },
 });
+// nice :ok_hand: 👌

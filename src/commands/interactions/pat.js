@@ -1,8 +1,6 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-const findPerson = require('../../util/findPerson');
+const createInteractionCommand = require('../../util/createInteractionCommand');
 
 const images = [
   'https://imgur.com/a/DThVg90',
@@ -22,20 +20,8 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    const target = await findPerson(message.mentions.members.first());
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
+    const pat = createInteractionCommand(`*pat-pat* \n${call.callerTag} has pat you c:`, images, message);
 
-    const embed = makeEmbed(
-      `*pat-pat* \n${call.callerTag} has pat you c:`,
-      random(images),
-      message,
-    );
-
-    target.send({ embed });
+    pat().catch(console.log);
   },
 });
-// need to put in embed for gifs
-// tysm

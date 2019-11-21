@@ -1,7 +1,6 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
+const createInteractionCommand = require('../../util/createInteractionCommand');
 
 const images = [
   'https://media1.tenor.com/images/506aa95bbb0a71351bcaa753eaa2a45c/tenor.gif?itemid=7552075',
@@ -19,17 +18,12 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   run(message, args, call) {
-    const target = message.mentions.members.first();
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
-
-    const embed = makeEmbed(
+    const hug = createInteractionCommand(
       `\n${call.callerTag} has given you a big ole hug, you oughta send them one back! :heart: `,
-      random(images),
+      images,
       message,
     );
-    target.user.send({ embed });
+
+    hug().catch(console.log);
   },
 });

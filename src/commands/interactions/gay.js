@@ -1,11 +1,10 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-const findPerson = require('../../util/findPerson');
+const createInteractionCommand = require('../../util/createInteractionCommand');
 
-// this crashed her
-const images = [];
+const images = [
+  'https://steemitimages.com/0x0/https://cdn.steemitimages.com/DQmTMRMohAeacAZdg1FdAjK5RGhsSPm8LiybHJ5QtCksYPN/anime-laugh-gif-16.gif',
+];
 
 module.exports = new Command({
   name: 'gay',
@@ -14,19 +13,12 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    const target = await findPerson(message.mentions.members.first());
-
-    if (!target) {
-      message.channel.send('I couldn\'t find that person.');
-      return;
-    }
-
-    const embed = makeEmbed(
+    const gay = createInteractionCommand(
       `\n${call.callerTag} called you gay ;p`,
-      random(images),
+      images,
       message,
     );
 
-    target.send({ embed });
+    gay().catch(console.log);
   },
 });

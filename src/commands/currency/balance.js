@@ -1,6 +1,7 @@
 const { Command } = require('chop-tools');
 
 const format = require('../../util/format');
+const { INK_EMOJI } = require('../../util/constants');
 
 module.exports = new Command({
   name: 'balance',
@@ -11,7 +12,7 @@ module.exports = new Command({
     message.channel.send(
       format(
         `Hello ${message.author.username}!`,
-        `You currently have **${call.profile.money}**[insert currency name or emoji here]!`,
+        `You currently have **${call.profile.money}**${INK_EMOJI} !`,
       ),
     );
   },

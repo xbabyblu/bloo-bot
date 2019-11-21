@@ -1,7 +1,7 @@
 const { Command } = require('chop-tools');
 
-const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
+const createInteractionCommand = require('../../util/createInteractionCommand');
+const format = require('../../util/format');
 
 const images = [
   'https://i.imgur.com/vVU7zG0.gif',
@@ -39,18 +39,16 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   run(message, args, call) {
-    const target = message.mentions.members.first();
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
-
-    const embed = makeEmbed(
-      `\n${call.callerTag} has kissed you.\nMy... you're looking quite flustered.. \nDo you want me to turn a fan on to help you cool down?`,
-      random(images),
+    const kiss = createInteractionCommand(
+      format(
+        `\n${call.callerTag} has kissed you.`,
+        "My... you're looking quite flustered..",
+        'Do you want me to turn a fan on to help you cool down?',
+      ),
+      images,
       message,
     );
 
-    target.user.send({ embed });
+    kiss().catch(console.log);
   },
 });
