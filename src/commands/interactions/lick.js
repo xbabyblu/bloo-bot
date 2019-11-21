@@ -11,7 +11,7 @@ const images = [
   'https://imgur.com/a/M3ldxNu',
   'https://imgur.com/a/LhshDAb',
   'https://imgur.com/a/hCYdtb1',
-]
+];
 
 module.exports = new Command({
   name: 'lick',
@@ -21,7 +21,7 @@ module.exports = new Command({
   category: 'interactions',
   async run(message, args, call) {
     const target = await findPerson(message.mentions.members.first());
-    
+
     if (!target) {
       message.channel.send("I couldn't find that person.");
       return;

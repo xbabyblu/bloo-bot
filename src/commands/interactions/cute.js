@@ -26,7 +26,7 @@ module.exports = new Command({
   category: 'interactions',
   async run(message, args, call) {
     const target = await findPerson(message.mentions.members.first());
-    
+
     if (!target) {
       message.channel.send("I couldn't find that person.");
       return;
@@ -36,8 +36,8 @@ module.exports = new Command({
       `Hey there! \n${call.callerTag} said you're cute. ;)`,
       random(images),
       message,
-    )
-    
+    );
+
     target.send({ embed });
   },
 });

@@ -6,20 +6,20 @@ module.exports = async (person, message) => {
   if (person instanceof GuildMember && !person.user.bot) {
     return person.user;
   }
-  
+
   if (person instanceof User) {
     if (person.bot) return undefined;
     return person;
   }
-  
+
   if (person.bot) return undefined;
 
-  if (person && person.user){
+  if (person && person.user) {
     if (person.user.bot) {
-      return undefined
+      return undefined;
     }
     return person.user;
-  };
+  }
 
   let guildie;
   if (typeof person === 'string') {

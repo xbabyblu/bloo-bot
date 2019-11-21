@@ -37,5 +37,5 @@ module.exports = new Command({
     target.send({ embed });
   },
 });
-// need to put in embed for gifs 
+// need to put in embed for gifs
 // tysm
