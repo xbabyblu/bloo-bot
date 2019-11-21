@@ -7,6 +7,10 @@ module.exports = new Command({
   category: 'funny',
   run(message) {
     // Yeeeeeeeeeeeeeeeeeeeehaw! 🐄
-    message.channel.send('Yeehaw!');
+    message.channel.send('Yeehaw!')
+      .then(msg => {
+        msg.react('🤠');
+      })
+      .catch(() => {});
   },
 });
