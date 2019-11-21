@@ -4,9 +4,8 @@ const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
 
-const images = [
-  'hey, ur cute'
-];
+// this crashed her
+const images = [];
 
 module.exports = new Command({
   name: 'gay',
