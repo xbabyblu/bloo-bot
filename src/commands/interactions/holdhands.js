@@ -2,6 +2,7 @@ const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
+const findPerson = require('../../util/findPerson');
 
 const images = [
   'https://media1.tenor.com/images/593c559b98765aec15b954f3d4c918da/tenor.gif?itemid=9156128',
@@ -19,8 +20,9 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
-  run(message, args, call) {
-    const target = message.mentions.members.first();
+  async run(message, args, call) {
+    const target = await findPerson(message.mentions.members.first());
+
     if (!target) {
       message.channel.send("I couldn't find that person.");
       return;
@@ -32,6 +34,6 @@ module.exports = new Command({
       message,
     );
 
-    target.user.send({ embed });
+    target.send({ embed });
   },
 });

@@ -1,6 +1,12 @@
 const { Command } = require('chop-tools');
 
+const makeEmbed = require('../../util/makeEmbed');
+const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
+
+const images = [
+  'hey, ur cute'
+];
 
 module.exports = new Command({
   name: 'gay',
@@ -9,14 +15,19 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    let target = message.mentions.members.first();
-    target = await findPerson(target);
+    let target = await findPerson(message.mentions.members.first());
 
     if (!target) {
       message.channel.send('I couldn\'t find that person.');
       return;
     }
 
-    target.send(`\n${call.callerTag} called you gay ;p`);
+    const embed = makeEmbed(
+      `\n${call.callerTag} called you gay ;p`,
+      random(images),
+      message,
+    );
+
+    target.send({ embed });
   },
 });

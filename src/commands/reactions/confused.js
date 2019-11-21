@@ -20,15 +20,15 @@ module.exports = new Command({
   run(message, args, call) {
     const target = message.mentions.members.first();
 
-    let cryingMessage;
+    let msg;
     if (target) {
-      cryingMessage = `<@${call.caller}> is confused by what you said, ${target.user} Maybe try clarifying a little more?`;
+      msg = `<@${call.caller}> is confused by what you said, ${target.user} Maybe try clarifying a little more?`;
     } else {
-      cryingMessage = `<@${call.caller}> is **confused** :thinking:`;
+      msg = `<@${call.caller}> is **confused** :thinking:`;
     }
 
     const embed = makeEmbed(
-      cryingMessage,
+      msg,
       random(images),
       message,
     );

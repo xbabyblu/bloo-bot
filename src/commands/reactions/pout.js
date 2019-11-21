@@ -2,9 +2,10 @@ const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
+const findPerson = require('../../util/findPerson');
 
 const images = [
-  ''
+  'boinks',
 ];
 
 module.exports = new Command({
@@ -13,22 +14,22 @@ module.exports = new Command({
   // args: ['target'],
   aliases: [],
   category: 'reactions',
-  run(message, args, call) {
-    const target = message.mentions.members.first();
+  async run(message, args, call) {
+    const target = await findPerson(message.mentions.members.first());
 
-    let cryingMessage;
+    let msg;
     if (target) {
-      cryingMessage = `<@${call.caller}> is pouting at ${target.user}. Whatever you do.. :pleading_face: *don't* give in.`;
+      msg = `<@${call.caller}> is pouting at ${target.user}. Whatever you do.. :pleading_face: *don't* give in.`;
     } else {
-      cryingMessage = `<@${call.caller}>'s pouting :pleading_face: `;
+      msg = `<@${call.caller}>'s pouting :pleading_face: `;
     }
 
     const embed = makeEmbed(
-      cryingMessage,
+      msg,
       random(images),
       message,
     );
 
-    message.channel.send({ embed });
+    target.send({ embed });
   },
 });
