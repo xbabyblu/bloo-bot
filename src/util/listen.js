@@ -14,8 +14,12 @@ function listen(message, words) {
     if (COMMON_WORDS[w]) return COMMON_WORDS[w];
     return placeholder;
   }
-  // get the content of the message and put it all to lower case
-  const content = message.content.toLowerCase();
+  // get the content of the message, remove punctuation and lower case it.
+  const content = message.content
+    // eslint-disable-next-line no-useless-escape
+    .replace(/[\.,\/#!$%\^&\*;:\{\}=\-_`~()\?]/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .toLowerCase();
 
   // regular expression to check if string contains a word
   const makeRegex = w => new RegExp(`(\\s+${w}\\s+|\\s+${w}$|^${w}\\s+|^${w}$)`);
