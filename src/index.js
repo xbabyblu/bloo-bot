@@ -25,6 +25,10 @@ database(() => {
     console.log('[Bloo] A discord error happened.', err);
   });
 
+  client.on('warn', err => {
+    console.log('[Bloo] WARNING:', err);
+  });
+
   // Middleware to log command calls
   client.use(logCommands);
 
