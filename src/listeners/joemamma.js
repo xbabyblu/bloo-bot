@@ -8,6 +8,6 @@ const joe = new Listener({
 module.exports = function joeListeners(message) {
 
   joe.listen(message, msg => {
-    msg.channel.send('***Joe MAMMA***');
+    msg.channel.send('***Joe Mamma!*** *hehehehehe*:rofl: :rofl: :rofl: :rofl: :rofl: ');
   });
 };
