@@ -12,14 +12,15 @@ const bloo = new Listener({
 });
 
 module.exports = function blooListeners(message) {
-  goAway.listen(message, msg => {
+  // Listener.linten() returns true if it triggers.
+  if (goAway.listen(message, msg => {
     // the message.... if anyone literally says this imma smack them.
     msg.channel.send(
       ":c I'm sorry.... Call me when you need me, I'll be here.. :pensive:",
     );
-  });
+  })) { return; }
 
-  bloo.listen(message, msg => {
+  if (bloo.listen(message, msg => {
     msg.channel.send('I heard my name! How are we today?');
-  });
+  })) { /* uhhh ok */ }
 };
