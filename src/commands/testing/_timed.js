@@ -6,12 +6,12 @@ module.exports = new Command({
   name: 'timed',
   description: 'timed messages test',
   hidden: true,
-  run(message) {
+  run(message, args) {
     // [msg, time in miliseconds to delete];
-    const m = [
-      ['hello', 2000],
-      ['woo woo woo', 5000]
-    ];
-    timedMessages(message.channel, m).catch(console.log);
+    const messages = [];
+    for (let i = 0; i < args.length; i++) {
+      messages.push([args[i], i * 1000]);
+    }
+    timedMessages(message.channel, messages).catch(console.log);
   },
 });
