@@ -3,7 +3,7 @@ require('dotenv').config();
 const ChopTools = require('chop-tools');
 
 const database = require('./services/database');
-const terminate = require('./util/terminate');
+const terminate = require('./services/terminate');
 
 const web = require('./web');
 const applyListeners = require('./listeners/listeners');
