@@ -14,7 +14,7 @@ module.exports = new Command({
   delete: true,
   category: 'interactions',
   async run(message, args, call) {
-    let target = await findPerson(message.mentions.members.first());
+    const target = await findPerson(message.mentions.members.first());
 
     if (!target) {
       message.channel.send('I couldn\'t find that person.');
