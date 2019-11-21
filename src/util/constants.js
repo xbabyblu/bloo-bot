@@ -8,6 +8,7 @@ const CATEGORY_EMOJIS = {
   happy: ':nerd:',
   info: ':blue_book:',
   reactions: ':pleading_face:',
+  currency: ':diamond_shape_with_a_dot_inside:',
 };
 
 module.exports = {
