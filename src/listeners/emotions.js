@@ -1,6 +1,7 @@
 const Prompter = require('discordjs-prompter');
 
 const Listener = require('../Listener');
+const format = require('../util/format');
 
 const angry = new Listener({
   words: ['{me}', 'angry'],
@@ -52,7 +53,14 @@ module.exports = function emotionListeners(message) {
 
   happy.listen(message, msg => {
     msg.channel.send(
-      'It makes me so happy to hear that you are happy. What things make you happy? \nI like the sunshine, the rain. \nI like roses, and lilies.. \nOoooh! \nAnd poems! Would you like to hear one? \nIf so, say !b poem !',
+      format(
+        'It makes me so happy to hear that you are happy. What things make you happy?',
+        'I like the sunshine, the rain.',
+        'I like roses, and lilies..',
+        'Ooooh!',
+        'And poems! Would you like to hear one?',
+        'If so, say !b poem !',
+      ),
     );
   });
 
