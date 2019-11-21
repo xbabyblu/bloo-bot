@@ -20,7 +20,7 @@ const format = time => moment.duration(time).format('HH[H] mm[M] ss[S]');
 module.exports = new Command({
   name: 'candy',
   description: 'Give someone some candy!',
-  category: 'fun',
+  category: 'funny',
   aliases: ['rep'],
   usage: '[@mention]',
   async run(message, args, call) {
