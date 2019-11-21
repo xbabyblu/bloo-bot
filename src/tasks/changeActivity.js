@@ -11,7 +11,7 @@ module.exports = class extends Task {
   async run() {
     // Possible types: PLAYING STREAMING LISTENING WATCHING
     const options = [
-      ['the sunset.', { type: 'WATCHING' }],
+      ['the sunset', { type: 'WATCHING' }],
       ['in a field of flowers', { type: 'PLAYING' }],
       [`${this.client.options.prefix}help`, { type: 'LISTENING' }],
     ];
