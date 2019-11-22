@@ -40,7 +40,7 @@ const suicide6 = new Listener({
 });
 
 const suicide7 = new Listener({
-  words: ['{me}', '(off|offing|kill)', 'myself'],
+  words: ['{me}', '(off|offing|kill|killing)', 'myself'],
   cooldown: 10,
 });
 

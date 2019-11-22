@@ -27,6 +27,7 @@ const LETTERS = {
   x: ':regional_indicator_x:',
   y: ':regional_indicator_y:',
   z: ':regional_indicator_z:',
+<<<<<<< HEAD
   '1': ':one:',
   '2': ':two:',
   '3': ':three:',
@@ -40,6 +41,18 @@ const LETTERS = {
   '!': ':heart_exclamation:',
   '.': ':radio_button:',
   '?':':grey_question:',
+=======
+  1: ':one:',
+  2: ':two:',
+  3: ':three:',
+  4: ':four:',
+  5: ':five:',
+  6: ':six:',
+  7: ':seven:',
+  8: ':eight:',
+  9: ':nine:',
+  0: ':zero:',
+>>>>>>> 48682b5a5f152e39985abd1fcec0f9993f11d9f9
 };
 
 module.exports = new Command({
@@ -50,8 +63,18 @@ module.exports = new Command({
   delete: true,
   run(message, args, call) {
     if (!args[0]) return;
-    const content = ''+message.content.substr(message.content.indexOf(args[0])).replace(/\s+/, ' ').replace(/[^a-zA-Z0-9\s]/g, '');
+    const content =
+      '' +
+      message.content
+        .substr(message.content.indexOf(args[0]))
+        .replace(/\s+/, ' ')
+        .replace(/[^a-zA-Z0-9\s]/g, '');
     if (content.length < 1) return;
-    message.channel.send(content.split('').map(l => LETTERS[l] || ' ').join(''));
+    message.channel.send(
+      content
+        .split('')
+        .map(l => LETTERS[l] || ' ')
+        .join(''),
+    ).catch(() => {});
   },
 });
