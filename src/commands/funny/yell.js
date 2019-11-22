@@ -37,6 +37,9 @@ const LETTERS = {
   '8': ':eight:',
   '9': ':nine:',
   '0': ':zero:',
+  '!': ':heart_exclamation:',
+  '.': ':radio_button:',
+  '?':':grey_question:',
 };
 
 module.exports = new Command({
