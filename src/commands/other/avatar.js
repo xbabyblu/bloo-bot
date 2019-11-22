@@ -5,7 +5,10 @@ const makeEmbed = require('../../util/makeEmbed');
 module.exports = new Command({
   name: 'avatar',
   description: "Displays someone's avatar.",
+  category: 'other',
   args: ['target'],
+  usage: '{@Name}',
+  example: '@Xlilblu',
   run(message) {
     const target = message.mentions.members.first();
     if (!target) {
