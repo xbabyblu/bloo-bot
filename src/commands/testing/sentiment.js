@@ -1,5 +1,7 @@
 const { Command } = require('chop-tools');
-const sentiment = require('multilang-sentiment');
+
+const sentiment = require('../../services/sentiment');
+
 
 module.exports = new Command({
   name: 'sentiment',
