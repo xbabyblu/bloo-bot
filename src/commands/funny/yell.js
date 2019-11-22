@@ -27,21 +27,6 @@ const LETTERS = {
   x: ':regional_indicator_x:',
   y: ':regional_indicator_y:',
   z: ':regional_indicator_z:',
-<<<<<<< HEAD
-  '1': ':one:',
-  '2': ':two:',
-  '3': ':three:',
-  '4': ':four:',
-  '5': ':five:',
-  '6': ':six:',
-  '7': ':seven:',
-  '8': ':eight:',
-  '9': ':nine:',
-  '0': ':zero:',
-  '!': ':heart_exclamation:',
-  '.': ':radio_button:',
-  '?':':grey_question:',
-=======
   1: ':one:',
   2: ':two:',
   3: ':three:',
@@ -52,7 +37,9 @@ const LETTERS = {
   8: ':eight:',
   9: ':nine:',
   0: ':zero:',
->>>>>>> 48682b5a5f152e39985abd1fcec0f9993f11d9f9
+  '!': ':heart_exclamation:',
+  '.': ':radio_button:',
+  '?':':grey_question:',
 };
 
 module.exports = new Command({
