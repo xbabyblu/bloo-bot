@@ -55,7 +55,7 @@ module.exports = new Command({
           : `\`\`\`${start}${e}\`\`\``;
         embed.addField(':ledger: Example', examples);
       }
-      return message.channel.send(embed);
+      return message.channel.send({ embed });
     }
 
     // return a list of commands separated by category
@@ -93,7 +93,6 @@ module.exports = new Command({
             .reduce((acc, cur) => `${acc} \`${cur.name}\``, ''),
       );
     });
-
-    return message.channel.send(embed);
+    return message.channel.send({ embed });
   },
 });
