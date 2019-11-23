@@ -1,6 +1,7 @@
 const Listener = require('../Listener');
 
 const format = require('../util/format');
+const wait = require('../util/wait');
 
 const emo = new Listener({
   words: ['{me}', 'emo'],
@@ -13,7 +14,9 @@ const emotional = new Listener({
 });
 
 module.exports = function emoListeners(message) {
-  emo.listen(message, msg => {
+  emo.listen(message, async msg => {
+    msg.channel.startTyping();
+    await wait(5000);
     console.log('emo');
     msg.channel.send(
       format(
@@ -21,10 +24,12 @@ module.exports = function emoListeners(message) {
         'I\'m sorry that you\'re feeling this way, are these feelings strong?',
         'Have you thought of doing something to distract yourself from the emotions?',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 
-  emotional.listen(message, msg => {
+  emotional.listen(message, async msg => {
+    msg.channel.startTyping();
+    await wait(10000);
     console.log('emotional');
     msg.channel.send(
       format(
@@ -38,6 +43,6 @@ module.exports = function emoListeners(message) {
         'Smile, take a deep breath, and think of three to five things you are grateful for.',
         'I promise your emotions will soon not be so overwhelming and you will *learn to love them*',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 };
