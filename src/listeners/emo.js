@@ -4,16 +4,16 @@ const format = require('../util/format');
 
 const emo = new Listener({
   words: ['{me}', 'emo'],
-  cooldown: 30,
+  cooldown: 15,
 });
 
 const emotional = new Listener({
   words: ['{me}', 'emotional'],
-  cooldown: 30,
+  cooldown: 15,
 });
 
 module.exports = function emoListeners(message) {
-  emo.Listen(message, msg => {
+  emo.listen(message, msg => {
     console.log('emo');
     msg.channel.send(
       format(
@@ -24,7 +24,7 @@ module.exports = function emoListeners(message) {
     );
   });
 
-  emotional.Listen(message, msg => {
+  emotional.listen(message, msg => {
     console.log('emotional');
     msg.channel.send(
       format(
