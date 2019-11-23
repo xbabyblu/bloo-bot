@@ -7,6 +7,7 @@ const depressedListeners = require('./depressed');
 // who is joe? 🤔
 const joeListeners = require('./joemamma');
 const stressListeners = require('./stress');
+const emoListeners = require('./emo');
 
 module.exports = function applyListerners(client) {
   client.on('message', message => {
@@ -20,5 +21,6 @@ module.exports = function applyListerners(client) {
     depressedListeners(message);
     joeListeners(message);
     stressListeners(message);
+    emoListeners(message);
   });
 };
