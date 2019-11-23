@@ -5,30 +5,29 @@ const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
 
 const images = [
-  'https://imgur.com/a/YxAiVT1',
-  'https://imgur.com/a/lfsh0P2',
-  'https://imgur.com/a/duI69xE',
-  'https://imgur.com/a/m0huRZe',
-  'https://imgur.com/a/UBxfsJr',
-  'https://imgur.com/a/oKJci6M',
-  'https://imgur.com/a/VzJbSwX',
-  'https://imgur.com/a/97iYVqb',
+  'https://imgur.com/a/O7YFhNl',
+  'https://imgur.com/a/7YrPV4k',
+  'https://imgur.com/a/J9gYmCk',
+  'https://imgur.com/a/ccMlhbT',
+  'https://imgur.com/a/ov8LPLu',
+  'https://imgur.com/a/CyNOEFF',
+  'https://imgur.com/a/wyE5ske',
+  'https://imgur.com/a/I9diBTx',
 ];
 
 module.exports = new Command({
-  name: 'pout',
-  description: ':c',
-  // args: ['target'],
-  aliases: [],
+  name: 'blush',
+  description: '~teehee you\'re looking awfully red~',
+  aliases: ['embarrassed'],
   category: 'reactions',
   async run(message, args, call) {
     const target = await findPerson(message.mentions.members.first());
 
     let msg;
     if (target) {
-      msg = `<@${call.caller}> is pouting at ${target.user}. Whatever you do.. :pleading_face: *don't* give in.`;
+      msg = `<@${call.caller}> is blushing because of ${target.user}.`;
     } else {
-      msg = `<@${call.caller}>'s pouting :pleading_face: `;
+      msg = `<@${call.caller}>'s blushing :flushed:`;
     }
 
     const embed = makeEmbed(

@@ -36,7 +36,7 @@ module.exports = new Command({
         format(
           `:calendar_spiral: **| ${message.author.username}**! Here is your daily Blue Ink! :D`,
           `:moneybag: **| ${amount}**${INK_EMOJI}`,
-          `       **|** Your next daily is in ${formatTime(timeUntilTomorrow())}`,
+          `Your next daily is in **${formatTime(timeUntilTomorrow())}**`,
         ),
       );
       call.profile.daily.time = new Date();

@@ -1,6 +1,7 @@
 const Listener = require('../Listener');
 
 const format = require('../util/format');
+const wait = require('../util/wait');
 
 const stress = new Listener({
   words: ['{me}', '(have|having)', 'stress'],
@@ -13,8 +14,10 @@ const stressed = new Listener({
 });
 
 module.exports = function blooListeners(message) {
-  stress.listen(message, msg => {
+  stress.listen(message, async msg => {
     console.log('stress');
+    msg.channel.startTyping();
+    await wait(1500);
     msg.channel.send(
       format(
         'You speak of having stress, and I want you to know that I hear you. What you are feeling is completely normal.',
@@ -23,11 +26,13 @@ module.exports = function blooListeners(message) {
         'Take some time for yourself and it will help relieve the stress, even if its a small amount.',
         'If you practice one fun daily activity a day, I promise it adds up!',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 
-  stressed.listen(message, msg => {
+  stressed.listen(message, async msg => {
     console.log('stressed');
+    msg.channel.startTyping();
+    await wait(1500);
     // reminder
     msg.channel.send(
       format(
@@ -38,6 +43,6 @@ module.exports = function blooListeners(message) {
         'It\'ll be hard to not think about your stress in the beginning, and that is completely normal. But it will fade as time goes on and you\'re enjoying yourself! Take some time for yourself,',
         '*you deserve it*.',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 };

@@ -30,6 +30,7 @@ const images = [
   'https://i.imgur.com/mtTmdyU.gif',
   'https://i.imgur.com/7Kepyk8.gif',
   'https://i.imgur.com/ZP5yX50.gif',
+  'https://imgur.com/a/Rwltq0b',
 ];
 
 module.exports = new Command({

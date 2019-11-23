@@ -39,7 +39,7 @@ const LETTERS = {
   0: ':zero:',
   '!': ':heart_exclamation:',
   '.': ':radio_button:',
-  '?':':grey_question:',
+  '?': ':grey_question:',
 };
 
 module.exports = new Command({
@@ -54,8 +54,9 @@ module.exports = new Command({
       '' +
       message.content
         .substr(message.content.indexOf(args[0]))
+        .toLowerCase()
         .replace(/\s+/, ' ')
-        .replace(/[^a-zA-Z0-9\s]/g, '');
+        .replace(/[^a-zA-Z0-9\s!\.\?]/g, '');
     if (content.length < 1) return;
     message.channel.send(
       content

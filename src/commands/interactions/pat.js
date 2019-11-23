@@ -10,6 +10,8 @@ const images = [
   'https://imgur.com/a/A5wp6YO',
   'https://imgur.com/a/XwcZRJQ',
   'https://imgur.com/a/ZAfS394',
+  'https://imgur.com/a/jxybHOJ',
+  'https://imgur.com/a/rX3tl5m',
 ];
 
 module.exports = new Command({
