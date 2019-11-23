@@ -2,14 +2,11 @@ const { Command } = require('chop-tools');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
-const images = [
-  'https://media1.tenor.com/images/593c559b98765aec15b954f3d4c918da/tenor.gif?itemid=9156128',
-  'https://i.imgur.com/eADE2Wd.gif',
-  'https://i.imgur.com/hNNYn6O.gif',
-  'https://i.imgur.com/IHb9WE9.gif',
-  'https://i.imgur.com/LmEsEKn.gif',
-  'https://i.imgur.com/goIJozH.gif',
-];
+const images = [];
+
+for (let i = 0; i <= 5; i++) {
+  images.push(`http://cdn.chop.coffee/holdhands/${i}.gif`);
+}
 
 // cute stuff c;
 module.exports = new Command({

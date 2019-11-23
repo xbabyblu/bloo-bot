@@ -1,5 +1,5 @@
 const COMMON_WORDS = {
-  me: "i('m|'ve|'ll|ll|mma)*",
+  me: "i('m|m|'ve|'ll|ll|mma)*",
   action: '(want|wanna|gonna|going to|will)',
   yes: '(y|yes|ye|yeah|mhm|sure|ok|okay|alright|alrighty|why not)',
 };

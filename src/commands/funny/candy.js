@@ -9,7 +9,7 @@ const timeToNextCoffe = (lastCoffee) => {
   const lastUsed = moment(lastCoffee);
   const diff = now.diff(lastUsed);
 
-  // COOLDOWNT TO SEND CANDY
+  // COOLDOWN TO SEND CANDY
   const d24 = moment.duration(3, 'h');
 
   return d24 - diff;

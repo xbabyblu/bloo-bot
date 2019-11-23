@@ -2,6 +2,10 @@ const { Command } = require('chop-tools');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
+const images = [
+  'www.example.com/slap.gif',
+];
+
 module.exports = new Command({
   name: 'slap',
   description: 'slap someone when they need it',

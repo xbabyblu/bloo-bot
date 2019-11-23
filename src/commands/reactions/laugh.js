@@ -6,14 +6,15 @@ const findPerson = require('../../util/findPerson');
 
 const images = [];
 
-for (let i = 0; i <= 7; i++) {
-  images.push(`http://cdn.chop.coffee/pout/${i}.gif`);
+for (let i = 0; i <= 36; i++) {
+  // i'm on it 👍
+  images.push(`http://cdn.chop.coffee/laugh/${i}.gif`);
 }
+// :B thank you :ok_hand: 👍
 
 module.exports = new Command({
-  name: 'pout',
-  description: ':c',
-  // args: ['target'],
+  name: 'laugh',
+  description: ':laughing:',
   aliases: [],
   category: 'reactions',
   async run(message, args, call) {
@@ -21,9 +22,9 @@ module.exports = new Command({
 
     let msg;
     if (target) {
-      msg = `<@${call.caller}> is pouting at ${target.user}. Whatever you do.. :pleading_face: *don't* give in.`;
+      msg = `<@${call.caller}> is laughing at ${target}. :laughing: How funny!`;
     } else {
-      msg = `<@${call.caller}>'s pouting :pleading_face: `;
+      msg = `<@${call.caller}>'s laughing :laughing: `;
     }
 
     const embed = makeEmbed(

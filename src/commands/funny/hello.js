@@ -2,7 +2,8 @@ const { Command } = require('chop-tools');
 
 module.exports = new Command({
   name: 'Hello',
-  description: 'greetings!',
+  description: 'greetings!', // YEAH, RIGHT. >.>
+  aliases: ['yeehaw'],
   delete: true,
   category: 'funny',
   run(message) {

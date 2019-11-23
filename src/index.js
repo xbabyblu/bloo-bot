@@ -16,6 +16,8 @@ database(() => {
 
   const client = new ChopTools.Client();
 
+  Reflect.defineProperty(client, 'ignoredChannels', { value: new Set(), writable: false });
+
   client.on('ready', () => {
     console.log(`[Bloo] It's discord time! [${client.user.tag}]`);
     client.user.setActivity('in a field of flowers', { type: 'PLAYING' });
