@@ -1,6 +1,6 @@
 const { Command } = require('chop-tools');
 
-const itsNotBlu = require('../../util/bluOnly');
+// const itsNotBlu = require('../../util/bluOnly');
 // kaffe's brb command only
 module.exports = new Command({
   name: 'cat',
@@ -10,7 +10,7 @@ module.exports = new Command({
   delete: true,
   hidden: true,
   run(message, args, call) {
-    if (itsNotBlu(this.client, message)) return;
+    if (call.caller !== '517599684961894400') return;
     message.channel.send('Lar is looking for his cat and he will be right back :cat:');
   },
 });
