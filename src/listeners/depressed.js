@@ -1,5 +1,6 @@
 const Listener = require('../Listener');
 const format = require('../util/format');
+const wait = require('../util/wait'); // :P
 // me -> "i('m|'ve|'ll|ll|mma)*"
 const depressed = new Listener({
   words: ['{me}', 'depressed'],
@@ -17,18 +18,25 @@ const depressing = new Listener({
 
 // depression | depressed | depressing
 module.exports = function blooListeners(message) {
-  depressed.listen(message, msg => {
+  // Depressed :c
+  depressed.listen(message, async msg => {
     console.log('depressed');
+    msg.channel.startTyping();
+    await wait(10000);
     msg.channel.send(
       format(
         'I\'m sorry that you\'re feeling depressed, and it\'s completely normal to feel this way.',
         'You\'re human and you\'re valid. Small tasks may seem overwhelming and daunting.',
         'Good days are coming your way.',
-      ),
-    );
+      ), // 👌                   👌                   👌                    👌
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
-  depression.listen(message, msg => {
+
+  // Depression :c
+  depression.listen(message, async msg => {
     console.log('depression');
+    msg.channel.startTyping();
+    await wait(10000);
     msg.channel.send(
       format(
         'Do you have a support group? Maybe friends or family? They can be a great help in times like these.',
@@ -40,11 +48,14 @@ module.exports = function blooListeners(message) {
         'Anything you enjoy can help relieve such.',
         'Even when you feel apathetic or anhedonic, I promise that trying to do such will trigger the serotonin in your brain, and make you feel relieved/happier.',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 
-  depressing.listen(message, msg => {
+  // Depressing :c
+  depressing.listen(message, async msg => {
     console.log('depressing');
+    msg.channel.startTyping();
+    await wait(10000);
     msg.channel.send(
       format(
         'I\'m sure that you are going through a lot to be feeling that way. You\'re truly a beautiful soul and I know that things can get tough.',
@@ -53,7 +64,7 @@ module.exports = function blooListeners(message) {
         'Allowing yourself to push yourself to true potential and see what you\'re truly capable of.',
         'You\'re a butterfly.',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 };
 

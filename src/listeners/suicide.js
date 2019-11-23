@@ -25,7 +25,7 @@ const suicide4 = new Listener({
 });
 
 const suicide5 = new Listener({
-  words: ['{me}', '(think|thinking)', '(about|of)', 'death'],
+  words: ['{me}', '(think|thinking|thought)', '(about|of)', 'death'],
   cooldown: 10,
 });
 

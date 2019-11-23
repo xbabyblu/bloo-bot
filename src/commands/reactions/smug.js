@@ -4,13 +4,11 @@ const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
 
-const images = [
-  'https://imgur.com/a/OiwUVEK',
-  'https://imgur.com/a/G3Envhw',
-  'https://imgur.com/a/wUc2Jhf',
-  'https://imgur.com/a/c7GS68H',
-  'https://imgur.com/a/L1aDTV3',
-];
+const images = [];
+
+for (let i = 0; i <= 21; i++) {
+  images.push(`http://cdn.chop.coffee/smug/${i}.gif`);
+}
 
 module.exports = new Command({
   name: 'smug',

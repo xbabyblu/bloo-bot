@@ -2,17 +2,11 @@ const { Command } = require('chop-tools');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
-const images = [
-  'https://imgur.com/a/kAWAVG0',
-  'https://imgur.com/a/4JpPze3',
-  'https://imgur.com/a/QdtLWln',
-  'https://imgur.com/a/ikpCHxg',
-  'https://imgur.com/a/tayKJoY',
-  'https://imgur.com/a/vdlqEtC',
-  'https://imgur.com/a/2WAZupB',
-  'https://imgur.com/a/zQqcfBG',
-  'https://imgur.com/a/TCl95hE',
-];
+const images = [];
+
+for (let i = 0; i <= 14; i++) {
+  images.push(`http://cdn.chop.coffee/cute/${i}.gif`);
+}
 
 // cute stuff c;
 module.exports = new Command({

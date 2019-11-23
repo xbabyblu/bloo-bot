@@ -3,14 +3,11 @@ const { Command } = require('chop-tools');
 const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
 
-const images = [
-  'https://imgur.com/a/tOCFbDX',
-  'https://imgur.com/a/Z3flABD',
-  'https://imgur.com/a/O2KfcPt',
-  'https://imgur.com/a/HJSQhOq',
-  'https://imgur.com/a/MYlNS1B',
-  'https://imgur.com/a/pb5DydE',
-];
+const images = [];
+
+for (let i = 0; i <= 17; i++) {
+  images.push(`http://cdn.chop.coffee/confused/${i}.gif`);
+}
 
 module.exports = new Command({
   name: 'confused',
