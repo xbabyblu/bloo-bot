@@ -2,6 +2,7 @@ const Prompter = require('discordjs-prompter');
 
 const Listener = require('../Listener');
 const format = require('../util/format');
+const wait = require('../util/wait');
 
 const angry = new Listener({
   words: ['{me}', 'angry'],
@@ -24,10 +25,12 @@ const sad = new Listener({
 });
 
 module.exports = function emotionListeners(message) {
-  angry.listen(message, msg => {
+  angry.listen(message, async msg => {
+    msg.channel.startTyping();
+    await wait(1000);
     msg.channel.send(
       'I hear that you are angry, I would like to understand why. Would you like to talk about it?',
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 
   hungry.listen(message, msg => {
@@ -51,7 +54,9 @@ module.exports = function emotionListeners(message) {
       });
   });
 
-  happy.listen(message, msg => {
+  happy.listen(message, async msg => {
+    msg.channel.startTyping();
+    await wait(3000);
     msg.channel.send(
       format(
         'It makes me so happy to hear that you are happy. What things make you happy?',
@@ -61,11 +66,10 @@ module.exports = function emotionListeners(message) {
         'And poems! Would you like to hear one?',
         'If so, say !b poem !',
       ),
-    );
+    ).then(() => msg.channel.stopTyping()).catch(() => {});
   });
 
-  // bugged
-  sad.listen(message, msg => {
+  sad.listen(message, async msg => {
     Prompter.message(message.channel, {
       question: 'What is going on? Maybe a nice cup of hot tea or coffee could help stabilize your mood.',
       userId: message.author.id,
