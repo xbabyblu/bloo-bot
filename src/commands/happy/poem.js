@@ -4,7 +4,7 @@ const random = require('../../util/random');
 const format = require('../../util/format');
 const wait = require('../../util/wait');
 
-const randomPoem = random([
+const poems = [
   format(
     'You are filled with doubt',
     'of the magic inside you,',
@@ -210,16 +210,19 @@ const randomPoem = random([
     'We will be living here together',
     'Inside my home forever.',
   ),
-]);
+];
 
 module.exports = new Command({
   name: 'poem',
   description: 'One of the many things that make me happy!',
   category: 'happy',
-  async run(message) {
-    message.channel.startTyping();
-    await wait(7000);
-    message.channel.send(randomPoem).then(() => message.channel.stopTyping()).catch(() => {});
+  usage: '[fast]',
+  async run(message, args) {
+    if (!(args && args[0] === 'fast')) {
+      message.channel.startTyping();
+      await wait(5000);
+    }
+    message.channel.send(random(poems)).then(() => message.channel.stopTyping()).catch(() => {});
   },
 });
 
