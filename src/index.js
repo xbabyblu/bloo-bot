@@ -1,12 +1,12 @@
 
 require('dotenv').config();
+// eslint-disable-next-line import/no-extraneous-dependencies
 const ChopTools = require('chop-tools');
 
 const database = require('./services/database');
 const terminate = require('./services/terminate');
 
 const web = require('./web');
-const applyListeners = require('./listeners/listeners');
 
 const logCommands = require('./services/logCommands');
 const Profile = require('./models/profile');
@@ -43,9 +43,6 @@ database(() => {
       })
       .catch(() => {});
   });
-
-  // Listeners
-  applyListeners(client);
 
   // Express Server
   const webServer = web();
