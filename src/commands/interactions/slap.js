@@ -1,10 +1,7 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
-
-const images = [
-  'www.example.com/slap.gif',
-];
 
 module.exports = new Command({
   name: 'slap',
@@ -15,7 +12,7 @@ module.exports = new Command({
   run(message, args, call) {
     const slap = createInteractionCommand(
       `*slap* \n${call.callerTag} sent me to slap you... you seemed like you needed some common sense sent your way. :yum: `,
-      images,
+      gifs.slap(),
       message,
     );
 
