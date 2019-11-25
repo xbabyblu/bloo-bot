@@ -4,6 +4,8 @@ const sentiment = (text) => multilangSentiment(text, 'en', {
   words: {
     '🍥': 0,
     '🍱': 0,
+    '❤️': 2,
+    '🙂': 1,
   },
 });
 
