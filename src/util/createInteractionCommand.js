@@ -17,7 +17,9 @@ module.exports = (text, images, message) => async () => {
     return;
   }
 
-  const embed = makeEmbed(text, random(images), message);
+  const image = Array.isArray(images) ? random(images) : images;
+
+  const embed = makeEmbed(text, image, message);
 
   target.send({ embed });
 };
