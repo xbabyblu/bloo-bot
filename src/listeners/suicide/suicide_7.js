@@ -12,5 +12,6 @@ module.exports = new Listener({
     return true;
   },
 });
+//* if message.content( 'not' => return\\
 
 // People's lives is all that matters to me. Which is why i made Bloo. 🔹💙
