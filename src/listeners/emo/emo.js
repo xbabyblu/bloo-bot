@@ -4,7 +4,7 @@ const format = require('../../util/format');
 const wait = require('../../util/wait');
 
 module.exports = new Listener({
-  words: ['{me}', 'bemo'],
+  words: ['{me}', 'emo'],
   category: 'emo',
   cooldown: 15,
   priority: 0,
