@@ -21,7 +21,7 @@ module.exports = new Command({
 
     let msg;
     if (target) {
-      msg = `<@${call.caller}> is pouting at ${target.user}. Whatever you do.. :pleading_face: *don't* give in.`;
+      msg = `<@${call.caller}> is pouting at ${target}. Whatever you do.. :pleading_face: *don't* give in.`;
     } else {
       msg = `<@${call.caller}>'s pouting :pleading_face: `;
     }

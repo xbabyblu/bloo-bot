@@ -1,6 +1,7 @@
-const { Listener } = require('chop-tools');
+const { Listener, COMMON_EXPRESSIONS, stringMatch } = require('chop-tools');
+const Prompter = require('chop-prompter');
 
-// const format = require('../../util/format');
+const format = require('../../util/format');
 const wait = require('../../util/wait');
 
 module.exports = new Listener({
@@ -11,10 +12,45 @@ module.exports = new Listener({
   async run(message) {
     message.channel.startTyping();
     await wait(1000);
-    message.channel
-      .send('I hear that you are angry, I would like to understand why. Would you like to talk about it?')
-      .then(() => message.channel.stopTyping())
-      .catch(() => {});
-    return true;
+    const responseList1 = await Prompter.message({
+      channel: message.channel,
+      userId: message.author.id,
+      question: format(
+        `I hear that you are angry, I would like to understand why. Would you like to talk about it?`
+        ),
+        max: 1,
+        deleteMessage: false,
+      });
+      
+      await message.channel.stopTyping();  
+      const response1 = responseList1 ? responseList1.first() : '';
+      
+      if(stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
+        message.channel.startTyping();
+        await wait(1000);
+        message.channel.send(
+          format(
+            // 🍿 🤔 *eats popcorn* owo >u< 
+            `Oh heavens... That sounds horrible and I'm quite honestly sorry that happened to you.`,
+            `What do you suppose you're going to do now about the situation? Maybe seperate yourself from such?`,
+            `Maybe make a plan to have a good rest of your morning/evening?`,
+          ),
+        );
+        await message.channel.stopTyping();
+
+      } else {
+        message.channel.startTyping();
+        await wait(2000);
+        message.channel.send(
+          format(
+            `I understand that you'd prefer to keep this to yourself. I am still here if you'd like to open up about it.`,
+            `I really do hope that this anger you are feeling fades away and you have a great rest of your day!`,
+          ),
+        );
+      };
+      await message.channel.stopTyping();
+     //  .catch(() => {});
+    return false;
   },
 });
+

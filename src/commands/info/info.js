@@ -1,4 +1,5 @@
 const { Command } = require('chop-tools');
+const chopToolsVersion = require('chop-tools/package.json').version;
 const { MessageEmbed } = require('discord.js');
 
 module.exports = new Command({
@@ -17,7 +18,7 @@ module.exports = new Command({
       color: 13044507,
       footer: {
         text: `Version ${module.require('../../../package.json').version ||
-          'latest'}`,
+          'latest'} (chop-tools ${chopToolsVersion})`,
       },
       thumbnail: {
         url: this.client.user.avatarURL(),
