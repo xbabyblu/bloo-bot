@@ -7,6 +7,8 @@ const terminate = require("./services/terminate");
 
 const web = require("./web");
 
+const guildCreate = require('./events/guildCreate');
+
 const logCommands = require("./services/logCommands");
 const Profile = require("./models/profile");
 const GuildSettings = require("./models/guildSettings");
@@ -34,11 +36,14 @@ database(() => {
     console.log("[Bloo] WARNING:", err);
   });
 
+  // Events
+  client.on('guildCreate', guildCreate(client));
+
   // Middleware to log command calls
   client.use(logCommands);
 
   // Middleware to create user profiles and guild settings
-  client.use(async (call, next) => {
+  client.use((call, next) => {
     Profile.getOrCreate(call.caller)
       .then(profile => {
         call.profile = profile;

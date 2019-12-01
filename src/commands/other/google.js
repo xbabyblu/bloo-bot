@@ -1,4 +1,5 @@
 const { Command } = require('chop-tools');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = new Command({
   name: 'google',
@@ -16,8 +17,13 @@ module.exports = new Command({
       search = search.replace(' images ', '') + '&source=lnms&tbm=isch';
     }
 
+    const embed = new MessageEmbed({
+      title: 'Search',
+      description: `[${content.substr(content.indexOf(args[0]))}](${google +  search })`,
+    });
+
     // console.log('https://www.google.com/search?q=' + search);
-    message.channel.send('Here ya fricking go m8: ' + google + search);
+    message.channel.send('Here ya fricking go m8: ', { embed });
   },
 });
 // go coffeeeeeeee

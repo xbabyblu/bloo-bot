@@ -12,6 +12,16 @@ const guildSettingsSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
+  updatedAt: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  }
 });
 
 guildSettingsSchema.statics.getOrCreate = async function getOrCreate(guildId) {
@@ -30,5 +40,18 @@ guildSettingsSchema.statics.getOrCreate = async function getOrCreate(guildId) {
     throw err;
   }
 };
+
+guildSettingsSchema.pre('save', function preSave(next) {
+  if (this.isModified('createdAt')) {
+    throw new Error('Creation field is read only!');
+  } else {
+    next();
+  }
+});
+
+guildSettingsSchema.pre('save', function preSave(next) {
+  this.updatedAt = Date.now();
+  next();
+});
 
 module.exports = mongoose.model('GuildSettings', guildSettingsSchema);
