@@ -1,6 +1,6 @@
 {
   "name": "bloo",
-  "version": "1.2.5",
+  "version": "1.5.5",
   "description": "empathetic bot",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mal-scraper": "^2.6.5",
+    "filesize": "^6.0.1",
+    "humanize-duration": "^3.21.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "mongoose": "^5.7.12",

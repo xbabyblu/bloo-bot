@@ -12,7 +12,7 @@ for (let i = 0; i <= 17; i++) {
 module.exports = new Command({
   name: 'confused',
   description: 'ever feel like you don\'t understand what\'s going on?',
-  aliases: ['confuse', 'huh'],
+  aliases: ['confuse', 'huh', 'confusion'],
   category: 'reactions',
   run(message, args, call) {
     const target = message.mentions.members.first();

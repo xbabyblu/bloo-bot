@@ -5,7 +5,7 @@ module.exports = new Listener({
   words: 'bloo',
   category: 'bloo',
   cooldown: 1,
-  priority: 1,
+  priority: 10,
   run(message) {
     message.channel.send('I heard my name! How are we today?');
     return true;

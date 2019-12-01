@@ -17,7 +17,7 @@ module.exports = new Command({
     console.log(s);
 
     message.channel.send(
-      `\`\`\`Sentiment analysis: \nscore: ${s.score} \ncomparative: ${s.comparative} \npositive words: ${s.positive} \nnegative words: ${s.negative}\`\`\``,
+      `Sentiment analysis: \`\`\`${JSON.stringify(s, null, 2)}\`\`\``,
     );
   },
 });

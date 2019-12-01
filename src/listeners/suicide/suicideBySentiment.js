@@ -18,7 +18,7 @@ module.exports = new Listener({
       // return false here means it will just go to the next listener
       return false;
     }
-    console.log('Possible suicide:', anal);
+    // console.log('Possible suicide:', anal);
     message.channel.send(MSG);
     return true;
   },
