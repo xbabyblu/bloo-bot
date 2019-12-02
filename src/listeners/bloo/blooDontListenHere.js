@@ -12,7 +12,7 @@ module.exports = new Listener({
     const duration = 5 * 60 * 1000;
     this.client.listeners.ignored.ignoreChannel(cId, duration);
     message.channel.send(
-      `:c I'm sorry.... I wont look here for __${time(duration)}__... :pensive:`
+      `:c I'm sorry.... I wont look here ${duration ? 'for ' + time(duration) : 'anymore'}... :pensive:`
     );
     console.log(
       `Ignoring channel ${message.channel.name} (${cId}) for ${time(duration)}`
@@ -20,3 +20,4 @@ module.exports = new Listener({
     return true;
   }
 });
+

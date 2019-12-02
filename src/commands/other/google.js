@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = new Command({
   name: 'google',
-  description: 'Google stuf duh~',
+  description: 'Google stuff, duh~',
   category: 'other',
   aliases: ['search'],
   args: ['search'],
