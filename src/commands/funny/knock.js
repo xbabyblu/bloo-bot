@@ -14,6 +14,7 @@ module.exports = new Command({
       question: 'Do you want to hear a joke?',
       // prefix: 'I am',
       deleteMessage: false,
+      userId: message.author.id,
     })
       .then(userResponse => {
         if (listen(userResponse.first(), ['{yes}'])) {
