@@ -42,6 +42,9 @@ const LETTERS = {
   '?': ':grey_question:',
 };
 
+const userRegex = /(?<=<@)[!]{0,1}(\d+?)(?=>)/g;
+const channelRegex = /(?<=<#)(\d+?)(?=>)/g;
+
 module.exports = new Command({
   name: 'yell',
   description: 'YELL STUFF!',
@@ -55,14 +58,26 @@ module.exports = new Command({
       message.content
         .substr(message.content.indexOf(args[0]))
         .toLowerCase()
+        .replace(channelRegex, id => {
+          const channel = message.guild.channels.get(id);
+          return channel.name.toLowerCase();
+        })
+        .replace(userRegex, id => {
+          id = id.replace('!', '');
+          const member = message.guild.members.get(id);
+          return (member.nickname || member.user.username).toLowerCase();
+        })
         .replace(/\s+/, ' ')
+        // eslint-disable-next-line no-useless-escape
         .replace(/[^a-zA-Z0-9\s!\.\?]/g, '');
     if (content.length < 1) return;
-    message.channel.send(
-      content
-        .split('')
-        .map(l => LETTERS[l] || ' ')
-        .join(''),
-    ).catch(() => {});
+    message.channel
+      .send(
+        content
+          .split('')
+          .map(l => LETTERS[l] || ' ')
+          .join(''),
+      )
+      .catch(() => {});
   },
 });
