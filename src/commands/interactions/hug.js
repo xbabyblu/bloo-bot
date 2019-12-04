@@ -1,12 +1,7 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
-
-const images = [];
-
-for (let i = 0; i <= 5; i++) {
-  images.push(`http://cdn.chop.coffee/hug/${i}.gif`);
-}
 
 module.exports = new Command({
   name: 'hug',
@@ -14,10 +9,12 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   run(message, args, call) {
     const hug = createInteractionCommand(
       `\n${call.callerTag} has given you a big ole hug, you oughta send them one back! :heart: `,
-      images,
+      gifs.hug(),
       message,
     );
 

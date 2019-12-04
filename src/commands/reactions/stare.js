@@ -1,13 +1,8 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-
-const images = [];
-
-for (let i = 0; i <= 24; i++) {
-  images.push(`http://cdn.chop.coffee/stare/${i}.gif`);
-}
+const findPerson = require('../../util/findPerson');
 
 module.exports = new Command({
   name: 'stare',
@@ -16,16 +11,13 @@ module.exports = new Command({
   aliases: ['glare'],
   //  ¯\_(ツ)_/¯
   category: 'reactions',
-  run(message, args, call) {
-    const target = message.mentions.members.first();
-    if (!target) {
-      message.channel.send("I couldn't find that person.");
-      return;
-    }
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
+  async run(message, args, call) {
+    const target = await findPerson(message.mentions.members.first());
 
     const embed = makeEmbed(
-      `<@${call.caller}> is staring at you ${target.user}... what did you do?`,
-      random(images),
+      `<@${call.caller}> is staring at you ${target}... what did you do?`,
+      gifs.stare(),
       message,
     );
 

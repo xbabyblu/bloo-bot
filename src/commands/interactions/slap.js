@@ -9,6 +9,8 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   run(message, args, call) {
     const slap = createInteractionCommand(
       `*slap* \n${call.callerTag} sent me to slap you... you seemed like you needed some common sense sent your way. :yum: `,

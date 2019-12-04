@@ -1,32 +1,28 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
-
-const images = [];
-
-for (let i = 0; i <= 17; i++) {
-  images.push(`http://cdn.chop.coffee/confused/${i}.gif`);
-}
+const findPerson = require('../../util/findPerson');
 
 module.exports = new Command({
   name: 'confused',
   description: 'ever feel like you don\'t understand what\'s going on?',
   aliases: ['confuse', 'huh', 'confusion'],
   category: 'reactions',
-  run(message, args, call) {
-    const target = message.mentions.members.first();
+  examples: [' ', '@Lar#9547', '@Xlilblu#5239'],
+  async run(message, args, call) {
+    const target = await findPerson(message.mentions.members.first());
 
     let msg;
     if (target) {
-      msg = `<@${call.caller}> is confused by what you said, ${target.user} Maybe try clarifying a little more?`;
+      msg = `<@${call.caller}> is confused by what you said, ${target} Maybe try clarifying a little more?`;
     } else {
       msg = `<@${call.caller}> is **confused** :thinking:`;
     }
 
     const embed = makeEmbed(
       msg,
-      random(images),
+      gifs.confused(),
       message,
     );
 

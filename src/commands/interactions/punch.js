@@ -9,6 +9,8 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   async run(message, args, call) {
     const punch = createInteractionCommand(
       `\n${call.callerTag} has punched you, and may I suggest... stop doing whatever caused them to do so? :grin:`,

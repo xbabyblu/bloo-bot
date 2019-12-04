@@ -1,12 +1,7 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
-
-const images = [];
-
-for (let i = 0; i <= 14; i++) {
-  images.push(`http://cdn.chop.coffee/cute/${i}.gif`);
-}
 
 // cute stuff c;
 module.exports = new Command({
@@ -16,10 +11,12 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   async run(message, args, call) {
     const cute = createInteractionCommand(
       `Hey there! \n${call.callerTag} said you're cute. ;)`,
-      images,
+      gifs.cute(),
       message,
     );
 

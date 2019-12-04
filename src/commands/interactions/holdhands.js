@@ -1,12 +1,7 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
-
-const images = [];
-
-for (let i = 0; i <= 5; i++) {
-  images.push(`http://cdn.chop.coffee/holdhands/${i}.gif`);
-}
 
 // cute stuff c;
 module.exports = new Command({
@@ -15,10 +10,12 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   async run(message, args, call) {
     const hold = createInteractionCommand(
       `I was sent by \n${call.callerTag} to ask if you'd like to hold their hand :smiling_face_with_3_hearts:`,
-      images,
+      gifs.holdhands(),
       message,
     );
 

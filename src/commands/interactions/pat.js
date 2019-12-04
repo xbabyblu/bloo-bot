@@ -10,6 +10,8 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   async run(message, args, call) {
     const pat = createInteractionCommand(`*pat-pat* \n${call.callerTag} has pat you c:`, gifs.pat(), message);
 

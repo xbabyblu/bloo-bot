@@ -1,13 +1,8 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 const format = require('../../util/format');
-
-const images = [];
-
-for (let i = 0; i <= 6; i++) {
-  images.push(`http://cdn.chop.coffee/kiss/${i}.gif`);
-}
 
 module.exports = new Command({
   name: 'kiss',
@@ -15,6 +10,8 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   run(message, args, call) {
     const kiss = createInteractionCommand(
       format(
@@ -22,7 +19,7 @@ module.exports = new Command({
         "My... you're looking quite flustered..",
         'Do you want me to turn a fan on to help you cool down?',
       ),
-      images,
+      gifs.kiss(),
       message,
     );
 

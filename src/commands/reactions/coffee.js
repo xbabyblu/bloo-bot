@@ -1,21 +1,15 @@
 const { Command } = require('chop-tools');
+const gifs = require('chop-gifs');
 
 const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
-
-const images = [];
-
-for (let i = 0; i <= 32; i++) {
-  images.push(`http://cdn.chop.coffee/coffee/${i}.gif`);
-}
 
 module.exports = new Command({
   name: 'coffee',
   description: 'A cup of coffee to boost your spirits. ;)',
-  // args: ['target'],
   aliases: ['kaffe'],
   category: 'reactions',
+  examples: [' ', '@Lar#9547', '@Xlilblu#5239'],
   async run(message, args, call) {
     const target = await findPerson(message.mentions.members.first());
 
@@ -28,7 +22,7 @@ module.exports = new Command({
 
     const embed = makeEmbed(
       msg,
-      random(images),
+      gifs.coffee(),
       message,
     );
 

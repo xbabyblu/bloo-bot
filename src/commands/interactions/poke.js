@@ -19,6 +19,8 @@ module.exports = new Command({
   args: ['target'],
   delete: true,
   category: 'interactions',
+  usage: '{target}',
+  examples: ['@Lar#9547', '@Xlilblu#5239'],
   async run(message, args, call) {
     const poke = createInteractionCommand(`${call.callerTag} poked you :yum:`, images, message);
 
