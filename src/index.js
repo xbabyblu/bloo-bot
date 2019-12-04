@@ -9,13 +9,12 @@ const web = require("./web");
 
 const guildCreate = require('./events/guildCreate');
 
+const logger = require('./services/logger');
 const logCommands = require("./services/logCommands");
 const Profile = require("./models/profile");
 const GuildSettings = require("./models/guildSettings");
 
 database(() => {
-  console.log("[Database] MongoDB Connected.");
-
   const client = new ChopTools.Client();
 
   Reflect.defineProperty(client, "ignoredChannels", {
@@ -23,17 +22,24 @@ database(() => {
     writable: false
   });
 
+  Reflect.defineProperty(client, "logger", {
+    value: logger,
+    writable: false
+  });
+
+  client.logger.info('[Database] MongoDB Connected.');
+
   client.on("ready", () => {
-    console.log(`[Bloo] It's discord time! [${client.user.tag}]`);
+    client.logger.info(`[Bloo] It's discord time! [${client.user.tag}]`);
     client.user.setActivity("in a field of flowers", { type: "PLAYING" });
   });
 
   client.on("error", err => {
-    console.log("[Bloo] A discord error happened.", err);
+    client.logger.error("[Bloo] A discord error happened.", err);
   });
 
   client.on("warn", err => {
-    console.log("[Bloo] WARNING:", err);
+    client.logger.warn("[Bloo] WARNING:", err);
   });
 
   // Events
@@ -62,10 +68,10 @@ database(() => {
   client
     .login(process.env.TOKEN)
     .then(() => {
-      console.log("[Bloo] Log in successful.");
+      client.logger.info("[Bloo] Log in successful.");
     })
     .catch(err => {
-      console.log("[Bloo] Could not login to Discord. Exiting...", err);
+      client.logger.getLogger('critical').error("[Bloo] Could not login to Discord. Exiting...", err);
       process.exit(1);
     });
 

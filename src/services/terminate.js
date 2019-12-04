@@ -5,11 +5,11 @@ function terminate(web, discord, options = { timeout: 500 }) {
   const exit = code => process.exit(code);
 
   return (code, reason) => (err, promise) => {
-    console.log(`Process exiting with code ${code}, reason: ${reason}`);
+    discord.logger.info(`Process exiting with code ${code}, reason: ${reason}`);
 
     if (err && err instanceof Error) {
-      console.log(err.message, err.stack);
-      if (promise) console.log(promise);
+      discord.logger.error(err.message, err.stack);
+      if (promise) discord.logger.error(promise);
     }
 
     // Try a graceful shutdown
