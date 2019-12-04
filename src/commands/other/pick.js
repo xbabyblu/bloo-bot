@@ -1,6 +1,6 @@
 const { Command } = require('chop-tools');
 
-const pickFrom = require('../../util/pickFrom');
+const random = require('../../util/random');
 const wait = require('../../util/wait');
 
 module.exports = new Command({
@@ -14,9 +14,9 @@ module.exports = new Command({
   async run(message, args) {
     let result;
     if (message.content.includes(',')) {
-      result = pickFrom(args.join(' ').split(','));
+      result = random(args.join(' ').split(','));
     } else {
-      result = pickFrom(args);
+      result = random(args);
     }
     let msg = await message.channel.send(
       `:page_facing_up: **| ${message.author.username}** asked me to pick something.\n:1234: And I pick`,
