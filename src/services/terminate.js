@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 function terminate(web, discord, options = { timeout: 500 }) {
   // Exit function
   const exit = code => process.exit(code);
@@ -11,6 +13,7 @@ function terminate(web, discord, options = { timeout: 500 }) {
     }
 
     // Try a graceful shutdown
+    mongoose.disconnect();
     discord.destroy();
     web.close(exit);
     // Force the shutdown
