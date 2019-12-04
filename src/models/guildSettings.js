@@ -8,9 +8,12 @@ const guildSettingsSchema = new Schema({
     required: true,
     unique: true,
   },
-  allowListeners: {
-    type: Boolean,
-    default: false,
+  listenerSettings: {
+    allow: {
+      type: Boolean,
+      default: true,
+    },
+    ignored: { type: [String], default: [] },
   },
   createdAt: {
     type: Date,
@@ -21,7 +24,7 @@ const guildSettingsSchema = new Schema({
     type: Date,
     required: true,
     default: Date.now(),
-  }
+  },
 });
 
 guildSettingsSchema.statics.getOrCreate = async function getOrCreate(guildId) {

@@ -1,30 +1,34 @@
-const { Listener } = require("chop-tools");
-const time = require("humanize-duration");
+const { Listener } = require('chop-tools');
+const time = require('humanize-duration');
+
+const GuildSettings = require('../../models/guildSettings');
 
 // the message.... if anyone literally says this imma smack them.
 module.exports = new Listener({
-  // she can only have one group of words per listener >.> ;-;
-  words: ["go", "away", "bloo"], 
-  category: "bloo",
+  words: ['go', 'away', 'bloo'],
+  category: 'bloo',
   cooldown: 1,
   priority: 0,
-  run(message) {
-    const cId = message.channel.id;
-    const duration = 0;
-    // This is the magic line \/ 
-    this.client.listeners.ignored.ignoreChannel(cId, duration);
-    message.channel.send(
-      `:c I'm sorry.... I wont look here ${duration ? 'for ' + time(duration) : 'anymore'}... :pensive:`
-    );
-    console.log(
-      `Ignoring channel ${message.channel.name} (${cId}) for ${time(duration)}`
-    );
+  async run(message) {
+    let settings = await GuildSettings.findOne({ guildId: message.guild.id }).exec();
+
+    if (!settings) {
+      settings = new GuildSettings({ guildId: message.guild.id });
+    }
+
+    if (settings.listenerSettings.ignored.indexOf(message.channel.id) === -1) {
+      settings.listenerSettings.ignored.push(message.channel.id);
+    }
+
+    await settings.save();
+
+    this.client.listeners.ignored.ignoreChannel(message.channel.id, 0);
+    message.channel.send(`:c I'm sorry.... I wont look here anymore... :pensive:`);
     return true;
-  }
+  },
 });
 
-
-//  
+//
 // How about, in other channel, Bloo listen to #themutedchannel
 // TODO: !b listen here you little shit
 
@@ -71,4 +75,4 @@ module.exports = new Listener({
     return true;
   }
 }); 
-*/ 
+*/

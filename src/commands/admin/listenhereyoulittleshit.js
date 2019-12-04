@@ -6,7 +6,7 @@ module.exports = new Command({
     category: 'admin',
     aliases: ['listenhereyoulittleshit'],
     args: ['channel'],
-    run(message, args, call) {
+    async run(message, args, call) {
       // tryna find the channel
       const channelList = message.guild.channels.filter(c => c.type === 'text');
       const channelsInMessage = message.content.match(/(?<=<#)(\d+?)(?=>)/);
@@ -18,6 +18,10 @@ module.exports = new Command({
       }
       
       const channel = channelList.get(idInMessage);
+
+      call.settings.listenerSettings.ignored = call.settings.listenerSettings.ignored.filter(c => c !== idInMessage);
+
+      await call.settings.save();
       
       // unmute said channel
       this.client.listeners.ignored.listenChannel(channel.id);
