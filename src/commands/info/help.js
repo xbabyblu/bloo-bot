@@ -46,14 +46,20 @@ module.exports = new Command({
             '# [] = Optional arguments.```',
         );
       }
-      if (command.example) {
+      const addExamples = (exampleType) => {
         const start = `${this.client.options.prefix}${command.name} `;
-        const e = command.example;
+        const e = command[exampleType];
         const isArr = Array.isArray(e);
         const examples = isArr
           ? e.reduce((a, c) => `${a} \`\`\`${start}${c}\`\`\``, '')
           : `\`\`\`${start}${e}\`\`\``;
         embed.addField(':ledger: Example', examples);
+      }
+      if (command.example) {
+        addExamples('example');
+      }
+      if (command.examples) {
+        addExamples('examples');
       }
       return message.channel.send({ embed });
     }
