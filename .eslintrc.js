@@ -24,7 +24,7 @@ module.exports = {
     'no-use-before-define': ['error', { functions: false }],
     'no-param-reassign': 'off',
     'new-cap': 'off',
-    'no-console': 'off',
+    'no-console': 'warn',
     'prefer-template': 'off',
   },
 };
