@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
 
+const Bloo = require('./bloo');
+
 const { Schema } = mongoose;
 
 const ideaSchema = new Schema({
+  ideaId: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
   title: {
     type: String,
     minlength: 3,
@@ -10,7 +17,7 @@ const ideaSchema = new Schema({
   },
   creator: {
     type: String,
-    required: true
+    required: true,
   },
   isDone: {
     type: Boolean,
@@ -25,21 +32,23 @@ const ideaSchema = new Schema({
     type: Date,
     required: true,
     default: Date.now(),
-  }
+  },
 });
 
-
-ideaSchema.pre('save', function preSave(next) {
+ideaSchema.pre('save', async function preSave(next) {
   if (this.isModified('createdAt')) {
     throw new Error('Creation field is read only!');
-  } else {
-    next();
   }
-});
-
-ideaSchema.pre('save', function preSave(next) {
   this.updatedAt = Date.now();
+  // get next id
+  const blooConfig = await Bloo.findOne({}).select('stats.currentIdeaId').exec();
+  const nextId = blooConfig.stats.currentIdeaId + 1;
+  this.ideaId = nextId;
+  blooConfig.stats.currentIdeaId += 1;
+  await blooConfig.save();
   next();
 });
+
+// TODO: Add mongoose-unique-validator
 
 module.exports = mongoose.model('Idea', ideaSchema);
