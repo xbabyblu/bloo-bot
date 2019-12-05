@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// const logError = require('../../util/logError');
+const logger = require('./logger');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -13,7 +13,7 @@ function connect(cb) {
   mongoose
     .connect(MONGODB_URI)
     .then(cb, (err) => {
-      console.log('[Database] Could not connect to database!', err);
+      logger.getLogger('critical').error('[Database] Could not connect to database!', err);
     })
     .catch(() => {
       process.exit(1);

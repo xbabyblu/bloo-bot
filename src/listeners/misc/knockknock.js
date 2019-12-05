@@ -25,13 +25,9 @@ module.exports = new Listener({
     
     const response1 = responseList1.first();
 
-    // you can put this response1 👈👈👈👈👈👈
-    await message.channel.send(`${response1} who?`);
-
     const responseList2 = await Prompter.message({
       channel: message.channel,
-      // in here   \/   👈👈👈👈👈👈
-      question: ':nerd:',
+      question: `${response1} who? :nerd:`,
       userId: message.author.id,
       max: 1,
       timeout: 10000,
