@@ -11,8 +11,8 @@ module.exports = new Command({
   // args: ['action'],
   // delete: false,
   hidden: true,
-  // usage: 'test 123',
-  // example: 'another test 123',
+  usage: '{your action} [your idea]',
+  examples: ['add cook bacon', 'new cook bacon', 'new Go for a walk', 'new eat ass', 'mine'],
   async run(message, args, call) {
     if (args[0]) {
       // Add new idea
@@ -39,7 +39,7 @@ module.exports = new Command({
         return message.channel.send(
           format(
             `You have ${myIdeas.length} ideas!`,
-            ...myIdeas.map(i => ":small_blue_diamond: " + i.title)
+            ...myIdeas.map(i => `:small_blue_diamond: **[${i.ideaId}]** ${i.title}`)
           ),
           { split: true }
         );
@@ -54,7 +54,7 @@ module.exports = new Command({
     message.channel.send(
       format(
         `There are ${ideas.length} ideas in the database. Yeehaw!`,
-        ...ideas.map(i => ":small_blue_diamond: " + i.title)
+        ...ideas.map(i => `:small_blue_diamond: **[${i.ideaId}]** ${i.title}`)
       ),
       { split: true }
     );
