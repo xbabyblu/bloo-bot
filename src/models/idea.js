@@ -50,6 +50,10 @@ ideaSchema.pre('save', async function preSave(next) {
   next();
 });
 
+ideaSchema.methods.display = function display() {
+  return `<:right:652702479292825600> **[${this.ideaId}]** ${this.title}`;
+}
+
 // TODO: Add mongoose-unique-validator
 
 module.exports = mongoose.model('Idea', ideaSchema);
