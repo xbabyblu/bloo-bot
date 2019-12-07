@@ -14,17 +14,10 @@ module.exports = new Command({
   hidden: true,
   usage: '{your action} [your idea]',
   examples: [
-    'add cook bacon',
-    'new cook bacon',
-    'new Go for a walk',
-    'new eat ass',
-    'mine',
-    'list',
-    'delete 8',
-    'remove 28',
-    'rem 32',
-    'edit 26',
-    'update 26'
+    'add Eat candy.',
+    'edit 5',
+    'delete 5',
+    'mine'
   ],
   async run(message, args, call) {
     // helper function to check the first argument.
