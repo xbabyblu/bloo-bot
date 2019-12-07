@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 const ideaSchema = new Schema({
   ideaId: {
     type: Number,
-    required: true,
+    // required: true,
     unique: true,
   },
   title: {
@@ -42,6 +42,7 @@ ideaSchema.pre('save', async function preSave(next) {
   this.updatedAt = Date.now();
   // get next id
   const blooConfig = await Bloo.findOne({}).select('stats.currentIdeaId').exec();
+  // @_@
   const nextId = blooConfig.stats.currentIdeaId + 1;
   this.ideaId = nextId;
   blooConfig.stats.currentIdeaId += 1;

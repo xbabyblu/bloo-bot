@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { Listener } = require('chop-tools');
 
 module.exports = new Listener({
