@@ -94,7 +94,7 @@ database(() => {
   // Application Shutdown
   const exitHandler = terminate(webServer, client, { timeout: 1500 });
   process.on('uncaughtException', exitHandler(1, 'Uncaught Exception'));
-  process.on('unhandledRejection', exitHandler(1, 'Unhandled Rejection'));
+  // process.on('unhandledRejection', exitHandler(1, 'Unhandled Rejection'));
   process.on('SIGTERM', exitHandler(0, 'SIGTERM'));
   process.on('SIGINT', exitHandler(0, 'SIGINT'));
 });
