@@ -9,10 +9,8 @@ function terminate(web, discord, options = { timeout: 500 }) {
   return (code, reason) => (err, promise) => {
     logger.info(`Process exiting with code ${code}, reason: ${reason}`);
 
-    if (err && err instanceof Error) {
-      logger.error(err.message, err.stack);
-      if (promise) logger.error(promise);
-    }
+    logger.error(err.message, err.stack);
+    if (promise) logger.error(promise);
 
     // Try a graceful shutdown
     mongoose.disconnect();
