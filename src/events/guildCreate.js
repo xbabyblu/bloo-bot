@@ -8,7 +8,7 @@ module.exports = client => guild => {
     "Hello I'm Bloo!",
     `To learn about my commands use ${prefix}help`,
     `If you dont want me to voluntarily tune in to your conversations with responses to emotions, say **${prefix}settings** to enable/disable my listeners.`,
-    "If you don't mind me listening, you can ignore the above message and I'll listen automatically until told otherwise! <3 "
+    "If you don't mind me listening, you can ignore the above message and I'll listen automatically until told otherwise! <3 ",
     `Feel free to join my support server! https://discord.gg/9JPmfkP :blue_heart:`,
   );
 
