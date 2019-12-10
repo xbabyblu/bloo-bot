@@ -39,6 +39,12 @@ module.exports = new Command({
       return;
     }
 
+    if (userMention === message.author) {
+      const msg = await message.channel.send(":no_entry_sign: Bruh... Are you fookin serious?");
+      deleteIn(msg, 4000);
+      return;
+    }
+
     try {
       const [bal] = await Currency.transfer(call.caller, userMention.id, amount);
       message.channel.send(

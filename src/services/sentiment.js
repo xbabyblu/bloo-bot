@@ -6,6 +6,7 @@ const sentiment = (text) => multilangSentiment(text, 'en', {
     '🍱': 0,
     '❤️': 2,
     '🙂': 1,
+    'kms': -5, // for suicide_10.js
   },
 });
 
