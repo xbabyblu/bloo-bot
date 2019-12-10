@@ -4,6 +4,7 @@ const ChopTools = require('chop-tools');
 
 const database = require('./services/database');
 const terminate = require('./services/terminate');
+const Alert = require('./services/alert')
 
 const web = require('./web');
 
@@ -65,7 +66,13 @@ database(() => {
   });
 
   client.on('error', err => {
-    client.logger.error('[Bloo] A discord error happened.', err);
+    client.logger.error('[Bloo] A nasty error occurred! HELP!!!!!!!', err);
+    Alert.log(
+      Alert.types.error,
+      client,
+      `Omg <@517599684961894400> is going to be so mad :cold_sweat:
+    \`\`\`${err.message}\n\n${err.stack}\`\`\``,
+    ).catch(console.error); // console.error instead of emit('error') or we could end up in a loop
   });
 
   client.on('warn', err => {
@@ -108,7 +115,7 @@ database(() => {
   // Application Shutdown
   const exitHandler = terminate(webServer, client, { timeout: 1500 });
   process.on('uncaughtException', exitHandler(1, 'Uncaught Exception'));
-  // process.on('unhandledRejection', exitHandler(1, 'Unhandled Rejection'));
+  process.on('unhandledRejection', exitHandler(1, 'Unhandled Rejection'));
   process.on('SIGTERM', exitHandler(0, 'SIGTERM'));
   process.on('SIGINT', exitHandler(0, 'SIGINT'));
 });

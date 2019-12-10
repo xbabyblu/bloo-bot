@@ -5,9 +5,10 @@ const Bloo = require('../models/bloo');
 
 const messages = {
   0: 'Possibly suicidal message detected.',
-  1: '___***Catastrophic Error!!!***__ Please take action immediately! ⚠ ⚠ ⚠ ',
+  1: '__***Catastrophic Error!!!***__ Please take action immediately! ⚠ ⚠ ⚠ ',
   2: "We've received a new piece of feedback! :D",
   3: 'Bloo got invited into a new server! 🎉',
+  4: '⚠️ An error occurred! ⚠️',
 };
 
 const transport = nodemailer.createTransport({
@@ -27,9 +28,10 @@ module.exports = class Alert {
     catastrophic_error: 1,
     feedback: 2,
     invited: 3,
+    error: 4,
   };
 
-  static async critical(type, client, data) {
+  static async critical(type, client, message) {
     const blooConfig = await Bloo.findOne({}).exec();
     if (!blooConfig) {
       client.emit('error', new Error('Bloo config is missing!'));
@@ -55,13 +57,13 @@ module.exports = class Alert {
       return;
     }
 
-    channel.send({ embed: new MessageEmbed({ title: messages[type], description: data }) });
+    channel.send({ embed: new MessageEmbed({ title: messages[type], description: message }) });
     transport.sendMail(
       {
         from: 'Bloo Bot <bloobotdev@gmail.com',
         to: 'Joaquim Neto <joaquimmy@yahoo.com>, Blu <xlilblu666@gmail.com>',
         subject: 'Bloo Alert',
-        text: messages[type],
+        text: messages[type] + '\n\n' + message,
       },
       (err, info) => {
         if (err) {
@@ -99,7 +101,11 @@ module.exports = class Alert {
       return;
     }
 
-    const embed = new MessageEmbed({ title: messages[type], description: message, thumbnail: { url: data.thumbnail } });
+    const embed = new MessageEmbed({
+      title: messages[type],
+      description: message,
+      thumbnail: data && data.thumbnail ? { url: data.thumbnail } : undefined,
+    });
     channel.send({ embed });
   }
 };

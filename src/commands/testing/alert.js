@@ -14,7 +14,13 @@ module.exports = new Command({
     let [channel] = getChannelsInMessage(message);
     // send a test alert
     if (args[0] && ['send', 'test', 'testing'].includes(args[0].toLowerCase())) {
-      Alert.critical(Alert.types.feedback, this.client, '***Yeehaw!***')
+      Alert.log(Alert.types.error, this.client, `Omg <@517599684961894400> is going to be so mad :cold_sweat:
+      \`\`\`
+This
+is
+a
+test!
+      \`\`\``)
         .catch(err => this.client.emit('error', err));
       return;
     }
