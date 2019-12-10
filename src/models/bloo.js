@@ -26,6 +26,11 @@ const blooSchema = new Schema({
       default: 0,
     },
   },
+  loglevel: {
+    type: String,
+    required: true,
+    default: 'info',
+  },
   createdAt: {
     type: Date,
     required: true,

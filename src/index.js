@@ -12,6 +12,7 @@ const guildCreate = require('./events/guildCreate');
 const logger = require('./services/logger');
 const logCommands = require('./services/logCommands');
 const Profile = require('./models/profile');
+const Bloo = require('./models/bloo');
 const GuildSettings = require('./models/guildSettings');
 
 database(() => {
@@ -42,6 +43,19 @@ database(() => {
         });
       });
       client.logger.info(`[Bloo] Adding ${count} channels to the listener ignore list from the database.`);
+    })
+    .catch(client.logger.error);
+
+  // set log level from db
+  Bloo.findOne({})
+    .exec()
+    .then(config => {
+      if (!config) return;
+      client.logger.setLevel(config.loglevel);
+      client.logger.info(
+        '[Log] Logging level set to',
+        `${['Trace', 'Debug', 'Info', 'Warn', 'Error', 'Silent'][client.logger.getLevel()]}.`,
+      );
     })
     .catch(client.logger.error);
 
