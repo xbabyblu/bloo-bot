@@ -3,7 +3,7 @@ const { Command } = require('chop-tools');
 module.exports = new Command({
   name: 'off',
   description: 'fair',
-  category: 'emotions',
+  category: 'admin',
   hidden: true,
   delete: true,
   run(message) {
