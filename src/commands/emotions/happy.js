@@ -3,7 +3,7 @@ const { Command } = require('chop-tools');
 module.exports = new Command({
   name: 'Happy',
   description: 'it is mutual!',
-  category: 'emotions',
+  category: 'reactions',
   hidden: true,
   run(message) {
     message.channel.send(
