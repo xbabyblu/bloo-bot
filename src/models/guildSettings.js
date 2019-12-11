@@ -30,7 +30,7 @@ const guildSettingsSchema = new Schema({
 guildSettingsSchema.statics.getOrCreate = async function getOrCreate(guildId) {
   let gSettings;
   try {
-    gSettings = await this.findOne({ guildId }).select('-_id');
+    gSettings = await this.findOne({ guildId });
     if (gSettings) {
       return gSettings;
     }
