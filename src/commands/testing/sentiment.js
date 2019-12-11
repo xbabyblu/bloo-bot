@@ -8,12 +8,9 @@ module.exports = new Command({
   description: 'Analyzes your message for sentiment data.',
   args: ['message to analyze'],
   hidden: true,
-  run(message, args) {
-    // do stuff
-    const c = message.content;
+  run(message, args, call) {
     // this extracts "!b sentiment" from the message content.
-    const content = c.substr(c.indexOf(args[0]));
-    const s = sentiment(content);
+    const s = sentiment(args.join(' '));
     console.log(s);
 
     message.channel.send(

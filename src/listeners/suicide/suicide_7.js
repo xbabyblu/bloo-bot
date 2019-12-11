@@ -11,8 +11,10 @@ module.exports = new Listener({
   priority: 0,
   run(message) {
     const analysis = sentiment(message.content);
-    if (analysis.positive.includes('suicide') || analysis.positive.includes('suicidal')) return false;
-    message.channel.send(MSG);
+    if (analysis.positive.includes('suicide') || analysis.positive.includes('suicidal')) {
+      return false;
+    };
+      message.channel.send(MSG);
     return true;
   },
 });
