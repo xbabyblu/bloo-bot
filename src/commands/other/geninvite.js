@@ -9,7 +9,7 @@ module.exports = new Command({
   // delete: true,
   hidden: true,
   async run(message, args, call) {
-    const invite = await this.client.generateInvite(['ADMINISTRATOR'])
-    message.channel.send('I\'m so happy you want to invite me c:\n' + invite);
+    const invite = 'https://discordapp.com/api/oauth2/authorize?client_id=643338599281983501&permissions=392256&scope=bot'
+    this.send('I\'m so happy you want to invite me c:' , invite);
   },
 });

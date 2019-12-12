@@ -7,7 +7,7 @@ module.exports = new Command({
   name: 'balance',
   description: 'Shows you how much currency you have.',
   category: 'currency',
-  aliases: ['bal', 'money', 'currency'],
+  aliases: ['bal', 'money', 'currency', 'monie', 'monies'],
   run(message, args, call) {
     message.channel.send(
       format(

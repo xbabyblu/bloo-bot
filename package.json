@@ -1,6 +1,6 @@
 {
   "name": "bloo",
-  "version": "1.6.3",
+  "version": "1.6.5",
   "description": "empathetic bot",
   "main": "index.js",
   "scripts": {

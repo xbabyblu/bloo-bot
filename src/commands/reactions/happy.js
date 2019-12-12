@@ -1,17 +1,4 @@
-const { Command } = require('chop-tools');
 
-module.exports = new Command({
-  name: 'Happy',
-  description: 'it is mutual!',
-  category: 'reactions',
-  hidden: true,
-  run(message) {
-    message.channel.send(
-      'That is so delightful to hear! I am pretty happy myself!',
-    );
-  },
-});
-/*
 const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
@@ -19,11 +6,23 @@ const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
 const format = require('../../util/format');
 
-const images = [];
-
+const images = [
+  'https://imgur.com/a/LORGHXP', 
+  'https://imgur.com/a/Pk7glNs', 
+  'https://imgur.com/a/1iRHU0a', 
+  'https://imgur.com/a/aNcjpmg',
+  'https://imgur.com/a/4VkbcSS',
+  'https://imgur.com/a/adh0lkn',
+  'https://imgur.com/a/PDD8Vj8',
+  'https://imgur.com/a/y1UoP9W', 
+  'https://imgur.com/a/4ycqOx3', 
+  'https://imgur.com/a/pmIYu1G', 
+  'https://imgur.com/a/76SIRE0'];
+/*
 for (let i = 0; i <= 28; i++) {
   images.push(`http://cdn.chop.coffee/happy/${i}.gif`);
 }
+*/
 
 module.exports = new Command({
   name: 'happy',
@@ -32,6 +31,7 @@ module.exports = new Command({
   category: 'reactions',
   usage: '[target]',
   examples: [' ', '@Lar#9547', '@Xlilblu#5239'],
+  hidden: true,
   async run(message, args, call) {
     const target = await findPerson(message.mentions.members.first());
 
@@ -47,4 +47,3 @@ module.exports = new Command({
     message.channel.send({ embed });
   },
 });
-*/
