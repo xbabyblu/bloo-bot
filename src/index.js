@@ -12,6 +12,7 @@ const Bloo = require('./models/bloo');
 const web = require('./web');
 
 const guildCreate = require('./events/guildCreate');
+const vote = require('./events/vote');
 
 const logger = require('./services/logger');
 const logCommands = require('./middleware/logCommands');
@@ -83,6 +84,7 @@ database(() => {
 
   // Events
   client.on('guildCreate', guildCreate(client));
+  client.on('vote', vote(client));
 
   // Middleware
   client.use(logCommands);
@@ -96,7 +98,7 @@ database(() => {
   });
 
   // Express Server
-  const webServer = web();
+  const webServer = web(client);
 
   client
     .login(process.env.TOKEN)
