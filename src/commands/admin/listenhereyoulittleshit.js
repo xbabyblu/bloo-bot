@@ -4,6 +4,7 @@ module.exports = new Command({
     name: 'comeback',
     description: 'For when you want Bloo to listen again after being muted',
     category: 'admin',
+    example: '#(name of your channel you\'d like her to listen to again)',
     aliases: ['listenhereyoulittleshit'],
     args: ['channel'],
     async run(message, args, call) {
