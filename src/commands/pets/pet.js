@@ -8,12 +8,13 @@ const Pets = require('../../services/pets');
 const Currency = require('../../services/currency');
 const format = require('../../util/format');
 const { INK_EMOJI } = require('../../util/constants');
-
+// TODO: currently hidden and under admin until finished, but make public once done & fix category
 module.exports = new Command({
   name: 'pet',
-  description: 'Pets uhhh idk',
-  category: 'pets',
+  description: 'trade your bloo ink for a pet that you can earn xp and feed!',
+  category: 'admin',
   aliases: ['p', 'pets'],
+  hidden: true,
   async run(message, args, call) {
     const pets = await Pet.find({ owner: call.caller }).exec();
 
