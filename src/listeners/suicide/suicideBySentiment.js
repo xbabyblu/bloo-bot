@@ -19,7 +19,7 @@ module.exports = new Listener({
       return false;
     }
     // console.log('Possible suicide:', anal);
-    message.channel.send(MSG);
+    this.send(MSG);
     return true;
   },
 });

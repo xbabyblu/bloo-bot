@@ -8,6 +8,12 @@ module.exports = new Command({
   description: 'Let me help you!',
   category: 'info',
   runIn: ['text', 'dm'],
+  usage: '[command name]',
+  examples: [
+    ' ',
+    'hug',
+    'yell'
+  ],
   run(message, args, call) {
     // return help about specific command
     if (args[0]) {
@@ -16,7 +22,7 @@ module.exports = new Command({
         c => c.name === search || c.aliases.includes(search),
       );
       if (!command || (command.hidden && !call.isSuperUser)) {
-        return message.channel.send(`I could not find the ${args[0]} command.`);
+        return this.send(`I could not find the ${args[0]} command.`);
       }
       // gather data and send it to same channel
       const embed = new MessageEmbed({
@@ -61,7 +67,7 @@ module.exports = new Command({
       if (command.examples) {
         addExamples('examples');
       }
-      return message.channel.send({ embed });
+      return this.send({ embed });
     }
 
     // return a list of commands separated by category
@@ -99,6 +105,6 @@ module.exports = new Command({
             .reduce((acc, cur) => `${acc} \`${cur.name}\``, ''),
       );
     });
-    return message.channel.send({ embed });
+    return this.send({ embed });
   },
 });

@@ -22,39 +22,40 @@ module.exports = new Command({
     const amount = Math.floor(Number(args[1]));
 
     if (!userMention) {
-      const msg = await message.channel.send(":no_entry_sign: You didn't tag a person to pay.");
+      const msg = await this.send(":no_entry_sign: You didn't tag a person to pay.");
       deleteIn(msg, 4000);
       return;
     }
 
     if (Number.isNaN(amount)) {
-      const msg = await message.channel.send(':no_entry_sign: That amount is not a valid number!');
+      const msg = await this.send(':no_entry_sign: That amount is not a valid number!');
       deleteIn(msg, 4000);
       return;
     }
 
     if (call.profile.money < amount) {
-      const msg = await message.channel.send(":no_entry_sign: You don't have enough funds to do that!");
+      const msg = await this.send(":no_entry_sign: You don't have enough funds to do that!");
       deleteIn(msg, 4000);
       return;
     }
 
     if (userMention === message.author) {
-      const msg = await message.channel.send(":no_entry_sign: Bruh... Are you fookin serious?");
+      const msg = await this.send(':no_entry_sign: Bruh... Are you fookin serious?');
       deleteIn(msg, 4000);
       return;
     }
 
     try {
       const [bal] = await Currency.transfer(call.caller, userMention.id, amount);
-      message.channel.send(
-        format(
-          `**${message.author.username}**, you sent **${amount}**${INK_EMOJI} to **${userMention.username}**.`,
-          `Your new balance is **${bal}**`,
-        ),
+      this.send(
+        `**${message.author.username}**, you sent **${amount}**${INK_EMOJI} to **${userMention.username}**.`,
+        `Your new balance is **${bal}**`,
       );
     } catch (err) {
-      console.log(`Failed to transfer ${amount} currency from ${call.callerTag} to ${userMention.tag}. Reason:`, err);
+      this.client.logger.error(
+        `Failed to transfer ${amount} currency from ${call.callerTag} to ${userMention.tag}. Reason:`,
+        err,
+      );
     }
   },
 });

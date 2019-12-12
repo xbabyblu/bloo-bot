@@ -6,7 +6,7 @@ module.exports = new Listener({
   cooldown: 5,
   priority: 0,
   run(message) {
-    message.channel.send(
+    this.send(
       'I like that too! Well. If robots could eat of course, I have no taste buds... but I am sure that it is delicious!',
     );
     return true;

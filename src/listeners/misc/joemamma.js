@@ -8,7 +8,7 @@ module.exports = new Listener({
   async run(message) {
     try {
       // LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-      const msg = await message.channel.send('***Joe Mamma!*** *hehehehehe* :rofl: :rofl: :rofl: :rofl: :rofl: ');
+      const msg = await this.send('***Joe Mamma!*** *hehehehehe* :rofl: :rofl: :rofl: :rofl: :rofl: ');
       msg.react('😂');
       msg.react('🤣');
       msg.react('💩');

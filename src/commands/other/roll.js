@@ -6,6 +6,6 @@ module.exports = new Command({
   run(message) {
     const roll = Math.floor(Math.random() * 6) + 1;
     const emotes = ['one', 'two', 'three', 'four', 'five', 'six'];
-    message.channel.send(`You rolled a :${emotes[roll - 1]}:`);
+    this.send(`You rolled a :${emotes[roll - 1]}:`);
   },
 });

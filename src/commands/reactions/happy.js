@@ -44,6 +44,6 @@ module.exports = new Command({
 
     const embed = makeEmbed(msg, random(images), message);
 
-    message.channel.send({ embed });
+    this.send({ embed });
   },
 });

@@ -26,20 +26,18 @@ module.exports = new Command({
           })
             .then(jokeResponse => {
               const { joke } = JSON.parse(jokeResponse);
-              message.channel
-                .send({
-                  embed: {
-                    title: joke,
-                    description: ':rofl:',
-                    thumbnail: {
-                      url: this.client.user.avatarURL(),
-                    },
+              this.send({
+                embed: {
+                  title: joke,
+                  description: ':rofl:',
+                  thumbnail: {
+                    url: this.client.user.avatarURL(),
                   },
-                })
-                .catch(() => {});
+                },
+              }).catch(() => {});
             })
             .catch(() => {
-              message.channel.send({
+              this.send({
                 embed: {
                   title: 'Knock Knock. Who is there? Oh its me! Bloo, duh! ~ ',
                   description: ':rofl:',
@@ -50,12 +48,12 @@ module.exports = new Command({
               }).catch(() => {});
             });
         } else {
-          message.channel.send('Okay then.');
+          this.send('Okay then.');
         }
       })
       .catch(err => {
-        console.log(err);
-        message.channel.send('Okay then.');
+        this.client.logger.error(err);
+        this.send('Okay then.');
       });
   },
 });

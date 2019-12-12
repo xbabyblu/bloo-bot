@@ -22,6 +22,6 @@ module.exports = new Command({
       channel = message.channel;
     }
     await blooConfig.save()
-    message.channel.send(`Logs channel set to: ${channel}`);
+    this.send(`Logs channel set to: ${channel}`);
   },
 });

@@ -10,6 +10,6 @@ module.exports = new Command({
   hidden: true,
   run(message, args, call) {
     const link = gifs.coffee();
-    message.channel.send('Generated link: ' + link);
+    this.send('Generated link: ' + link);
   },
 });

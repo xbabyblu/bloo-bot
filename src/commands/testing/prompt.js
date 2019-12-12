@@ -20,11 +20,11 @@ module.exports = new Command({
       })
         .then(res => {
           // console.log(res);
-          message.channel.send(res ? 'Confirmed!' : 'Cancelled :c');
+          this.send(res ? 'Confirmed!' : 'Cancelled :c');
         })
         .catch(err => {
           console.log(err);
-          message.channel.send('Error.');
+          this.send('Error.');
         });
       return;
     }
@@ -32,19 +32,19 @@ module.exports = new Command({
     if (args[0] && args[0] === 'test') {
       Prompter.message({
         channel: message.channel,
-        question: 'What is Lar\'s favorite food?',
+        question: "What is Lar's favorite food?",
         userId: call.caller,
         deleteMessage: false,
         regex: /spaghetti/gi,
         max: 1,
       })
         .then(res => {
-          if (!res) return message.channel.send(':c');
-          message.channel.send(`Yes ${call.callerUsername}, you got it!`);
+          if (!res) return this.send(':c');
+          this.send(`Yes ${call.callerUsername}, you got it!`);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
-          message.channel.send(':c');
+          this.send(':c');
         });
       return;
     }
@@ -65,20 +65,18 @@ module.exports = new Command({
           })
             .then(jokeResponse => {
               const { joke } = JSON.parse(jokeResponse);
-              message.channel
-                .send({
-                  embed: {
-                    title: joke,
-                    description: ':rofl:',
-                    thumbnail: {
-                      url: this.client.user.avatarURL(),
-                    },
+              this.send({
+                embed: {
+                  title: joke,
+                  description: ':rofl:',
+                  thumbnail: {
+                    url: this.client.user.avatarURL(),
                   },
-                })
-                .catch(() => {});
+                },
+              }).catch(() => {});
             })
             .catch(() => {
-              message.channel.send({
+              this.send({
                 embed: {
                   title: 'Knock Knock. Who is there? Oh its me! Bloo, duh! ~ ',
                   description: ':rofl:',
@@ -89,12 +87,12 @@ module.exports = new Command({
               }).catch(() => {});
             });
         } else {
-          message.channel.send('Okay then.');
+          this.send('Okay then.');
         }
       })
       .catch(err => {
         console.log(err);
-        message.channel.send('Okay then.');
+        this.send('Okay then.');
       });
   },
 });

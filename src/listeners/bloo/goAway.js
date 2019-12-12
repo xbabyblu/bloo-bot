@@ -23,7 +23,7 @@ module.exports = new Listener({
     await settings.save();
 
     this.client.listeners.ignored.ignoreChannel(message.channel.id, 0);
-    message.channel.send(`:c I'm sorry.... I wont look here anymore... :pensive:`);
+    this.send(`:c I'm sorry.... I wont look here anymore... :pensive:`);
     return true;
   },
 });

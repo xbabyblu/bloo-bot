@@ -5,7 +5,7 @@ module.exports = new Command({
   description: 'italian goodness',
   category: 'food',
   run(message) {
-    message.channel.send(
+    this.send(
       'mmmm spaghet, I love spaghetti. Do you like extra cheese on yours?',
     );
   },

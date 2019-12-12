@@ -18,7 +18,7 @@ module.exports = new Command({
     } else {
       result = random(args);
     }
-    let msg = await message.channel.send(
+    let msg = await this.send(
       `:page_facing_up: **| ${message.author.username}** asked me to pick something.\n:1234: And I pick`,
     );
     await wait(200);

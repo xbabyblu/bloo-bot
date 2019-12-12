@@ -7,6 +7,6 @@ module.exports = new Command({
   category: 'funny',
   delete: true,
   run(message) {
-    message.channel.send('¯\\_(ツ)_/¯');
+    this.send('¯\\_(ツ)_/¯');
   },
 });

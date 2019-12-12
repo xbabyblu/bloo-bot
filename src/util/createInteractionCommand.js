@@ -12,7 +12,7 @@ module.exports = (text, images, message) => async () => {
   const target = await findPerson(message.mentions.members.first());
 
   if (!target) {
-    const msg = await message.channel.send("I couldn't find that person.");
+    const msg = await message.channel.send("I couldn't find that person.").catch(() => {});
     deleteAfterDelay(msg, 3000);
     return;
   }
@@ -21,5 +21,7 @@ module.exports = (text, images, message) => async () => {
 
   const embed = makeEmbed(text, image, message);
 
-  target.send({ embed });
+  target.send({ embed }).catch(() => {
+    message.channel.send('I can\'t DM that person. ;-;').catch(() => {});
+  });
 };

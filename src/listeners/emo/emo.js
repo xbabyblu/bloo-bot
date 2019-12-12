@@ -9,7 +9,7 @@ module.exports = new Listener({
   category: 'emo',
   cooldown: 1,
   priority: 0,
-  async run(message) { 
+  async run(message) {
     message.channel.startTyping();
     await wait(5000);
     const responseList1 = await Prompter.message({
@@ -17,7 +17,7 @@ module.exports = new Listener({
       userId: message.author.id,
       question: format(
         'I can completely understand where you are coming from.',
-        'I\'m sorry that you\'re feeling this way, are these feelings strong?',
+        "I'm sorry that you're feeling this way, are these feelings strong?",
         'Have you thought of doing something to distract yourself from the emotions?',
       ),
       max: 1,
@@ -26,24 +26,22 @@ module.exports = new Listener({
 
     await message.channel.stopTyping();
     const response1 = responseList1 ? responseList1.first() : '';
-    
+
     // If yes :)
-    if(stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
+    if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
       message.channel.startTyping();
       await wait(1000);
-      message.channel.send( // lol xD 😂 fix it bluuuu ***Bruh***
-        format(
-          `${response1}? That's great! I'm so glad to hear that you have things to make yourself feel better!`,
-        ),
+      this.send(
+        // lol xD 😂 fix it bluuuu ***Bruh***
+        format(`${response1}? That's great! I'm so glad to hear that you have things to make yourself feel better!`),
       );
       await message.channel.stopTyping();
-
     } else {
       message.channel.startTyping();
       await wait(5000);
-      message.channel.send(
+      this.send(
         format(
-          // i read a lot on javascript, i'm a nerd :nerd: 
+          // i read a lot on javascript, i'm a nerd :nerd:
           `I'm sorry to say hear that. I'd love to suggest a couple of things.`,
           // wahts book? '-' is that a boomer thing i'm too Z too understand?
           `May I suggest a warm beverage or maybe sitting in a comfy spot maybe read a good book.`,
@@ -54,7 +52,7 @@ module.exports = new Listener({
           `Exercise also helps release dopamine and serotonin in the brain, and even so, naps do as well!`,
         ),
       );
-    };
+    }
     // ur fucking BLU ~~retarded~~
     // False so the next listener in the category can run too.
     // If its true it will stop in this listener.

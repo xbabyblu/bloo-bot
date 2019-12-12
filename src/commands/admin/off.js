@@ -7,7 +7,7 @@ module.exports = new Command({
   hidden: true,
   delete: true,
   run(message) {
-    message.channel.send(
+    this.send(
       'Hi, offing my self, i\'m dad.',
     );
   },

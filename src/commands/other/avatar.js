@@ -12,11 +12,11 @@ module.exports = new Command({
   run(message) {
     const target = message.mentions.members.first();
     if (!target) {
-      message.channel.send("I couldn't find that person.");
+      this.send("I couldn't find that person.");
       return;
     }
 
-    message.channel.send({
+    this.send({
       embed: makeEmbed(target.user.tag + "'s Avatar", target.user.displayAvatarURL({ size: 512 }), message),
     });
   },

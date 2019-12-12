@@ -13,20 +13,19 @@ module.exports = new Listener({
       userId: message.author.id,
       max: 1,
       timeout: 10000,
-    })
-      .then(responses => {
-        // If no responses, the time ran out
-        if (!responses) {
-          message.channel.send('No time for questions? I see.');
-          return;
-        }
-        
-        // Gets the first message in the collection
-        const response = responses.first();
+    }).then(responses => {
+      // If no responses, the time ran out
+      if (!responses) {
+        this.send('No time for questions? I see.');
+        return;
+      }
 
-        // Respond
-        message.channel.send(`**${response}**? I like that too! Not my favorite tho... :P`);
-      });
+      // Gets the first message in the collection
+      const response = responses.first();
+
+      // Respond
+      this.send(`**${response}**? I like that too! Not my favorite tho... :P`);
+    });
     return true;
   },
 });

@@ -11,6 +11,6 @@ module.exports = new Command({
   hidden: true,
   run(message, args, call) {
     if (call.caller !== '517599684961894400') return;
-    message.channel.send('Lar is looking for his cat and he will be right back :cat:');
+    this.send('Lar is looking for his cat and he will be right back :cat:');
   },
 });

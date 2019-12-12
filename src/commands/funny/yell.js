@@ -70,14 +70,24 @@ module.exports = new Command({
         .replace(/\s+/, ' ')
         // eslint-disable-next-line no-useless-escape
         .replace(/[^a-zA-Z0-9\s!\.\?]/g, '');
+
     if (content.length < 1) return;
-    message.channel
-      .send(
-        content
-          .split('')
-          .map(l => LETTERS[l] || ' ')
-          .join(''),
-      )
-      .catch(() => {});
+
+    const theYELL = content
+    .split('')
+    .map(l => LETTERS[l] || ' ')
+    .join('');
+    
+    if (theYELL.length > 1999) {
+      this.send('That is too long to yell. :c');
+      return;
+    }
+
+    this.send(
+      content
+        .split('')
+        .map(l => LETTERS[l] || ' ')
+        .join(''),
+    );
   },
 });

@@ -32,7 +32,7 @@ module.exports = new Command({
     const next = timeToNextDaily(call.profile.daily.time);
     if (next <= 0) {
       const amount = Math.min(300 + call.profile.daily.count * 50, 2000);
-      message.channel.send(
+      this.send(
         format(
           `:calendar_spiral: **| ${message.author.username}**! Here is your daily Blue Ink! :D`,
           `:moneybag: **| ${amount}**${INK_EMOJI}`,
@@ -44,7 +44,7 @@ module.exports = new Command({
       call.profile.money += amount;
       await call.profile.save();
     } else {
-      message.channel.send(
+      this.send(
         `:timer: **|** Oh no **${message.author.username}** you have to wait **${formatTime(next)}**`,
       );
     }

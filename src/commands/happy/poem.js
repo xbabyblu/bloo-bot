@@ -5,11 +5,7 @@ const format = require('../../util/format');
 const wait = require('../../util/wait');
 
 const poems = [
-  format(
-    'You are filled with doubt',
-    'of the magic inside you,',
-    'but its all I see.',
-  ),
+  format('You are filled with doubt', 'of the magic inside you,', 'but its all I see.'),
   format(
     'Ah, ah cries the crow arching toward the heavy sky over the marina.',
     'Lands on the crown of the palm tree.',
@@ -27,12 +23,12 @@ const poems = [
     'Ah, ah scapes the hull of my soul. Ah, ah.',
   ),
   format(
-    'Sometimes things don\'t go, after all, from bad to worse. Some years, muscadel',
-    'faces down frost; green thrives; the crops don\'t fail,',
+    "Sometimes things don't go, after all, from bad to worse. Some years, muscadel",
+    "faces down frost; green thrives; the crops don't fail,",
     'sometimes a man aims high, and all goes well.',
     '\n',
     'A people sometimes will step back from war; elect an honest man, decide they care',
-    'enough, that they can\'t leave some stranger poor.',
+    "enough, that they can't leave some stranger poor.",
     'Some men become what they were born for.',
     '\n',
     'Sometimes our best efforts do not go amiss, sometimes we do as meant to.',
@@ -86,7 +82,7 @@ const poems = [
     'You',
     'are going to be okay.',
     'So please smile sunshine',
-    'It\'s a fine new day',
+    "It's a fine new day",
     'to be okay :heart:',
   ),
   format(
@@ -110,11 +106,7 @@ const poems = [
     'let the sunshine in,',
     'Open up your hearts and let the sunshine in.',
   ),
-  format(
-    'Your smile is a million suns',
-    'The galaxy never knows night',
-    'When you\'re happy.',
-  ),
+  format('Your smile is a million suns', 'The galaxy never knows night', "When you're happy."),
   format(
     'Happiness,',
     '\n',
@@ -146,15 +138,15 @@ const poems = [
     '\n',
     'To improve one self',
     'To look on path troded',
-    'It\'s essence',
+    "It's essence",
     '\n',
     'To know there is more',
     'With hunger jump forth',
-    'It\'s rushes',
+    "It's rushes",
     '\n',
     'To balance the mind',
     'With the desire of the heart',
-    'It\'s key',
+    "It's key",
     '\n',
     'And once held in hand',
     'You will understand',
@@ -169,7 +161,7 @@ const poems = [
     'And peace',
     'And love',
     'On the planet earth',
-    '    Is there anything that\'s worth',
+    "    Is there anything that's worth",
     'More than',
     'Peace',
     'And love',
@@ -180,28 +172,24 @@ const poems = [
     'Over one million hair follicles',
     'And I believe you.',
     'I do.',
-    'But, if it\'s okay, I\'ve never counted',
+    "But, if it's okay, I've never counted",
     'To one million before.',
     'I heard it takes a really long time,',
     'But after I count all of the spots',
     'The hair grows out of you,',
     'I want to count all your freckles',
     'And connect them like constellations.',
-    'You\'re just like the universe to me',
+    "You're just like the universe to me",
     'And each freckle is a star.',
-    'There are lots of stars we can\'t',
+    "There are lots of stars we can't",
     'See with the naked eye,',
     'But want to find those too.',
     'If that’s okay.',
   ),
-  format(
-    'What a joy it is',
-    'to know that for once in some time',
-    'life will really be okay.',
-  ),
+  format('What a joy it is', 'to know that for once in some time', 'life will really be okay.'),
   format(
     'My home is where I can find my heart',
-    'It\'s where I can express my art',
+    "It's where I can express my art",
     'Where I can bury all my worries',
     'And where I can seek my peace',
     '\n',
@@ -220,9 +208,11 @@ module.exports = new Command({
   async run(message, args) {
     if (!(args && args[0] === 'fast')) {
       message.channel.startTyping();
-      await wait(5000);
+      await wait(2000);
     }
-    message.channel.send(random(poems)).then(() => message.channel.stopTyping()).catch(() => {});
+    this.send(random(poems))
+      .then(() => message.channel.stopTyping())
+      .catch(() => {});
   },
 });
 

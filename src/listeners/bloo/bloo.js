@@ -6,7 +6,7 @@ module.exports = new Listener({
   cooldown: 1,
   priority: 10,
   run(message) {
-    message.channel.send('I heard my name! How are we today?');
+    this.send('I heard my name! How are we today?');
     return true;
   },
 });
