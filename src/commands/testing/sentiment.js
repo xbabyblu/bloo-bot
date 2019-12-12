@@ -10,8 +10,8 @@ module.exports = new Command({
   hidden: true,
   run(message, args, call) {
     // this extracts "!b sentiment" from the message content.
-    const s = sentiment(args.join(' '));
-    console.log(s);
+    const s = sentiment(message.content);
+    // console.log(s);
 
     message.channel.send(
       `Sentiment analysis: \`\`\`${JSON.stringify(s, null, 2)}\`\`\``,

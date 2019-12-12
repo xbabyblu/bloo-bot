@@ -5,6 +5,7 @@ const ChopTools = require('chop-tools');
 const database = require('./services/database');
 const terminate = require('./services/terminate');
 const Alert = require('./services/alert')
+const sentiment = require('./services/sentiment');
 
 const web = require('./web');
 
@@ -18,6 +19,8 @@ const GuildSettings = require('./models/guildSettings');
 
 database(() => {
   const client = new ChopTools.Client();
+
+  // sentiment.setClient(client);
 
   Reflect.defineProperty(client, 'ignoredChannels', {
     value: new Set(),
