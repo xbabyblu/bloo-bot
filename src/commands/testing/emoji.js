@@ -9,6 +9,6 @@ module.exports = new Command({
     const emojis = parse(message.content)
       .map(e => e.text)
       .join(' ');
-    message.channel.send(`Emoji in the message: ${emojis}`);
+    this.send(`Emoji in the message: ${emojis}`);
   },
 });

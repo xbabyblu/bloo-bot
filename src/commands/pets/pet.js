@@ -23,17 +23,20 @@ module.exports = new Command({
       // currency check
       const response = await Prompter.confirm({
         channel: message.channel,
-        question: 'Are you sure? That will cost you **1500**' + INK_EMOJI + ' (pet will not be saved and money not be taken. still in development ❌)',
+        question:
+          'Are you sure? That will cost you **1500**' +
+          INK_EMOJI +
+          ' (pet will not be saved and money not be taken. still in development ❌)',
         // deleteMessage: false,
         userId: call.caller,
       });
       if (response !== true) {
-        message.channel.send('Okay then.');
+        this.send('Okay then.');
         return;
       }
       // pet count check
       if (pets.length >= 2) {
-        message.channel.send("You can't adopt any more pets. :c");
+        this.send("You can't adopt any more pets. :c");
         return;
       }
       // Create pet and save
@@ -45,8 +48,8 @@ module.exports = new Command({
         thumbnail: { url: 'attachment://slime.png' },
         color: 0x009900,
       });
-      await message.channel.send({ embed });
-      // message.channel.send(
+      await this.send({ embed });
+      // this.send(
       //   `ToDo: remove blue ink from user and save pet to db.`,
       // );
       return;
@@ -54,14 +57,12 @@ module.exports = new Command({
 
     // No args
     if (pets.length === 0) {
-      message.channel.send(
-        format(
-          "You don't have a pet yet. Would you like to adopt one?",
-          `Use **${this.client.options.prefix}pet adopt**`,
-        ),
+      this.send(
+        "You don't have a pet yet. Would you like to adopt one?",
+        `Use **${this.client.options.prefix}pet adopt**`,
       );
     } else {
-      message.channel.send('To Be Decided.');
+      this.send('To Be Decided.');
     }
   },
 });

@@ -16,6 +16,6 @@ module.exports = new Command({
         this.client.destroy();
         process.exit(0);
       }
-    });
+    }).catch(err => this.client.emit('error', err));
   },
 });

@@ -23,7 +23,7 @@ module.exports = new Command({
     });
 
     // console.log('https://www.google.com/search?q=' + search);
-    message.channel.send('Here ya fricking go m8: ', { embed });
+    this.send('Here ya fricking go m8: ', { embed });
   },
 });
 // go coffeeeeeeee

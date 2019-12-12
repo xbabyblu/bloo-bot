@@ -27,23 +27,23 @@ module.exports = new Command({
     const mention = message.mentions.members.first();
     const next = timeToNextCoffe(call.profile.candy.time);
     if (!mention || (mention && mention.user.id === call.caller)) {
-      message.channel.send(
+      this.send(
         // Look at profile.js for the schema
         `:lollipop: **| ${message.author.username}**! You have received **${
           call.profile.candy.count
         }** candies so far! Yeah! \\:D`,
       );
       if (next <= 0) {
-        message.channel.send(':timer: **|** You have **1** candy to send!');
+        this.send(':timer: **|** You have **1** candy to send!');
       } else {
-        message.channel.send(`:timer: **|** Your next candy is in **${format(next)}**`);
+        this.send(`:timer: **|** Your next candy is in **${format(next)}**`);
       }
       return;
     }
 
     // give candy
     if (next <= 0) {
-      message.channel.send(
+      this.send(
         `:lollipop: **| ${mention.user.username}**! You got a candy from **${
           message.author.username
         }**! *nom nom nom* c:<`,
@@ -53,7 +53,7 @@ module.exports = new Command({
       await Profile.getOrCreate(mention.user.id);
       await Profile.findOneAndUpdate({ userId: mention.user.id }, { $inc: { 'candy.count': 1 } });
     } else {
-      message.channel.send(
+      this.send(
         `:timer: **|** Oh no **${message.author.username}** you have to wait **${format(next)}**`,
       );
     }

@@ -15,42 +15,34 @@ module.exports = new Listener({
     const responseList1 = await Prompter.message({
       channel: message.channel,
       userId: message.author.id,
-      question: format(
-        `I hear that you are angry, I would like to understand why. Would you like to talk about it?`
-        ),
-        max: 1,
-        deleteMessage: false,
-      });
-      
-      await message.channel.stopTyping();  
-      const response1 = responseList1 ? responseList1.first() : '';
-      
-      if(stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
-        message.channel.startTyping();
-        await wait(1000);
-        message.channel.send(
-          format(
-            // 🍿 🤔 *eats popcorn* owo >u< 
-            `Oh heavens... That sounds horrible and I'm quite honestly sorry that happened to you.`,
-            `What do you suppose you're going to do now about the situation? Maybe seperate yourself from such?`,
-            `Maybe make a plan to have a good rest of your morning/evening?`,
-          ),
-        );
-        await message.channel.stopTyping();
+      question: format(`I hear that you are angry, I would like to understand why. Would you like to talk about it?`),
+      max: 1,
+      deleteMessage: false,
+    });
 
-      } else {
-        message.channel.startTyping();
-        await wait(2000);
-        message.channel.send(
-          format(
-            `I understand that you'd prefer to keep this to yourself. I am still here if you'd like to open up about it.`,
-            `I really do hope that this anger you are feeling fades away and you have a great rest of your day!`,
-          ),
-        );
-      };
+    await message.channel.stopTyping();
+    const response1 = responseList1 ? responseList1.first() : '';
+
+    if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
+      message.channel.startTyping();
+      await wait(1000);
+      this.send(
+        // 🍿 🤔 *eats popcorn* owo >u<
+        `Oh heavens... That sounds horrible and I'm quite honestly sorry that happened to you.`,
+        `What do you suppose you're going to do now about the situation? Maybe seperate yourself from such?`,
+        `Maybe make a plan to have a good rest of your morning/evening?`,
+      );
       await message.channel.stopTyping();
-     //  .catch(() => {});
+    } else {
+      message.channel.startTyping();
+      await wait(2000);
+      this.send(
+        `I understand that you'd prefer to keep this to yourself. I am still here if you'd like to open up about it.`,
+        `I really do hope that this anger you are feeling fades away and you have a great rest of your day!`,
+      );
+    }
+    await message.channel.stopTyping();
+    //  .catch(() => {});
     return false;
   },
 });
-

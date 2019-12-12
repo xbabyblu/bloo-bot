@@ -6,7 +6,7 @@ module.exports = new Listener({
   cooldown: 15,
   priority: 0,
   run(message) {
-    message.channel.send("You're gay and that's ok!");
+    this.send("You're gay and that's ok!");
     return true;
   },
 });

@@ -12,10 +12,10 @@ module.exports = new Command({
   run(message, args, call) {
     // bruh 🌸
     if (call.caller === '517599684961894400') {
-      message.channel.send('Lar has returned and the kitty is OKAY :cat2:');
+      this.send('Lar has returned and the kitty is OKAY :cat2:');
       return;
     }
     if (itsNotBlu(this.client, message)) return;
-    message.channel.send('xlilblu has returned back and better than ever :nerd:');
+    this.send('xlilblu has returned back and better than ever :nerd:');
   },
 });

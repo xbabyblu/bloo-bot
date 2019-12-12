@@ -22,7 +22,7 @@ module.exports = new Command({
         return config.save();
       })
       .then(() => {
-        message.channel.send('Done!');
+        this.send('Done!');
       })
       .catch(this.client.logger.error);
   },

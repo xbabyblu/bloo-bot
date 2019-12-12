@@ -10,6 +10,6 @@ module.exports = new Command({
   run(message, args, call) {
     const list = [...this.client.listeners.values()].map(l => l.toString());
     // console.log(list);
-    message.channel.send("```" + JSON.stringify(list, null, 2) + "```", true);
+    this.send("```" + JSON.stringify(list, null, 2) + "```", true);
   },
 });

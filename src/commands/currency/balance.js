@@ -9,7 +9,7 @@ module.exports = new Command({
   category: 'currency',
   aliases: ['bal', 'money', 'currency', 'monie', 'monies'],
   run(message, args, call) {
-    message.channel.send(
+    this.send(
       format(
         `Hello ${message.author.username}!`,
         `You currently have **${call.profile.money}**${INK_EMOJI} !`,

@@ -20,6 +20,6 @@ module.exports = new Command({
       return;
     }
 
-    message.channel.send('The **type** argument must be either **exception** or **rejection**.');
+    this.send('The **type** argument must be either **exception** or **rejection**.');
   },
 });

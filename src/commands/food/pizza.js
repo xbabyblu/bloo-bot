@@ -5,8 +5,10 @@ module.exports = new Command({
   description: 'warm... gooey.. goodness.. topped with your favorite toppings',
   category: 'food',
   run(message) {
-    message.channel.send(
-      'mmmm... Pizza, huh? I love pizza, almost as much as I love myse- I mean, you. \nHaha, anyways.. Have you seen the pizza in The Goofy Movie? \nThey had no business making the pizza look that good.',
+    this.send(
+      'mmmm... Pizza, huh? I love pizza, almost as much as I love myse- I mean, you.',
+      'Haha, anyways.. Have you seen the pizza in The Goofy Movie?',
+      'They had no business making the pizza look that good.',
     );
   },
 });

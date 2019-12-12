@@ -13,7 +13,7 @@ module.exports = new Command({
     const s = sentiment(message.content);
     // console.log(s);
 
-    message.channel.send(
+    this.send(
       `Sentiment analysis: \`\`\`${JSON.stringify(s, null, 2)}\`\`\``,
     );
   },

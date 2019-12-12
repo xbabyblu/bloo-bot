@@ -21,6 +21,6 @@ module.exports = new Command({
       message,
     );
 
-    message.channel.send({ embed });
+    this.send({ embed });
   },
 });

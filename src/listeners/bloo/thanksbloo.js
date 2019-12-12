@@ -6,7 +6,7 @@ module.exports = new Listener({
   cooldown: 1,
   priority: 0,
   run(message) {
-    message.channel.send(`You're very welcome! owo`);
+    this.send(`You're very welcome! owo`);
     return true;
   },
 });

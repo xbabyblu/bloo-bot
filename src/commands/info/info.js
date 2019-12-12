@@ -15,16 +15,15 @@ module.exports = new Command({
     const ping = Math.trunc(this.client.ws.ping);
 
     const embedData = {
-      color: 13044507,
+      color: 2000099,
       footer: {
-        text: `Version ${module.require('../../../package.json').version ||
-          'latest'} (chop-tools ${chopToolsVersion})`,
+        text: `Version ${module.require('../../../package.json').version || 'latest'} (chop-tools ${chopToolsVersion})`,
       },
       thumbnail: {
         url: this.client.user.avatarURL(),
       },
       author: {
-        name: 'Bloo Stats',
+        name: 'Bloo Stats 💙',
       },
       fields: [
         {
@@ -50,6 +49,6 @@ module.exports = new Command({
       ],
     };
     const embed = new MessageEmbed(embedData);
-    message.channel.send({ embed });
+    this.send({ embed });
   },
 });

@@ -33,10 +33,10 @@ module.exports = new Command({
       const ideas = await Idea.find({});
 
       if (!ideas.length) {
-        message.channel.send('There are no ideas yet. :c');
+        this.send('There are no ideas yet. :c');
         return;
       }
-      message.channel.send(
+      this.send(
         format(
           `Commands: __add__ __list__ __delete__ | All ideas: ${ideas.length}`,
           ...ideas.map(i => i.display()),
@@ -50,13 +50,13 @@ module.exports = new Command({
     // Add new idea
     if (theCommandIs(['add', 'new', '+'])) {
       if (!args[1]) {
-        message.channel.send('What is your idea tho? :c');
+        this.send('What is your idea tho? :c');
         return;
       }
       // const i = message.content.indexOf(args[1]);
       const yourIdea = call.content.substr(args[0].length).trim();
       if (yourIdea.length > 500) {
-        message.channel.send('Are you serious? :neutral_face:\nThat idea is too long!!');
+        this.send('Are you serious? :neutral_face:\nThat idea is too long!!');
         return;
       }
       const newIdea = new Idea({
@@ -64,7 +64,7 @@ module.exports = new Command({
         creator: call.caller,
       });
       await newIdea.save();
-      message.channel.send(format('**DONE** Idea added! :)', newIdea.display()));
+      this.send(format('**DONE** Idea added! :)', newIdea.display()));
       return;
     }
 
@@ -72,10 +72,10 @@ module.exports = new Command({
     if (theCommandIs(['mine', 'list', 'me', 'my'])) {
       const myIdeas = await Idea.find({ creator: message.author.id });
       if (!myIdeas.length) {
-        message.channel.send("You don't have any ideas yet. :c");
+        this.send("You don't have any ideas yet. :c");
         return;
       }
-      message.channel.send(
+      this.send(
         format(
           `Commands: __add__ __list__ __delete__ | You have: ${myIdeas.length} ideas!`,
           ...myIdeas.map(i => i.display()),
@@ -89,12 +89,12 @@ module.exports = new Command({
     if (theCommandIs('edit', 'change', 'upgrade')) {
       const [id] = Text.numbers(call.content);
       if (!id) {
-        message.channel.send('The id must be a valid number!');
+        this.send('The id must be a valid number!');
         return;
       }
       const ideaToEdit = await Idea.findOne({ ideaId: id }).exec();
       if (!ideaToEdit) {
-        message.channel.send('I could not find an idea with that id. :c');
+        this.send('I could not find an idea with that id. :c');
         return;
       }
       let res = await Prompter.confirm({
@@ -111,19 +111,19 @@ module.exports = new Command({
           timeout: 60000,
         });
         if (!res || !res.first()) {
-          message.channel.send('Okay then.');
+          this.send('Okay then.');
           return;
         }
         const ideaContent = res.first();
         if (ideaContent.length > 500) {
-          message.channel.send('Are you serious? :neutral_face:\nThat idea is too long!!');
+          this.send('Are you serious? :neutral_face:\nThat idea is too long!!');
           return;
         }
         ideaToEdit.title = ideaContent;
         await ideaToEdit.save();
-        message.channel.send(format('**DONE** Idea updated! :)', ideaToEdit.display()));
+        this.send(format('**DONE** Idea updated! :)', ideaToEdit.display()));
       } else if (res === false || res === null) {
-        message.channel.send('Okay then.');
+        this.send('Okay then.');
       }
       return;
     }
@@ -132,16 +132,16 @@ module.exports = new Command({
     if (theCommandIs(['remove', 'delete', 'del', 'rem', 'erase'])) {
       const [id] = Text.numbers(call.content);
       if (!id) {
-        message.channel.send('The id must be a valid number!');
+        this.send('The id must be a valid number!');
         return;
       }
       const ideaToDelete = await Idea.findOne({ ideaId: id }).exec();
       if (!ideaToDelete) {
-        message.channel.send('I could not find an idea with that id. :c');
+        this.send('I could not find an idea with that id. :c');
         return;
       }
       await ideaToDelete.remove();
-      message.channel.send('I have deleted your requested idea.');
+      this.send('I have deleted your requested idea.');
     }
   },
 });

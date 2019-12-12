@@ -5,7 +5,7 @@ module.exports = new Command({
   description: 'someone woke up one morning and said "I\'m going to put corn in a pan and see what happens..." and **BOOM** We have popcorn.',
   category: 'food',
   run(message) {
-    message.channel.send(
+    this.send(
       'Did someone say...***POPCORN?*** I LOVE POPCORN *so much... that maybe.. I might shut down*',
     );
   },

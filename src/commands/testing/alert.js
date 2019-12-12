@@ -35,6 +35,6 @@ test!
       channel = message.channel;
     }
     await blooConfig.save()
-    message.channel.send(`Alerts channel set to: ${channel}`);
+    this.send(`Alerts channel set to: ${channel}`);
   },
 });

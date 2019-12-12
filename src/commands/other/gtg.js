@@ -11,6 +11,6 @@ module.exports = new Command({
   hidden: true,
   run(message, args, call) {
     if (itsNotBlu(this.client, message)) return;
-    message.channel.send("xlilblu has said 'Gotta Blast!':rocket: ");
+    this.send("xlilblu has said 'Gotta Blast!':rocket: ");
   },
 });

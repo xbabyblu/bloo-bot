@@ -14,7 +14,7 @@ module.exports = new Listener({
     if (analysis.positive.includes('suicide') || analysis.positive.includes('suicidal')) {
       return false;
   };
-    message.channel.send(MSG);
+    this.send(MSG);
     return true;
   },
 });

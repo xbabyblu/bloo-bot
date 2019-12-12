@@ -14,7 +14,7 @@ module.exports = new Command({
       const idInMessage = channelsInMessage ? channelsInMessage[0] : null;
       
       if (!idInMessage) {
-        message.channel.send('Please tag a channel with #. Like: #general please try again.');
+        this.send('Please tag a channel with #. Like: #general please try again.');
         return;
       }
       
@@ -26,7 +26,7 @@ module.exports = new Command({
       
       // unmute said channel
       this.client.listeners.ignored.listenChannel(channel.id);
-      message.channel.send(`I will listen to ${channel} once more, thank you for allowing me to use my ears again.`);
+      this.send(`I will listen to ${channel} once more, thank you for allowing me to use my ears again.`);
     },
 });
 
