@@ -1,5 +1,4 @@
 require('dotenv').config();
-// eslint-disable-next-line import/no-extraneous-dependencies
 const ChopTools = require('chop-tools');
 
 const database = require('./services/database');
@@ -7,20 +6,20 @@ const terminate = require('./services/terminate');
 const Alert = require('./services/alert')
 const sentiment = require('./services/sentiment');
 
+const GuildSettings = require('./models/guildSettings');
+const Bloo = require('./models/bloo');
+
 const web = require('./web');
 
 const guildCreate = require('./events/guildCreate');
 
 const logger = require('./services/logger');
-const logCommands = require('./services/logCommands');
-const Profile = require('./models/profile');
-const Bloo = require('./models/bloo');
-const GuildSettings = require('./models/guildSettings');
+const logCommands = require('./middleware/logCommands');
+const attachProfile = require('./middleware/attachProfile');
+const attachSettings = require('./middleware/attachSettings');
 
 database(() => {
   const client = new ChopTools.Client();
-
-  // sentiment.setClient(client);
 
   Reflect.defineProperty(client, 'ignoredChannels', {
     value: new Set(),
@@ -85,21 +84,15 @@ database(() => {
   // Events
   client.on('guildCreate', guildCreate(client));
 
-  // Middleware to log command calls
+  // Middleware
   client.use(logCommands);
+  client.use(attachProfile);
+  client.use(attachSettings);
 
-  // Middleware to create user profiles and guild settings
-  client.use((call, next) => {
-    Profile.getOrCreate(call.caller)
-      .then(profile => {
-        call.profile = profile;
-        return GuildSettings.getOrCreate(call.guild.id);
-      })
-      .then(settings => {
-        call.settings = settings;
-        next();
-      })
-      .catch(() => {});
+  sentiment.setClient(client);
+  client.on('sentiment', data => {
+    client.logger.debug(data);
+    client.logger.debug(client.metrics);
   });
 
   // Express Server
