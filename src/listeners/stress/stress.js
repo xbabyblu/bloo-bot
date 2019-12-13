@@ -8,7 +8,7 @@ module.exports = new Listener({
   cooldown: 15,
   priority: 0,
   async run(message) {
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(1500);
 
     this.send(
@@ -18,7 +18,7 @@ module.exports = new Listener({
       'Take some time for yourself and it will help relieve the stress, even if its a small amount.',
       'If you practice one fun daily activity a day, I promise it adds up!',
     )
-      .then(() => message.channel.stopTyping())
+      .then(() => message.channel.stopTyping().catch(() => {}))
       .catch(() => {});
     return true;
   },

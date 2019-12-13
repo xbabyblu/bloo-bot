@@ -8,7 +8,7 @@ module.exports = new Listener({
   cooldown: 15,
   priority: 0,
   async run(message) {
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(5000);
 
     this.send(
@@ -18,7 +18,7 @@ module.exports = new Listener({
       "Allowing yourself to push yourself to true potential and see what you're truly capable of.",
       "You're a butterfly.",
     )
-      .then(() => message.channel.stopTyping())
+      .then(() => message.channel.stopTyping().catch(() => {}))
       .catch(() => {});
     return true;
   },

@@ -8,7 +8,7 @@ module.exports = new Listener({
   cooldown: 15,
   priority: 0,
   async run(message) {
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(1500);
 
     // reminder
@@ -20,7 +20,7 @@ module.exports = new Listener({
       "It'll be hard to not think about your stress in the beginning, and that is completely normal. But it will fade as time goes on and you're enjoying yourself! Take some time for yourself,",
       '*you deserve it*.',
     )
-      .then(() => message.channel.stopTyping())
+      .then(() => message.channel.stopTyping().catch(() => {}))
       .catch(() => {});
     return true;
   },

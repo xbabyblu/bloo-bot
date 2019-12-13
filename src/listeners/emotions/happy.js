@@ -9,7 +9,7 @@ module.exports = new Listener({
   priority: 0,
   async run(message) {
     const prefix = this.client.options.prefix;
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(3000);
     this.send(
       'It makes me so happy to hear that you are happy. What things make you happy?',
@@ -19,7 +19,7 @@ module.exports = new Listener({
       'And poems! Would you like to hear one?',
       'If so, say ' + prefix + 'poem !',
     )
-      .then(() => message.channel.stopTyping())
+      .then(() => message.channel.stopTyping().catch(() => {}))
       .catch(() => {});
     return true;
   },

@@ -10,7 +10,7 @@ module.exports = new Listener({
   cooldown: 15,
   priority: 0,
   async run(message) {
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(5000);
     const responseList1 = await Prompter.message({
       channel: message.channel,
@@ -30,20 +30,20 @@ module.exports = new Listener({
       max: 1,
       deleteMessage: false,
     });
-    await message.channel.stopTyping();
+    await message.channel.stopTyping().catch(() => {});
     const response1 = responseList1 ? responseList1.first() : '';
 
     // if yes
     if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
-      message.channel.startTyping();
+      message.channel.startTyping().catch(() => {});
       await wait(1000);
       this.send(
         format(`${response1}? That's amazing! I'm so glad to hear that you have things to make yourself feel better!`),
       );
-      await message.channel.stopTyping();
+      await message.channel.stopTyping().catch(() => {});
       // everything else
     } else {
-      message.channel.startTyping();
+      message.channel.startTyping().catch(() => {});
       await wait(5000);
       this.send(
         `I completely understand where you are coming from. `,
@@ -55,7 +55,7 @@ module.exports = new Listener({
         `Exercise also helps release dopamine and serotonin in the brain, and even so, naps do as well!`,
       );
     }
-    await message.channel.stopTyping();
+    await message.channel.stopTyping().catch(() => {});
     return false;
   },
 });

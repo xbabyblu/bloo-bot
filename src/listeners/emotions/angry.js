@@ -10,7 +10,7 @@ module.exports = new Listener({
   cooldown: 10,
   priority: 0,
   async run(message) {
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(1000);
     const responseList1 = await Prompter.message({
       channel: message.channel,
@@ -24,7 +24,7 @@ module.exports = new Listener({
     const response1 = responseList1 ? responseList1.first() : '';
 
     if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
-      message.channel.startTyping();
+      message.channel.startTyping().catch(() => {});
       await wait(1000);
       this.send(
         // 🍿 🤔 *eats popcorn* owo >u<
@@ -32,16 +32,16 @@ module.exports = new Listener({
         `What do you suppose you're going to do now about the situation? Maybe seperate yourself from such?`,
         `Maybe make a plan to have a good rest of your morning/evening?`,
       );
-      await message.channel.stopTyping();
+      await message.channel.stopTyping().catch(() => {});
     } else {
-      message.channel.startTyping();
+      message.channel.startTyping().catch(() => {});
       await wait(2000);
       this.send(
         `I understand that you'd prefer to keep this to yourself. I am still here if you'd like to open up about it.`,
         `I really do hope that this anger you are feeling fades away and you have a great rest of your day!`,
       );
     }
-    await message.channel.stopTyping();
+    await message.channel.stopTyping().catch(() => {});
     //  .catch(() => {});
     return false;
   },

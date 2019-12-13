@@ -8,7 +8,7 @@ module.exports = new Listener({
   cooldown: 15,
   priority: 0,
   async run(message) {
-    message.channel.startTyping();
+    message.channel.startTyping().catch(() => {});
     await wait(5000);
 
     this.send(
@@ -16,7 +16,7 @@ module.exports = new Listener({
       'Sometimes, taking a nap or drinking a hot beverage does it for me.',
       'Video games are also a great de-stressor.',
     )
-      .then(() => message.channel.stopTyping())
+      .then(() => message.channel.stopTyping().catch(() => {}))
       .catch(() => {});
     return true;
   },

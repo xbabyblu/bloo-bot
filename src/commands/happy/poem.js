@@ -207,11 +207,11 @@ module.exports = new Command({
   usage: '[fast]',
   async run(message, args) {
     if (!(args && args[0] === 'fast')) {
-      message.channel.startTyping();
+      message.channel.startTyping().catch(() => {});
       await wait(2000);
     }
     this.send(random(poems))
-      .then(() => message.channel.stopTyping())
+      .then(() => message.channel.stopTyping().catch(() => {}))
       .catch(() => {});
   },
 });
