@@ -3,6 +3,7 @@ const Alert = require('../services/alert');
 
 module.exports = client => guild => {
   const prefix = client.options.prefix;
+  client.logger.info('[Event] Bloo joined a new server! ->' + guild.name);
   // Bloo just joined a server. This is what she will say.
   const msg = format(
     "Hello I'm Bloo!",

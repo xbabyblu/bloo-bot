@@ -14,6 +14,8 @@
   "author": "xlilblu",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/collection": "^0.1.3",
+    "body-parser": "^1.19.0",
     "chalk": "^3.0.0",
     "chop-gifs": "github:Chop-Bot/chop-gifs#master",
     "chop-prompter": "github:Chop-Bot/chop-prompter#master",

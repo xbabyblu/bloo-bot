@@ -1,26 +1,18 @@
 const { Command } = require('chop-tools');
 
+const getChannelsInMessage = require('../../util/getChannelsInMessage');
+
 module.exports = new Command({
     name: 'comeback',
     description: 'For when you want Bloo to listen again after being muted',
     category: 'admin',
     example: '#(name of your channel you\'d like her to listen to again)',
     aliases: ['listenhereyoulittleshit'],
-    args: ['channel'],
     async run(message, args, call) {
-      // tryna find the channel
-      const channelList = message.guild.channels.filter(c => c.type === 'text');
-      const channelsInMessage = message.content.match(/(?<=<#)(\d+?)(?=>)/);
-      const idInMessage = channelsInMessage ? channelsInMessage[0] : null;
-      
-      if (!idInMessage) {
-        this.send('Please tag a channel with #. Like: #general please try again.');
-        return;
-      }
-      
-      const channel = channelList.get(idInMessage);
+      let [channel] = getChannelsInMessage(message);
+      if (!channel) channel = message.channel;
 
-      call.settings.listenerSettings.ignored = call.settings.listenerSettings.ignored.filter(c => c !== idInMessage);
+      call.settings.listenerSettings.ignored = call.settings.listenerSettings.ignored.filter(c => c !== channel.id);
 
       await call.settings.save();
       
