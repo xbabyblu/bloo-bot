@@ -6,6 +6,15 @@ class Currency {
     return user.money;
   }
 
+  /**
+   * Gives the user some money.
+   *
+   * @static
+   * @param {*} userId The user's id
+   * @param {*} amount The amount to give
+   * @returns The user's new balance
+   * @memberof Currency
+   */
   static async add(userId, amount) {
     if (Number.isNaN(Number(amount))) {
       throw new TypeError('Amount must be a number.');
