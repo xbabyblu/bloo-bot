@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { DiscordAPIError } = require('discord.js')
 
 const logger = require('./logger');
 const Alert = require('./alert');
@@ -13,6 +14,9 @@ function terminate(web, discord, options = { timeout: 500 }) {
     if (err) {
       if (reason === 'Unhandled Rejection') {
         logger.error('Rejected promise:', promise, 'Error:', err);
+        if (err instanceof DiscordAPIError || promise instanceof DiscordAPIError) {
+          return;
+        }
         Alert.log(
           Alert.types.error,
           discord,
