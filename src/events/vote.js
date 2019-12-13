@@ -21,6 +21,13 @@ module.exports = client => async vote => {
 
     const user = client.users.get(vote.user);
 
+    if (!user) {
+      Alert.log(Alert.types.vote, client, `Someone Bloo has never seen before just voted for her! Yeehaw!`).catch(err =>
+        client.emit('err', err),
+      );
+      return;
+    }
+
     Alert.log(Alert.types.vote, client, `${user.tag} just voted for us! Yeehaw!`, {
       thumbnail: user.displayAvatarURL({ size: 512 }),
     }).catch(err => client.emit('err', err));
