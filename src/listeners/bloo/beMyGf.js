@@ -5,7 +5,7 @@ module.exports = new Listener({
   category: 'bloo',
   cooldown: 10,
   priority: 0,
-  run(message) {
+  run() {
     this.send("I'm flattered... But I'm underage.");
     return true;
   },
