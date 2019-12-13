@@ -9,6 +9,7 @@ const messages = {
   2: "We've received a new piece of feedback! :D",
   3: 'Bloo got invited into a new server! 🎉',
   4: '⚠️ An error occurred! ⚠️',
+  5: '📥 Bloo got a new vote!'
 };
 
 const transport = nodemailer.createTransport({
@@ -29,6 +30,7 @@ module.exports = class Alert {
     feedback: 2,
     invited: 3,
     error: 4,
+    vote: 5,
   };
 
   static async critical(type, client, message) {
