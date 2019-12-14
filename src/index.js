@@ -1,5 +1,6 @@
 require('dotenv').config();
 const ChopTools = require('chop-tools');
+const { DiscordAPIError } = require('discord.js')
 
 const database = require('./services/database');
 const terminate = require('./services/terminate');
@@ -69,7 +70,10 @@ database(() => {
   });
 
   client.on('error', err => {
-    client.logger.error('[Bloo] A nasty error occurred! HELP!!!!!!!', err);
+    client.logger.error('[Bloo] An error occurred.\n', err);
+    if (err instanceof DiscordAPIError) {
+      return;
+    }
     Alert.log(
       Alert.types.error,
       client,
@@ -92,10 +96,6 @@ database(() => {
   client.use(attachSettings);
 
   sentiment.setClient(client);
-  client.on('sentiment', data => {
-    client.logger.debug(data);
-    client.logger.debug(client.metrics);
-  });
 
   // Express Server
   const webServer = web(client);
