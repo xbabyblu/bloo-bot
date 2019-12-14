@@ -27,7 +27,7 @@ module.exports = class Pets {
     return `${random(FIRST_NAMES)} ${random(LAST_NAMES)}`;
   }
 
-  static generateRandomImage(species) {
+  static generateImageRecipe(species) {
     const base = random(parts.base);
     const eyes = random(parts.eyes);
 
@@ -37,7 +37,7 @@ module.exports = class Pets {
     ];
   }
 
-  static async generateImage(recipe) {
+  static async buildImage(recipe) {
     const base = recipe.shift();
     const img = sharp(base[0]).modulate(base[1]);
     const toComposite = [];

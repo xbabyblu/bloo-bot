@@ -17,17 +17,21 @@ const petSchema = new Schema({
     required: true,
     default: 0,
   },
+  // TODO: Pet species
   species: {
     type: String,
     required: true,
-    // default: ''
+    default: '---'
+  },
+  image: {
+    type: Buffer,
+    required: true,
   },
   owner: {
     type: String,
     required: true,
-    unique: true,
   },
-  pat: {
+  pats: {
     count: { type: Number, default: 0 },
     time: { type: Date, default: new Date('1970-01-01') },
   },

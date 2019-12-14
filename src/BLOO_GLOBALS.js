@@ -1,0 +1,13 @@
+// CURRENCY
+
+exports.INK_EMOJI = '<:blue:647188962376417280>';
+
+// PET STUFF
+
+exports.PET_PRICE = 5000;
+exports.MAX_PET_COUNT = 2;
+
+// VOTING
+
+exports.VOTING_REWARD_NORMAL = 1500;
+exports.VOTING_REWARD_WEEKEND = 3000;
