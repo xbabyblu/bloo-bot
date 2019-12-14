@@ -33,8 +33,9 @@ module.exports = new Command({
     if (next <= 0) {
       const amount = Math.min(300 + call.profile.daily.count * 50, 2000);
       this.send(
-        `:calendar_spiral: **| ${message.author.username}**! Here is your daily Blue Ink! :D`,
+        `:calendar_spiral: **| ${message.author.username}**! Here is your daily Bloo Ink! :D`,
         `:moneybag: **| ${amount}**${INK_EMOJI}`,
+        `:newspaper: **|** By the way, you can **!b vote** for me to get even more Bloo Ink${INK_EMOJI} >u<`,
         `Your next daily is in **${formatTime(timeUntilTomorrow())}**`,
       );
       call.profile.daily.time = new Date();
