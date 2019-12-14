@@ -1,9 +1,9 @@
-const Bloo = require('../models/bloo');
 const Profile = require('../models/profile');
 const Currency = require('../services/currency');
 const Alert = require('../services/alert');
 const { INK_EMOJI } = require('../util/constants');
 const format = require('../util/format');
+const { VOTING_REWARD_NORMAL, VOTING_REWARD_WEEKEND } = require('../BLOO_GLOBALS');
 
 module.exports = client => async vote => {
   client.logger.debug('[Event] New vote! ->', vote);
@@ -12,7 +12,7 @@ module.exports = client => async vote => {
   try {
     const profile = await Profile.getOrCreate(vote.user).catch(err => client.emit('error', err));
 
-    const amount = vote.isWeekend ? 3000 : 1500;
+    const amount = vote.isWeekend ? VOTING_REWARD_WEEKEND : VOTING_REWARD_NORMAL;
     const newBalance = await Currency.add(vote.user, amount);
 
     profile.votes.count += 1;
