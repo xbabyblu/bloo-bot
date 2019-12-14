@@ -50,6 +50,9 @@ database(() => {
       client.logger.info(`[Bloo] Adding ${count} channels to the listener ignore list from the database.`);
     })
     .catch(client.logger.error);
+  
+  // ignored guilds
+  client.listeners.ignored.ignoreGuild('264445053596991498', 0);
 
   // set log level from db
   Bloo.findOne({})
