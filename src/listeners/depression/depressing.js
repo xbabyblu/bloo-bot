@@ -18,7 +18,7 @@ module.exports = new Listener({
       "Allowing yourself to push yourself to true potential and see what you're truly capable of.",
       "You're a butterfly.",
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

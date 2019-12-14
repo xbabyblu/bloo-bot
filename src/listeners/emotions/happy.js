@@ -19,7 +19,7 @@ module.exports = new Listener({
       'And poems! Would you like to hear one?',
       'If so, say ' + prefix + 'poem !',
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

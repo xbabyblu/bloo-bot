@@ -21,7 +21,7 @@ module.exports = new Listener({
       'Anything you enjoy can help relieve such.',
       'Even when you feel apathetic or anhedonic, I promise that trying to do such will trigger the serotonin in your brain, and make you feel relieved/happier.',
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

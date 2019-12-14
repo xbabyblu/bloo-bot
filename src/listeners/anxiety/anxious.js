@@ -16,7 +16,7 @@ module.exports = new Listener({
       'Sometimes, taking a nap or drinking a hot beverage does it for me.',
       'Video games are also a great de-stressor.',
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

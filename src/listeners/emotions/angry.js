@@ -20,7 +20,7 @@ module.exports = new Listener({
       deleteMessage: false,
     });
 
-    message.channel.stopTyping().catch(() => {});
+    message.channel.stopTyping();
     const response1 = responseList1 ? responseList1.first() : '';
 
     if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
@@ -32,7 +32,7 @@ module.exports = new Listener({
         `What do you suppose you're going to do now about the situation? Maybe seperate yourself from such?`,
         `Maybe make a plan to have a good rest of your morning/evening?`,
       );
-      message.channel.stopTyping().catch(() => {});
+      message.channel.stopTyping();
     } else {
       message.channel.startTyping().catch(() => {});
       await wait(2000);
@@ -41,7 +41,7 @@ module.exports = new Listener({
         `I really do hope that this anger you are feeling fades away and you have a great rest of your day!`,
       );
     }
-    message.channel.stopTyping().catch(() => {});
+    message.channel.stopTyping();
     //  .catch(() => {});
     return false;
   },

@@ -19,7 +19,7 @@ module.exports = new Listener({
       "It's like the seasons, and I promise,",
       '**you will be okay in the end.**',
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

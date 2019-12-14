@@ -24,7 +24,7 @@ module.exports = new Listener({
       deleteMessage: false,
     });
 
-    await message.channel.stopTyping().catch(() => {});
+    message.channel.stopTyping();
     const response1 = responseList1 ? responseList1.first() : '';
 
     // If yes :)
@@ -35,7 +35,7 @@ module.exports = new Listener({
         // lol xD 😂 fix it bluuuu ***Bruh***
         format(`${response1}? That's great! I'm so glad to hear that you have things to make yourself feel better!`),
       );
-      await message.channel.stopTyping().catch(() => {});
+      message.channel.stopTyping();
     } else {
       message.channel.startTyping().catch(() => {});
       await wait(5000);
@@ -56,7 +56,7 @@ module.exports = new Listener({
     // ur fucking BLU ~~retarded~~
     // False so the next listener in the category can run too.
     // If its true it will stop in this listener.
-    await message.channel.stopTyping().catch(() => {});
+    message.channel.stopTyping();
     return false;
   },
 });

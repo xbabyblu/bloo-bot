@@ -211,7 +211,7 @@ module.exports = new Command({
       await wait(2000);
     }
     this.send(random(poems))
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
   },
 });

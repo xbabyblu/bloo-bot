@@ -30,7 +30,7 @@ module.exports = new Listener({
       max: 1,
       deleteMessage: false,
     });
-    await message.channel.stopTyping().catch(() => {});
+    message.channel.stopTyping();
     const response1 = responseList1 ? responseList1.first() : '';
 
     // if yes
@@ -40,7 +40,7 @@ module.exports = new Listener({
       this.send(
         format(`${response1}? That's amazing! I'm so glad to hear that you have things to make yourself feel better!`),
       );
-      await message.channel.stopTyping().catch(() => {});
+      message.channel.stopTyping();
       // everything else
     } else {
       message.channel.startTyping().catch(() => {});
@@ -55,7 +55,7 @@ module.exports = new Listener({
         `Exercise also helps release dopamine and serotonin in the brain, and even so, naps do as well!`,
       );
     }
-    await message.channel.stopTyping().catch(() => {});
+    message.channel.stopTyping();
     return false;
   },
 });

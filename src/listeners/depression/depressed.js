@@ -17,7 +17,7 @@ module.exports = new Listener({
       'Good days are coming your way.',
       // 👌                   👌                   👌                    👌
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

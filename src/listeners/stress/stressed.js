@@ -20,7 +20,7 @@ module.exports = new Listener({
       "It'll be hard to not think about your stress in the beginning, and that is completely normal. But it will fade as time goes on and you're enjoying yourself! Take some time for yourself,",
       '*you deserve it*.',
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },

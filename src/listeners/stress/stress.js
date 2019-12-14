@@ -18,7 +18,7 @@ module.exports = new Listener({
       'Take some time for yourself and it will help relieve the stress, even if its a small amount.',
       'If you practice one fun daily activity a day, I promise it adds up!',
     )
-      .then(() => message.channel.stopTyping().catch(() => {}))
+      .then(() => message.channel.stopTyping())
       .catch(() => {});
     return true;
   },
