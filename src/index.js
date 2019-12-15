@@ -1,10 +1,10 @@
 require('dotenv').config();
 const ChopTools = require('chop-tools');
-const { DiscordAPIError } = require('discord.js')
+const { DiscordAPIError } = require('discord.js');
 
 const database = require('./services/database');
 const terminate = require('./services/terminate');
-const Alert = require('./services/alert')
+const Alert = require('./services/alert');
 const Metrics = require('./services/metrics');
 const sentiment = require('./services/sentiment');
 
@@ -41,6 +41,19 @@ database(() => {
 
   client.logger.info('[Database] MongoDB Connected.');
 
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      const DBL = module.require('dblapi.js');
+      const dbl = new DBL(process.env.TOPGG_TOKEN, client);
+      dbl.on('error', err => {
+        client.emit('error', err);
+      });
+    } catch(err) {
+      logger.error('Could not dbl instance.');
+      logger.error(err);
+    }
+  }
+
   // add ignored channels saved in db to the ignore list
   GuildSettings.find({})
     .exec()
@@ -57,10 +70,12 @@ database(() => {
           client.listeners.ignored.ignoreGuild(document.guildId);
         }
       });
-      client.logger.info(`[Bloo] Adding ${channelCount} channels and ${guildCount} guilds to the listener ignore list from the database.`);
+      client.logger.info(
+        `[Bloo] Adding ${channelCount} channels and ${guildCount} guilds to the listener ignore list from the database.`,
+      );
     })
     .catch(client.logger.error);
-  
+
   // ignored guilds
   client.listeners.ignored.ignoreGuild('264445053596991498', 0);
 
