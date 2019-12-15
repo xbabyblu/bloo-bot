@@ -42,18 +42,22 @@ database(() => {
   client.logger.info('[Database] MongoDB Connected.');
 
   // add ignored channels saved in db to the ignore list
-  GuildSettings.find({}, '-_id listenerSettings.ignored')
+  GuildSettings.find({})
     .exec()
     .then(documents => {
-      const guildSettingsList = documents.map(d => d.listenerSettings.ignored);
-      let count = 0;
-      guildSettingsList.forEach(channels => {
-        channels.forEach(c => {
-          count += 1;
+      let channelCount = 0;
+      let guildCount = 0;
+      documents.forEach(document => {
+        document.listenerSettings.ignored.forEach(c => {
+          channelCount += 1;
           client.listeners.ignored.ignoreChannel(c, 0);
         });
+        if (!document.listenerSettings.allow) {
+          guildCount += 1;
+          client.listeners.ignored.ignoreGuild(document.guildId);
+        }
       });
-      client.logger.info(`[Bloo] Adding ${count} channels to the listener ignore list from the database.`);
+      client.logger.info(`[Bloo] Adding ${channelCount} channels and ${guildCount} guilds to the listener ignore list from the database.`);
     })
     .catch(client.logger.error);
   

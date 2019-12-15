@@ -1,14 +1,15 @@
-const { Command } = require("chop-tools");
+const { Command } = require('chop-tools');
 
 const format = require('../../util/format');
 
 module.exports = new Command({
-  name: "settings",
-  description: "The settings for this server.",
-  category: "testing",
-  aliases: ["config", "configuration", "configurate"],
-  hidden: true,
-  run(message, args, call) {
+  name: 'settings',
+  description: 'The settings for this server.',
+  category: 'admin',
+  aliases: ['config', 'configuration', 'configurate'],
+  usage: '[the config option]',
+  examples: [' ', 'listeners'],
+  async run(message, args, call) {
     /*
     ______SETTINGS OPTIONS IDEAS_____
     listen -> enables/disables listeners in the current server
@@ -19,30 +20,39 @@ module.exports = new Command({
     what do u need help w this all looks great??????????????????
     */
 
-    const areListenersEnabled = call.settings.listenerSettings.allow;
+    let areListenersEnabled = call.settings.listenerSettings.allow;
 
-    const settings = JSON.stringify(call.settings, null, 2);
-    const msg = JSON.stringify(
-      {
-        ...call.settings.toObject({
-          getters: false,
-          virtuals: false,
-          minimize: true,
-          versionKey: false
-        })
-      },
-      null,
-      2
-    );
+    if (args[0] && args[0].toLowerCase() === 'listeners') {
+      call.settings.listenerSettings.allow = !areListenersEnabled;
+      areListenersEnabled = call.settings.listenerSettings.allow;
+      await call.settings.save()
+      message.channel.send(`**Listeners** are now **${areListenersEnabled ? 'enabled' : 'disabled'}**.`);
+      if (areListenersEnabled) {
+        this.client.listeners.ignored.listenGuild(call.guild.id);
+      } else {
+        this.client.listeners.ignored.ignoreGuild(call.guild.id, 0);
+      }
+      return;
+    }
+
+    if (args[0] && args[0].toLowerCase() === 'love') {
+      message.channel.send(`You silly, you can't disable the love. ;)`);
+      return;
+    }
+
+    if (args[0] && args[0].toLowerCase() === 'yeehaw') {
+      message.channel.send(`The yeehaw aint never stoppin'! :cowboy:`);
+      return;
+    }
+
     message.channel.send(
       format(
         '__**Settings For This Server**__',
-        `Listeners: ${areListenersEnabled ? '🟢' : '🔴'}`,
-        'Love: 🟢',
-        'Fun: 🟢',
-        'Yeehaw: 🟢',
-        'Motivation: uhhhh... 🔴?'
+        `${areListenersEnabled ? '🟢' : '🔴'} \\~~ **Listeners**`,
+        '🟢 \\~~ **Love**',
+        '🟢 \\~~ **Yeehaw**',
+        `You can toggle them by using **${this.client.options.prefix}settings [option name]**`,
       ),
     );
-  }
+  },
 });
