@@ -1,6 +1,8 @@
 const { Listener } = require('chop-tools');
 const Prompter = require('chop-prompter');
 
+const send = require('../../services/safeSend');
+
 module.exports = new Listener({
   words: ['{me}', 'sad'],
   category: 'emotions',
@@ -16,7 +18,7 @@ module.exports = new Listener({
     }).then(responses => {
       // If no responses, the time ran out
       if (!responses) {
-        this.send("I'm still here if you'd like to talk");
+        send(message)("I'm still here if you'd like to talk");
         return;
       }
 
@@ -33,7 +35,7 @@ module.exports = new Listener({
       // Without the bad, we wouldn't know how to appreciate the good."
 
       // Respond
-      this.send(
+      send(message)(
         `You are sad because ${response}, right? I am sorry you are going through this. But without the bad things in life, we would not know how to enjoy the good things. That's the beauty in life.`,
       );
     });

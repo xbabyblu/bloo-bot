@@ -1,6 +1,7 @@
 const { Listener } = require('chop-tools');
 
 const wait = require('../../util/wait');
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: ['{me}', '(having|have|had)', 'depression'],
@@ -11,7 +12,7 @@ module.exports = new Listener({
     message.channel.startTyping().catch(() => {});
     await wait(5000);
 
-    this.send(
+    send(message)(
       'Do you have a support group? Maybe friends or family? They can be a great help in times like these.',
       '*Humans are not meant to go through such hard things alone.*',
       'I know that you may or may not have isolated yourself from these people, and it can seem challenging to reach back out to them.',

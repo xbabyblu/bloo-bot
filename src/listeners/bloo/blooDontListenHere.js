@@ -1,6 +1,8 @@
 const { Listener } = require('chop-tools');
 const time = require('humanize-duration');
 
+const send = require('../../services/safeSend');
+
 module.exports = new Listener({
   words: ['bloo', "(no|dont|don't)", 'listen', 'here'],
   category: 'bloo',
@@ -11,7 +13,7 @@ module.exports = new Listener({
     // 5 min
     const duration = 5 * 60 * 1000;
     this.client.listeners.ignored.ignoreChannel(cId, duration);
-    this.send(`:c I'm sorry.... I wont look here ${duration ? 'for ' + time(duration) : 'anymore'}... :pensive:`);
+    send(message)(`:c I'm sorry.... I wont look here ${duration ? 'for ' + time(duration) : 'anymore'}... :pensive:`);
     this.client.logger.info(`Ignoring channel ${message.channel.name} (${cId}) for ${time(duration)}`);
     return true;
   },

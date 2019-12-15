@@ -1,6 +1,7 @@
 const { Listener } = require('chop-tools');
 
 const wait = require('../../util/wait');
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: ['{me}', '(have|having)', 'stress'],
@@ -11,7 +12,7 @@ module.exports = new Listener({
     message.channel.startTyping().catch(() => {});
     await wait(1500);
 
-    this.send(
+    send(message)(
       'You speak of having stress, and I want you to know that I hear you. What you are feeling is completely normal.',
       'Day to day activities can be full of stress, and you must remind yourself, you have to give yourself free time.',
       'It can be easy getting wrapped up in our daily activities and becoming overwhelmed.',

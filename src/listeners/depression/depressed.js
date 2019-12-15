@@ -1,6 +1,7 @@
 const { Listener } = require('chop-tools');
 
 const wait = require('../../util/wait');
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: ['{me}', 'depressed'],
@@ -11,7 +12,7 @@ module.exports = new Listener({
     message.channel.startTyping().catch(() => {});
     await wait(2000);
 
-    this.send(
+    send(message)(
       "I'm sorry that you're feeling depressed, and it's completely normal to feel this way.",
       "You're human and you're valid. Small tasks may seem overwhelming and daunting.",
       'Good days are coming your way.',
