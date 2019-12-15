@@ -9,7 +9,7 @@ module.exports = new Listener({
   priority: 0,
   async run(message) {
     message.channel.startTyping().catch(() => {});
-    await wait(5000);
+    await wait(2000);
 
     this.send(
       "I'm sorry that you're feeling depressed, and it's completely normal to feel this way.",
