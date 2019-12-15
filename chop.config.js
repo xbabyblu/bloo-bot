@@ -1,6 +1,6 @@
 const production = process.env.NODE_ENV === 'production';
 
-const prefix = production ? '!b ' : '!cd ';
+const prefix = production ? '!b ' : '!bd ';
 
 // https://chop-bot.github.io/chop-tools/latest/global.html#ChopOptions
 module.exports = {
