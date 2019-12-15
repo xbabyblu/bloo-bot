@@ -5,6 +5,7 @@ const { DiscordAPIError } = require('discord.js')
 const database = require('./services/database');
 const terminate = require('./services/terminate');
 const Alert = require('./services/alert')
+const Metrics = require('./services/metrics');
 const sentiment = require('./services/sentiment');
 
 const GuildSettings = require('./models/guildSettings');
@@ -30,6 +31,11 @@ database(() => {
 
   Reflect.defineProperty(client, 'logger', {
     value: logger,
+    writable: false,
+  });
+
+  Reflect.defineProperty(client, 'metrics', {
+    value: new Metrics(),
     writable: false,
   });
 

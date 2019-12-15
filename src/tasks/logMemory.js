@@ -11,6 +11,7 @@ module.exports = Task({
   time: '*/30 * * * *',
   // it logs to the console how much memory bloo is using.
   async run() {
+    console.log('memory task')
     const memory = process.memoryUsage().rss;
     // FIXME: At midnight, 23 goes to 00.
     const uptime = new Date(this.client.uptime).toISOString().substr(11, 8);

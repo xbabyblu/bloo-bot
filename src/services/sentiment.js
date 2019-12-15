@@ -17,12 +17,16 @@ const sentiment = (() => {
   const S = text => {
     const result = multilangSentiment(text, 'en', { words });
     if (client) {
-      client.emit('sentiment', { length: text.length, score: result.score });
+      client.metrics.insert('sentiment', { length: text.length, score: result.score, time: Date.now() });
     }
     return result;
   };
   S.setClient = clt => {
+    if (client) return;
     client = clt;
+    client.metrics.register('sentiment', data => {
+      return {...data};
+    });
   };
   return S;
 })();

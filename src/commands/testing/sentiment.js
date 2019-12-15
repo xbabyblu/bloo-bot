@@ -12,9 +12,11 @@ module.exports = new Command({
     // this extracts "!b sentiment" from the message content.
     const s = sentiment(message.content);
     // console.log(s);
-
-    this.send(
-      `Sentiment analysis: \`\`\`${JSON.stringify(s, null, 2)}\`\`\``,
-    );
+    const msg = `Sentiment analysis: \`\`\`${JSON.stringify(s, null, 2)}\`\`\``;
+    if (msg.length > 1999) {
+      this.send('The message is too long to send here. But the result can be seen on the console.');
+    } else {
+      this.send(msg);
+    }
   },
 });
