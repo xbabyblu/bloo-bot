@@ -5,6 +5,15 @@ function web(client) {
   // web server to keep Bloo awake
   const app = express();
 
+  const commandList = client.commands
+    .array()
+    .filter(cmd => !cmd.hidden)
+    .map(cmd => {
+      const command = { ...cmd };
+      delete command.client;
+      return command;
+    });
+
   // top.gg votes webhook
   app.post('/vote', bodyParser.json(), (req, res, next) => {
     const auth = req.get('Authorization');
@@ -19,22 +28,32 @@ function web(client) {
   // commands
   app.get('/commands', (req, res) => {
     const auth = req.get('Authorization');
-    if (!auth || auth !== process.env.TOPGG_PASS && process.env.NODE_ENV === 'production') {
-      client.logger.debug(`Auth ${auth} failed.`);
+    if (!auth || (auth !== process.env.TOPGG_PASS && process.env.NODE_ENV === 'production')) {
       res.status(403).json({ message: 'Authentication Failed' });
       return;
     }
     try {
-      const cmds = client.commands.array().filter(cmd => !cmd.hidden).map(cmd => {
-        const command = {...cmd}
-        delete command.client;
-        return command;
-      });
       client.logger.debug('GET /commands - Emitting command list.');
-      res.status(200).json(cmds);
+      res.status(200).json(commandList);
     } catch (err) {
       client.logger.error(err);
-      res.status(500).json({message: 'off'});
+      res.status(500).json({ message: 'oof' });
+    }
+  });
+
+  // bloo avatar
+  app.get('/avatar', (req, res) => {
+    const auth = req.get('Authorization');
+    if (!auth || (auth !== process.env.TOPGG_PASS && process.env.NODE_ENV === 'production')) {
+      res.status(403).json({ message: 'Authentication Failed' });
+      return;
+    }
+    try {
+      client.logger.debug('GET /avatar - Emitting bloo avatar.');
+      res.status(200).json({ avatar: client.user.avatarURL() });
+    } catch (err) {
+      client.logger.error(err);
+      res.status(500).json({ message: 'oof' });
     }
   });
 
