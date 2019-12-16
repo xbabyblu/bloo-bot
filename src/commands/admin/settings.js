@@ -9,6 +9,7 @@ module.exports = new Command({
   aliases: ['config', 'configuration', 'configurate'],
   usage: '[the config option]',
   examples: [' ', 'listeners'],
+  admin: true,
   async run(message, args, call) {
     /*
     ______SETTINGS OPTIONS IDEAS_____
