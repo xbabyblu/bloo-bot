@@ -33,7 +33,9 @@ function web(client) {
       return;
     }
     try {
-      client.logger.debug('GET /commands - Emitting command list.');
+      if (process.env.NODE_ENV !== 'production') {
+        client.logger.debug('GET /commands - Emitting command list.');
+      }
       res.status(200).json(commandList);
     } catch (err) {
       client.logger.error(err);
@@ -49,7 +51,9 @@ function web(client) {
       return;
     }
     try {
-      client.logger.debug('GET /avatar - Emitting bloo avatar.');
+      if (process.env.NODE_ENV !== 'production') {
+        client.logger.debug('GET /avatar - Emitting bloo avatar.');
+      }
       res.status(200).json({ avatar: client.user.avatarURL() });
     } catch (err) {
       client.logger.error(err);
