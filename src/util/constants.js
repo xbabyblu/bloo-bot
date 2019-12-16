@@ -9,6 +9,7 @@ const CATEGORY_EMOJIS = {
   info: ':blue_book:',
   reactions: ':pleading_face:',
   currency: ':diamond_shape_with_a_dot_inside:',
+  admin: ':card_box:',
 };
 
 module.exports = {

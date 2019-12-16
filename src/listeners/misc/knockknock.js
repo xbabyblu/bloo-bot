@@ -1,6 +1,7 @@
 const { Listener } = require('chop-tools');
-
 const Prompter = require('chop-prompter');
+
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: 'knock knock',
@@ -19,7 +20,7 @@ module.exports = new Listener({
     // If no responses, the time ran out
     if (!responseList1) {
       // i sure hope its not Joe lmfao xD || this is a cry for help
-      this.send("....*Who's there?*");
+      send(message)("....*Who's there?*");
       return true;
     }
 
@@ -34,13 +35,13 @@ module.exports = new Listener({
     });
     // i didn't think this far
     if (!responseList2) {
-      await this.send('***bruh***');
+      await send(message)('***bruh***');
       return true;
     }
 
     const response2 = responseList2.first();
 
-    await this.send(`*${response2}*... the heck!?`);
+    await send(message)(`*${response2}*... the heck!?`);
 
     return true;
   },

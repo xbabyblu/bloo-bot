@@ -3,6 +3,7 @@ const Prompter = require('chop-prompter');
 
 const format = require('../../util/format');
 const wait = require('../../util/wait');
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: ['{me}', 'emotional'],
@@ -37,7 +38,7 @@ module.exports = new Listener({
     if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
       message.channel.startTyping().catch(() => {});
       await wait(1000);
-      this.send(
+      send(message)(
         format(`${response1}? That's amazing! I'm so glad to hear that you have things to make yourself feel better!`),
       );
       message.channel.stopTyping();
@@ -45,7 +46,7 @@ module.exports = new Listener({
     } else {
       message.channel.startTyping().catch(() => {});
       await wait(5000);
-      this.send(
+      send(message)(
         `I completely understand where you are coming from. `,
         `May I suggest a warm beverage or maybe sitting in a comfy spot maybe read a good book.`,
         `Listening to music, writing, drawing, going for a walk/jog, playing video games, or even a good nap can help.`,

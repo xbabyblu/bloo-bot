@@ -2,6 +2,7 @@ const { Command } = require('chop-tools');
 const { MessageEmbed } = require('discord.js');
 
 const { CATEGORY_EMOJIS } = require('../../util/constants.js');
+const pkg = require('../../../package.json');
 
 module.exports = new Command({
   name: 'help',
@@ -31,7 +32,7 @@ module.exports = new Command({
           iconURL: message.author.avatarURL(),
         },
         footer: {
-          text: '<3',
+          text: `Version ${pkg.version} <3`,
           icon_url: this.client.user.avatarURL(),
         },
       });
@@ -74,7 +75,7 @@ module.exports = new Command({
     const embed = new MessageEmbed({
       author: { name: 'Bloo Help', iconURL: message.author.avatarURL() },
       footer: {
-        text: '<3',
+        text: `Version ${pkg.version} <3`,
         icon_url: this.client.user.avatarURL(),
       },
       description:

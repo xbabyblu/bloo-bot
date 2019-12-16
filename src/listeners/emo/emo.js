@@ -3,6 +3,7 @@ const Prompter = require('chop-prompter');
 
 const format = require('../../util/format');
 const wait = require('../../util/wait');
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: ['{me}', 'emo'],
@@ -31,7 +32,7 @@ module.exports = new Listener({
     if (stringMatch(response1, [COMMON_EXPRESSIONS.yes])) {
       message.channel.startTyping().catch(() => {});
       await wait(1000);
-      this.send(
+      send(message)(
         // lol xD 😂 fix it bluuuu ***Bruh***
         format(`${response1}? That's great! I'm so glad to hear that you have things to make yourself feel better!`),
       );
@@ -39,7 +40,7 @@ module.exports = new Listener({
     } else {
       message.channel.startTyping().catch(() => {});
       await wait(5000);
-      this.send(
+      send(message)(
         format(
           // i read a lot on javascript, i'm a nerd :nerd:
           `I'm sorry to say hear that. I'd love to suggest a couple of things.`,

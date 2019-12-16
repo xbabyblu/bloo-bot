@@ -1,6 +1,8 @@
 const { Listener } = require('chop-tools');
 const Prompter = require('chop-prompter');
 
+const send = require('../../services/safeSend');
+
 module.exports = new Listener({
   words: ['{me}', 'hungry'],
   category: 'emotions',
@@ -16,7 +18,7 @@ module.exports = new Listener({
     }).then(responses => {
       // If no responses, the time ran out
       if (!responses) {
-        this.send('No time for questions? I see.');
+        send(message)('No time for questions? I see.');
         return;
       }
 
@@ -24,7 +26,7 @@ module.exports = new Listener({
       const response = responses.first();
 
       // Respond
-      this.send(`**${response}**? I like that too! Not my favorite tho... :P`);
+      send(message)(`**${response}**? I like that too! Not my favorite tho... :P`);
     });
     return true;
   },

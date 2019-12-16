@@ -1,10 +1,11 @@
 require('dotenv').config();
 const ChopTools = require('chop-tools');
-const { DiscordAPIError } = require('discord.js')
+const { DiscordAPIError } = require('discord.js');
 
 const database = require('./services/database');
 const terminate = require('./services/terminate');
-const Alert = require('./services/alert')
+const Alert = require('./services/alert');
+const Metrics = require('./services/metrics');
 const sentiment = require('./services/sentiment');
 
 const GuildSettings = require('./models/guildSettings');
@@ -33,24 +34,48 @@ database(() => {
     writable: false,
   });
 
+  Reflect.defineProperty(client, 'metrics', {
+    value: new Metrics(),
+    writable: false,
+  });
+
   client.logger.info('[Database] MongoDB Connected.');
 
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      const DBL = module.require('dblapi.js');
+      const dbl = new DBL(process.env.TOPGG_TOKEN, client);
+      dbl.on('error', err => {
+        client.emit('error', err);
+      });
+    } catch(err) {
+      logger.error('Could not dbl instance.');
+      logger.error(err);
+    }
+  }
+
   // add ignored channels saved in db to the ignore list
-  GuildSettings.find({}, '-_id listenerSettings.ignored')
+  GuildSettings.find({})
     .exec()
     .then(documents => {
-      const guildSettingsList = documents.map(d => d.listenerSettings.ignored);
-      let count = 0;
-      guildSettingsList.forEach(channels => {
-        channels.forEach(c => {
-          count += 1;
+      let channelCount = 0;
+      let guildCount = 0;
+      documents.forEach(document => {
+        document.listenerSettings.ignored.forEach(c => {
+          channelCount += 1;
           client.listeners.ignored.ignoreChannel(c, 0);
         });
+        if (!document.listenerSettings.allow) {
+          guildCount += 1;
+          client.listeners.ignored.ignoreGuild(document.guildId);
+        }
       });
-      client.logger.info(`[Bloo] Adding ${count} channels to the listener ignore list from the database.`);
+      client.logger.info(
+        `[Bloo] Adding ${channelCount} channels and ${guildCount} guilds to the listener ignore list from the database.`,
+      );
     })
     .catch(client.logger.error);
-  
+
   // ignored guilds
   client.listeners.ignored.ignoreGuild('264445053596991498', 0);
 

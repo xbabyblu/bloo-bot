@@ -1,6 +1,7 @@
 const { Listener } = require('chop-tools');
 
 const wait = require('../../util/wait');
+const send = require('../../services/safeSend');
 
 module.exports = new Listener({
   words: ['{me}', 'stressed'],
@@ -12,7 +13,7 @@ module.exports = new Listener({
     await wait(1500);
 
     // reminder
-    this.send(
+    send(message)(
       "I'm hearing that you're feeling stressed, if I'm correct. Do you have any daily activities you like to do? A short walk can help give you some clarity in situations like these.",
       'I cannot imagine what you are going through to have such an intense emotion. Stress is never fun, for anyone.',
       'Trying to distract your brain in even the slightest ways, can go a long way! Try doing something you enjoy to distract yourself for even a little bit.',
