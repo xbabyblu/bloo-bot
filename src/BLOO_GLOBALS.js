@@ -6,6 +6,7 @@ exports.INK_EMOJI = '<:blue:647188962376417280>';
 
 exports.PET_PRICE = 5000;
 exports.MAX_PET_COUNT = 2;
+exports.PET_ABANDON_RETURN_MONEY = 69;
 
 // VOTING
 
