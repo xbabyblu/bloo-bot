@@ -6,7 +6,7 @@ const findPerson = require('../../util/findPerson');
 
 module.exports = new Command({
   name: 'laugh',
-  description: ':laughing:',
+  description: 'Lmao! :laughing:',
   aliases: ['laughing', 'laughter'],
   category: 'reactions',
   examples: [' ', '@Lar#9547', '@Xlilblu#5239'],
