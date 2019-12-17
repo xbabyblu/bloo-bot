@@ -152,6 +152,7 @@ module.exports = new Command({
       await this.send(`You can pat your pets every **${PET_PAT_COOLDOWN}** minutes.`);
       pets.forEach(pet => {
         const lastPatDate = pet.pats.time;
+        if (Date.now() - lastPatDate.getTime() < 1800000) return;
         Prompter.confirm({
           channel: message.channel,
           question: {
@@ -194,6 +195,7 @@ module.exports = new Command({
 
     // No args, show pets
     pets.forEach(pet => {
+      const lastPatDate = pet.pats.time;
       this.send({
         embed: new MessageEmbed({
           title: pet.name,
@@ -201,6 +203,7 @@ module.exports = new Command({
             `⭐ **Level:** __${pet.level}__`,
             `✨ **Experience:** __${pet.experience}__`,
             `💕 **Pats:** __${pet.pats.count}__`,
+            Text.duration(`**Last pat:** __{duration:${Date.now() - lastPatDate.getTime()}}__ ago.`),
           ),
           files: [{ name: 'pet.png', attachment: pet.image }],
           thumbnail: { url: 'attachment://pet.png' },
