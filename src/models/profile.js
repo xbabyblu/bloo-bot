@@ -24,6 +24,9 @@ const profileSchema = new Schema({
     type: Number,
     default: 0,
   },
+  brb: {
+    type: String,
+  }
 });
 
 profileSchema.statics.getOrCreate = async function getOrCreate(userId) {

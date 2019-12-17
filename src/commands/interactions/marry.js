@@ -8,7 +8,7 @@ module.exports = new Command({
   description: 'Propose to that special someone and ask them to marry you. Or, you know, give someone a heart attack! >u< :blue_heart:',
   args: ['target'],
   aliases: ['marry', 'proposeto'],
-  delete: true,
+  delete: false,
   category: 'interactions',
   usage: '{target}',
   examples: ['@Lar#9547', '@Xlilblu#5239'],
