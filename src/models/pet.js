@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { PET_EXP_PER_PAT } = require('../BLOO_GLOBALS');
+
 const { Schema } = mongoose;
 
 const petSchema = new Schema({
@@ -17,7 +19,7 @@ const petSchema = new Schema({
     required: true,
     default: 0,
   },
-  // TODO: Pet species
+  // unused
   species: {
     type: String,
     required: true,
@@ -47,13 +49,6 @@ const petSchema = new Schema({
   }
 });
 
-/*
-stats
-random image
-random species
-
-*/
-
 petSchema.pre('save', function preSave(next) {
   if (this.isModified('createdAt')) {
     throw new Error('Creation field is read only!');
@@ -67,10 +62,11 @@ petSchema.pre('save', function preSave(next) {
   next();
 });
 
-petSchema.methods.givePat = function givePat() {
+petSchema.methods.givePat = async function givePat() {
   this.pats.count += 1;
   this.pats.time = Date.now();
-  this.save()
+  this.experience += PET_EXP_PER_PAT;
+  return this.save();
 }
 
 module.exports = mongoose.model('Pet', petSchema);

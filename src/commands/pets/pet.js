@@ -6,7 +6,13 @@ const Pet = require('../../models/pet');
 const Pets = require('../../services/pets');
 const Currency = require('../../services/currency');
 const format = require('../../util/format');
-const { INK_EMOJI, PET_PRICE, MAX_PET_COUNT } = require('../../BLOO_GLOBALS');
+const {
+  INK_EMOJI,
+  PET_PRICE,
+  MAX_PET_COUNT,
+  PET_ABANDON_RETURN_MONEY,
+  PET_PAT_COOLDOWN,
+} = require('../../BLOO_GLOBALS');
 
 module.exports = new Command({
   name: 'pet',
@@ -74,15 +80,19 @@ module.exports = new Command({
     if (args[0] && ['abandon', 'yeet', 'delete'].includes(args[0].toLowerCase())) {
       // abandon pet
       const whichPetToAbandonMessage = format(
-          'Which pet would you like to throw away forever? **{0}**?',
-          'I can\'t believe I have to be the bearer of bad news and tell them their master doesn\'t love them anymore.',
-          'Please don\'t do this :frowning:'
-        );
-      const areYouSureMessage = 'Are you sure you would like to do this? There isn\'t a possibility of getting the same pet back. And you may hurt their *feelings* :c \n**Please confirm that you would like to do this.**';
-      const petAbandonedMessage = 'You have gotten rid of your pet **{0}**. \n \nI bet you feel bad now.. *How could you?* :frowning:'; // << undefined
-      const youHaveNoPetsMessage = 'I hate to see this... You really don\'t like pets to the point... That you tried... To get rid.. Of a pet, that __***doesn\'t exist***__.';
-      const userEnteredAPetNameThatTheyDontOwnMessage = 'I do not see a pet under that name, maybe see if you are spelling it correctly? Or.... maybe you shouldn\'t get rid of your pet :smile: \nBut if you are serious about wanting to abandon your pet, please check your spelling and try again!';
-      
+        'Which pet would you like to throw away forever? **{0}**?',
+        "I can't believe I have to be the bearer of bad news and tell them their master doesn't love them anymore.",
+        "Please don't do this :frowning:",
+      );
+      const areYouSureMessage =
+        "Are you sure you would like to do this? There isn't a possibility of getting the same pet back. And you may hurt their *feelings* :c \n**Please confirm that you would like to do this.**";
+      const petAbandonedMessage =
+        'You have gotten rid of your pet **{0}**. \n \nI bet you feel bad now.. *How could you?* :frowning:'; // << undefined
+      const youHaveNoPetsMessage =
+        "I hate to see this... You really don't like pets to the point... That you tried... To get rid.. Of a pet, that __***doesn't exist***__.";
+      const userEnteredAPetNameThatTheyDontOwnMessage =
+        "I do not see a pet under that name, maybe see if you are spelling it correctly? Or.... maybe you shouldn't get rid of your pet :smile: \nBut if you are serious about wanting to abandon your pet, please check your spelling and try again!";
+
       // 0 pets
       if (pets.length < 1) {
         this.send(youHaveNoPetsMessage);
@@ -102,7 +112,10 @@ module.exports = new Command({
         });
 
         if (res) {
-          const chosenPetName = res.first().content.trim().toLowerCase();
+          const chosenPetName = res
+            .first()
+            .content.trim()
+            .toLowerCase();
           petToDelete = pets.find(p => p.name.toLowerCase() === chosenPetName);
         }
 
@@ -110,7 +123,7 @@ module.exports = new Command({
           this.send(userEnteredAPetNameThatTheyDontOwnMessage);
           return;
         }
-      // only 1 pet
+        // only 1 pet
       } else {
         petToDelete = pets[0];
       }
@@ -122,12 +135,13 @@ module.exports = new Command({
       });
       if (shouldDeletePet !== true) {
         // ✅ ✖ -> user chose no.... KAFFE
-        this.send('**Phew.** Thank goodness you decided not to! Thank you for having a heart.'); 
+        this.send('**Phew.** Thank goodness you decided not to! Thank you for having a heart.');
         return;
       }
 
       // eslint-disable-next-line
       await Pet.deleteOne({ _id: petToDelete._id }).exec();
+      await Currency.add(call.caller, PET_ABANDON_RETURN_MONEY);
       this.send(petAbandonedMessage.replace(/\{0\}/g, petToDelete.name));
       return;
     }
@@ -135,8 +149,9 @@ module.exports = new Command({
     // Arg === pat 💕
     if (args[0] && ['pat', 'pet', 'loveon', 'givelove'].includes(args[0].toLowerCase())) {
       const petGotPatD = 'You have pat your pet {0}!';
-
+      await this.send(`You can pat your pets every **${PET_PAT_COOLDOWN}** minutes.`);
       pets.forEach(pet => {
+        const lastPatDate = pet.pats.time;
         Prompter.confirm({
           channel: message.channel,
           question: {
@@ -145,11 +160,12 @@ module.exports = new Command({
               description: Text.lines(
                 `⭐ **Level:** __${pet.level}__`,
                 `✨ **Experience:** __${pet.experience}__`,
-                `💕 **Pats:** __${pet.pats.count}__`
+                `💕 **Pats:** __${pet.pats.count}__`,
+                Text.duration(`**Last pat:** __{duration:${Date.now() - lastPatDate.getTime()}}__ ago.`),
               ),
               files: [{ name: 'pet.png', attachment: pet.image }],
               thumbnail: { url: 'attachment://pet.png' },
-            })
+            }),
           },
           userId: call.caller,
           confirmEmoji: '🥰',
@@ -157,7 +173,11 @@ module.exports = new Command({
           // deleteMessage: false,
         }).then(res => {
           if (res !== true) return;
-          this.send(petGotPatD.replace(/\{0\}/g, pet.name));
+          pet.givePat()
+            .then(() => {
+              this.send(petGotPatD.replace(/\{0\}/g, pet.name));
+            })
+            .catch(() => { /* bruh */ });
         });
       });
       return;
@@ -180,12 +200,12 @@ module.exports = new Command({
           description: Text.lines(
             `⭐ **Level:** __${pet.level}__`,
             `✨ **Experience:** __${pet.experience}__`,
-            `💕 **Pats:** __${pet.pats.count}__`
+            `💕 **Pats:** __${pet.pats.count}__`,
           ),
           files: [{ name: 'pet.png', attachment: pet.image }],
           thumbnail: { url: 'attachment://pet.png' },
-        })
-      })
+        }),
+      });
     });
   },
 });
