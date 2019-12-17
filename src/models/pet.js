@@ -67,4 +67,10 @@ petSchema.pre('save', function preSave(next) {
   next();
 });
 
+petSchema.methods.givePat = function givePat() {
+  this.pats.count += 1;
+  this.pats.time = Date.now();
+  this.save()
+}
+
 module.exports = mongoose.model('Pet', petSchema);
