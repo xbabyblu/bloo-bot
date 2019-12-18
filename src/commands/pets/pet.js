@@ -195,7 +195,38 @@ module.exports = new Command({
       // Name Restrictions
       // const characters = [14]ig
       const filter = new Filter();
-      // we'll use filter.isProfane();
+
+      // steps:
+      // 1. check pet count
+      //    - if no pets, send message u got no pets u can adopt with blah blah....
+      // 2. check money
+      //    - if not enough, send message ur poor blah blah....
+      // 2.5? prompt confirm
+      //    - if no, send message okay then
+      // 3. prompt for new name
+      //    - prompt for a name, check for profanity
+      //    - if profane, send message fk off dude blah blah....
+      //    - we'll use filter.isProfane();
+      // 4. rename
+      //    - change name
+      // 5. save
+      //    - save to db
+      // 6. send feedback message
+      //    - send message, success new pet name {petname}
+
+      // const responseList = await Prompter.message({
+      //   channel: message.channel,
+      //   question: 'What do you want your brb message to say?',
+      //   userId: call.caller,
+      //   deleteMessage: false,
+      // });
+    
+      // const newName = responseList ? responseList.first().content.trim() : '';
+    
+      // if (!newName) {
+      //   this.send('Uhhhh, okay then.');
+      //   return;
+      // }
     }
 
     // No pets
