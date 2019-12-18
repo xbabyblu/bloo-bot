@@ -1,6 +1,7 @@
 const { Command, Text } = require('chop-tools');
 const Prompter = require('chop-prompter');
 const { MessageEmbed } = require('discord.js');
+const Filter = require('bad-words');
 
 const Pet = require('../../models/pet');
 const Pets = require('../../services/pets');
@@ -14,6 +15,7 @@ const {
   PET_PAT_COOLDOWN,
 } = require('../../BLOO_GLOBALS');
 const flatSeconds = require('../../util/flatSeconds');
+const xp = require('../../util/magicformula');
 
 module.exports = new Command({
   name: 'pet',
@@ -161,7 +163,7 @@ module.exports = new Command({
               title: pet.name,
               description: Text.lines(
                 `⭐ **Level:** __${pet.level}__`,
-                `✨ **Experience:** __${pet.experience}__`,
+                `✨ **Experience:** __${pet.experience}/${xp.expToNextLevel(pet.level)}__`,
                 `💕 **Pats:** __${pet.pats.count}__`,
                 Text.duration(`**Last pat:** __{duration:${flatSeconds(Date.now() - lastPatDate.getTime())}}__ ago.`),
               ),
@@ -188,6 +190,14 @@ module.exports = new Command({
       return;
     }
 
+    // arg === rename
+    if (args[0] && ['rename', 'changename', 'idk', 'helpmebluLOL'].includes(args[0].toLowerCase())) {
+      // Name Restrictions
+      // const characters = [14]ig
+      const filter = new Filter();
+      // we'll use filter.isProfane();
+    }
+
     // No pets
     if (pets.length === 0) {
       this.send(
@@ -205,7 +215,7 @@ module.exports = new Command({
           title: pet.name,
           description: Text.lines(
             `⭐ **Level:** __${pet.level}__`,
-            `✨ **Experience:** __${pet.experience}__`,
+            `✨ **Experience:** __${pet.experience}/${xp.expToNextLevel(pet.level)}__`,
             `💕 **Pats:** __${pet.pats.count}__`,
             Text.duration(`**Last pat:** __{duration:${flatSeconds(Date.now() - lastPatDate.getTime())}}__ ago.`),
           ),

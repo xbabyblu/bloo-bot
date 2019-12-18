@@ -1,5 +1,7 @@
 const { Command, Text } = require('chop-tools');
 
+
+
 module.exports = new Command({
   name: 'xp',
   description: 'xp formula testing',
@@ -8,6 +10,19 @@ module.exports = new Command({
   hidden: true,
   run(message, args, call) {
     const [currentLevel] = Text.numbers(message.content);
+
+    if (args[0] && args[0].toLowerCase() === 'bruh') {
+      let msg = '';
+      let total = 0;
+      // but i'm doing it "currentLevel" times.
+      for (let i = 1; i <= (currentLevel || 5); i++) {
+        // this is just ur formula
+        msg += `**${i}** -> ${i * (10 + i)}\n`;
+        total += i * (10 + i);
+      }
+      message.channel.send(msg + 'And the sum of that is ' + total, {split: true});
+      return;
+    }
 
     if (currentLevel === undefined) {
       message.channel.send('Bruh \'-\'');
