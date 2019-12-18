@@ -13,6 +13,7 @@ const {
   PET_ABANDON_RETURN_MONEY,
   PET_PAT_COOLDOWN,
 } = require('../../BLOO_GLOBALS');
+const flatSeconds = require('../../util/flatSeconds');
 
 module.exports = new Command({
   name: 'pet',
@@ -162,7 +163,7 @@ module.exports = new Command({
                 `⭐ **Level:** __${pet.level}__`,
                 `✨ **Experience:** __${pet.experience}__`,
                 `💕 **Pats:** __${pet.pats.count}__`,
-                Text.duration(`**Last pat:** __{duration:${Date.now() - lastPatDate.getTime()}}__ ago.`),
+                Text.duration(`**Last pat:** __{duration:${flatSeconds(Date.now() - lastPatDate.getTime())}}__ ago.`),
               ),
               files: [{ name: 'pet.png', attachment: pet.image }],
               thumbnail: { url: 'attachment://pet.png' },
@@ -174,11 +175,14 @@ module.exports = new Command({
           // deleteMessage: false,
         }).then(res => {
           if (res !== true) return;
-          pet.givePat()
+          pet
+            .givePat()
             .then(() => {
               this.send(petGotPatD.replace(/\{0\}/g, pet.name));
             })
-            .catch(() => { /* bruh */ });
+            .catch(() => {
+              /* bruh */
+            });
         });
       });
       return;
@@ -203,7 +207,7 @@ module.exports = new Command({
             `⭐ **Level:** __${pet.level}__`,
             `✨ **Experience:** __${pet.experience}__`,
             `💕 **Pats:** __${pet.pats.count}__`,
-            Text.duration(`**Last pat:** __{duration:${Date.now() - lastPatDate.getTime()}}__ ago.`),
+            Text.duration(`**Last pat:** __{duration:${flatSeconds(Date.now() - lastPatDate.getTime())}}__ ago.`),
           ),
           files: [{ name: 'pet.png', attachment: pet.image }],
           thumbnail: { url: 'attachment://pet.png' },
