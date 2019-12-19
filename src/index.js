@@ -15,6 +15,7 @@ const web = require('./web');
 
 const guildCreate = require('./events/guildCreate');
 const vote = require('./events/vote');
+const mention = require('./events/mention');
 
 const logger = require('./services/logger');
 const logCommands = require('./middleware/logCommands');
@@ -117,6 +118,7 @@ database(() => {
   // Events
   client.on('guildCreate', guildCreate(client));
   client.on('vote', vote(client));
+  client.on('message', mention(client));
 
   // Middleware
   client.use(logCommands);
