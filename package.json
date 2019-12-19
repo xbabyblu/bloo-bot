@@ -18,7 +18,7 @@
     "bad-words": "^3.0.3",
     "body-parser": "^1.19.0",
     "chalk": "^3.0.0",
-    "chop-gifs": "github:Chop-Bot/chop-gifs#master",
+    "chop-gifs": "github:Chop-Bot/chop-gifs#7c51b1f3943a3862fda535e61d2c737df0fafe5c",
     "chop-prompter": "github:Chop-Bot/chop-prompter#master",
     "chop-tools": "github:Chop-Bot/chop-tools#master",
     "dblapi.js": "^2.3.0",
