@@ -13,6 +13,7 @@ const {
   MAX_PET_COUNT,
   PET_ABANDON_RETURN_MONEY,
   PET_PAT_COOLDOWN,
+  PET_PAT_EXP
 } = require('../../BLOO_GLOBALS');
 const flatSeconds = require('../../util/flatSeconds');
 const xp = require('../../util/magicformula');
@@ -151,7 +152,7 @@ module.exports = new Command({
 
     // Arg === pat 💕
     if (args[0] && ['pat', 'pet', 'loveon', 'givelove'].includes(args[0].toLowerCase())) {
-      const petGotPatD = 'You have pat your pet {0}!';
+      const petGotPatD = 'You have pat your pet **{0}** for **{1}** exp!';
       await this.send(`You can pat your pets every **${PET_PAT_COOLDOWN}** minutes.`);
       pets.forEach(pet => {
         const lastPatDate = pet.pats.time;
@@ -180,7 +181,7 @@ module.exports = new Command({
           pet
             .givePat()
             .then(() => {
-              this.send(petGotPatD.replace(/\{0\}/g, pet.name));
+              this.send(petGotPatD.replace(/\{0\}/g, pet.name).replace(/\{1\}/g, PET_PAT_EXP));
             })
             .catch(() => {
               /* bruh */

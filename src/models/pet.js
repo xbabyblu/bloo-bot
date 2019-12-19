@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { PET_EXP_PER_PAT } = require('../BLOO_GLOBALS');
+const { PET_PAT_EXP } = require('../BLOO_GLOBALS');
 const xp = require('../util/magicformula');
 
 const { Schema } = mongoose;
@@ -66,7 +66,7 @@ petSchema.pre('save', function preSave(next) {
 petSchema.methods.givePat = async function givePat() {
   this.pats.count += 1;
   this.pats.time = Date.now();
-  this.experience += PET_EXP_PER_PAT;
+  this.experience += PET_PAT_EXP;
 
   while (xp.expToNextLevel(this.level) < this.experience) {
     this.experience -= xp.expToNextLevel(this.level);
