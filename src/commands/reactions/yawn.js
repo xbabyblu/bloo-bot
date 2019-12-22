@@ -1,19 +1,12 @@
 const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
-const format = require('../../util/format');
-
-const images = [];
-
-for (let i = 0; i <= 28; i++) {
-  images.push(`http://cdn.chop.coffee/tired/${i}.gif`);
-}
+const Gifs = require('../../services/gifs');
 
 module.exports = new Command({
   name: 'tired',
-  description: "someone is looking a little sleeeeeepyyyyyy. Aw how cute! ~",
+  description: 'someone is looking a little sleeeeeepyyyyyy. Aw how cute! ~',
   aliases: ['sleepy', 'yawn', 'sleep'],
   category: 'reactions',
   usage: '[target]',
@@ -28,7 +21,7 @@ module.exports = new Command({
       msg = `<@${call.caller}>'s feeling awfully sleepy :yawning_face:`;
     }
 
-    const embed = makeEmbed(msg, random(images), message);
+    const embed = makeEmbed(msg, await Gifs.random('sleepy'), message);
 
     this.send({ embed });
   },

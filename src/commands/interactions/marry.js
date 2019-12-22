@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -15,7 +14,7 @@ module.exports = new Command({
   run(message, args, call) {
     const propose = createInteractionCommand(
       `\n${call.callerTag} has asked you to marry them :hugging:`,
-      gifs.propose(),
+      'shy',
       message,
     );
 

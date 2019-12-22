@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -14,7 +13,7 @@ module.exports = new Command({
   run(message, args, call) {
     const cuddle = createInteractionCommand(
       `\n${call.callerTag} has decided that they want to cuddle you. Hope I didn't make it weird o3o :hugging:`,
-      gifs.cuddle(),
+      'cuddle',
       message,
     );
 

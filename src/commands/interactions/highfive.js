@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -14,7 +13,7 @@ module.exports = new Command({
   async run(message, args, call) {
     const highfive = createInteractionCommand(
       `\n${call.callerTag} has high-fived you :raised_hand: :pray: good job, on whatever you did to deserve a high-five :grin:`,
-      gifs.highfive(),
+      'highfive',
       message,
     );
 

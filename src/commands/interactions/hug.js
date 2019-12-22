@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -14,7 +13,7 @@ module.exports = new Command({
   run(message, args, call) {
     const hug = createInteractionCommand(
       `\n${call.callerTag} has given you a big ole hug, you oughta send them one back! :heart: `,
-      gifs.hug(),
+      'hug',
       message,
     );
 

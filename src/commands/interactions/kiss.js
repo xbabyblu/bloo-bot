@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 const format = require('../../util/format');
@@ -19,7 +18,7 @@ module.exports = new Command({
         "My... you're looking quite flustered..",
         'Do you want me to turn a fan on to help you cool down?',
       ),
-      gifs.kiss(),
+      'kiss',
       message,
     );
 

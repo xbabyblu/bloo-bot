@@ -2,27 +2,8 @@
 const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
-const format = require('../../util/format');
-
-const images = [
-  'https://imgur.com/a/LORGHXP', 
-  'https://imgur.com/a/Pk7glNs', 
-  'https://imgur.com/a/1iRHU0a', 
-  'https://imgur.com/a/aNcjpmg',
-  'https://imgur.com/a/4VkbcSS',
-  'https://imgur.com/a/adh0lkn',
-  'https://imgur.com/a/PDD8Vj8',
-  'https://imgur.com/a/y1UoP9W', 
-  'https://imgur.com/a/4ycqOx3', 
-  'https://imgur.com/a/pmIYu1G', 
-  'https://imgur.com/a/76SIRE0'];
-/*
-for (let i = 0; i <= 28; i++) {
-  images.push(`http://cdn.chop.coffee/happy/${i}.gif`);
-}
-*/
+const Gifs = require('../../services/gifs');
 
 module.exports = new Command({
   name: 'happy',
@@ -42,7 +23,7 @@ module.exports = new Command({
       msg = `<@${call.caller}> seems to be really happy!`;
     }
 
-    const embed = makeEmbed(msg, random(images), message);
+    const embed = makeEmbed(msg, await Gifs.random('happy'), message);
 
     this.send({ embed });
   },

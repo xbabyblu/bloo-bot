@@ -1,8 +1,8 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const makeEmbed = require('../../util/makeEmbed');
 const findPerson = require('../../util/findPerson');
+const Gifs = require('../../services/gifs');
 
 module.exports = new Command({
   name: 'stare',
@@ -17,7 +17,7 @@ module.exports = new Command({
 
     const embed = makeEmbed(
       `<@${call.caller}> is staring at you ${target}... what did you do?`,
-      gifs.stare(),
+      await Gifs.random('stare'),
       message,
     );
 
