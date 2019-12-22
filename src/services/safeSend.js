@@ -19,6 +19,6 @@ module.exports = message => (...args) => {
     .catch(err => {
       err.stack += `\n\nGuild: ${message.guild ? message.guild.name : undefined}\n`;
       err.stack += `Channel: ${message.channel ? message.channel.name : undefined}\n`;
-      message.client.emit('error', err);
+      message.client && message.client.emit('error', err);
     });
 };
