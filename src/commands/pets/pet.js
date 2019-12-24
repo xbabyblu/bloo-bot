@@ -2,6 +2,7 @@ const { Command, Text } = require('chop-tools');
 const Prompter = require('chop-prompter');
 const { MessageEmbed } = require('discord.js');
 const Filter = require('bad-words');
+const match = require('string-similarity').findBestMatch;
 
 const Pet = require('../../models/pet');
 const Pets = require('../../services/pets');
@@ -13,7 +14,8 @@ const {
   MAX_PET_COUNT,
   PET_ABANDON_RETURN_MONEY,
   PET_PAT_COOLDOWN,
-  PET_PAT_EXP
+  PET_PAT_EXP,
+  PET_RENAMING_PRICE
 } = require('../../BLOO_GLOBALS');
 const flatSeconds = require('../../util/flatSeconds');
 const xp = require('../../util/magicformula');
@@ -197,19 +199,126 @@ module.exports = new Command({
       // const characters = [14]ig
       const filter = new Filter();
 
-      // steps:
       // 1. check pet count
       //    - if no pets, send message u got no pets u can adopt with blah blah....
+      const youHaveNoPetsMessage = "u got no pet to rename";
+
+      if (pets.length < 1) {
+        this.send(youHaveNoPetsMessage);
+        return;
+      }
+
       // 2. check money
       //    - if not enough, send message ur poor blah blah....
+      const insufficientMoney = "Renaming costs {0}. You do not have enough funds to rename your pet. Please consider voting for me (**!b vote**) to gather more Blue Ink, or use **!b daily** if you haven't already!";
+      if (call.profile.money < PET_RENAMING_PRICE) {
+        this.send(insufficientMoney.replace(/\{0\}/g, PET_RENAMING_PRICE));
+        return
+      }
+
+      // 2.25?? - which pet lol?
+      let whichPetToRename = 'which pet would you like to rename? {0}';
+      const userEnteredAPetNameThatTheyDontOwnMessage = 'I do not see a pet under that name, maybe check to see that you are spelling it correctly?'
+      /* should we reroute the command when someone incorrectly spells to where it says the above then gives the option again? 
+      like " i do not see this name ...." then person says " pet name example " then bloo says "oh 'Pet Name' right?"
+      alright! 😃:D oop
+      */
+      let petToRename = null;
+
+      // more than 1 pet
+      if (pets.length > 1) {
+        while (!petToRename) {
+          // eslint-disable-next-line no-await-in-loop
+          const res = await Prompter.message({
+            channel: message.channel,
+            question: whichPetToRename.replace(/\{0\}/g, pets.map(p => p.name).join(', ')),
+            userId: call.caller,
+            max: 1,
+            deleteMessage: false,
+          });
+          
+          if (res) {
+            const chosenPetName = res
+              .first()
+              .content.trim()
+              .toLowerCase();
+            petToRename = pets.find(p => p.name.toLowerCase() === chosenPetName);
+            if (!petToRename) {
+              const variableNamesLMAO = 'I do not see a pet under this name; did you mean {0}?';
+              const { bestMatch } = match(chosenPetName, pets.map(p => p.name));
+              // eslint-disable-next-line no-await-in-loop
+              const didWeGetIt = await Prompter.confirm({
+                channel: message.channel,
+                question: variableNamesLMAO.replace(/\{0\}/g, bestMatch),
+                userId: call.caller,
+              });
+              if (didWeGetIt === true) {
+                petToRename = pets.find(p => p.name === bestMatch);
+                break;
+              }
+            }
+          }
+        }
+        // only 1 pet
+      } else {
+        petToRename = pets[0];
+      }
+
       // 2.5? prompt confirm
       //    - if no, send message okay then
+      const areYouSure = 'Are you sure you would like to rename your pet?';;
+      const okayThen = 'Okie Dokie Artichokie.';
+      // teehee okiedokieartichokie ~~~
+      const response = await Prompter.confirm({
+        channel: message.channel,
+        question: areYouSure,
+        userId: call.caller,
+      });
+
+      if (response !== true) {
+        this.send(okayThen);
+        return;
+      }
+
       // 3. prompt for new name
       //    - prompt for a name, check for profanity
       //    - if profane, send message fk off dude blah blah....
       //    - we'll use filter.isProfane();
+      const whatPetNewName = 'What would you like your pet\'s new name to be?';
+      const okayThenV2 = 'Alrighty then.';
+      const nameIsProfane = `I'm going to need you to reconsider that name. That is an explicit name that I cannot allow you to name your pet that.`;
+      const nameHasWeirdStuff = 'Only characters A-Z are allowed in your pets name.';
+
+      // ~~~oowoo~~~ 👍
+      const responseList = await Prompter.message({
+        channel: message.channel,
+        question: whatPetNewName,
+        userId: call.caller,
+        deleteMessage: false,
+      });
+    
+      const newName = responseList ? responseList.first().content : '';
+    
+      if (!newName) {
+        this.send(okayThenV2);
+        return;
+      }
+
+      if (filter.isProfane(newName)) {
+        this.send(nameIsProfane);
+        return;
+      }
+
+      if (/[^a-zA-Z]/g.test(newName)) {
+        this.send(nameHasWeirdStuff);
+        return;
+      }
+
       // 4. rename
       //    - change name
+      petToRename.name = newName.trim();
+
+      // steps:      
       // 5. save
       //    - save to db
       // 6. send feedback message

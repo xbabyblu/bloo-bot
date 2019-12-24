@@ -5,7 +5,7 @@ exports.INK_EMOJI = '<:blue:647188962376417280>';
 // PET STUFF
 
 exports.PET_PRICE = 5000;
-exports.PET_RENAMING_PRICE = 2000;
+exports.PET_RENAMING_PRICE = 2000; 
 exports.MAX_PET_COUNT = 2;
 exports.PET_ABANDON_RETURN_MONEY = 69;
 exports.PET_PAT_EXP = 20;
