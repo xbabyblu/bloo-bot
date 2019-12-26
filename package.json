@@ -36,12 +36,18 @@
     "moment-timezone": "^0.5.27",
     "mongoose": "^5.8.2",
     "multilang-sentiment": "^1.2.0",
+    "natural": "^0.6.3",
     "nodemailer": "^6.3.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
     "sharp": "^0.23.3",
+<<<<<<< HEAD
     "string-similarity": "^3.0.0",
     "twemoji-parser": "^12.1.1"
+=======
+    "twemoji-parser": "^12.1.1",
+    "wordpos": "^1.2.0"
+>>>>>>> 7eba5b566f55fab61a1a4516ccd767a78eb76aa3
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
