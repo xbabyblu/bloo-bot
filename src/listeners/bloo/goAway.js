@@ -6,7 +6,7 @@ const send = require('../../services/safeSend');
 
 // the message.... if anyone literally says this imma smack them.
 module.exports = new Listener({
-  words: ['go', 'away', 'bloo'],
+  words: ['go', 'away', 'bloo',],
   category: 'bloo',
   cooldown: 1,
   priority: 0,
