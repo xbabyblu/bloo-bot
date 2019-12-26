@@ -27,6 +27,9 @@ module.exports = new Listener({
         `:diamond_shape_with_a_dot_inside:__**Shizophrenia**__ is a serious mental illness characterized by a person experiencing a combination of delusions and hallucinations. Because these delusions and hallucinations feel as real as the world around them, a person with untreated schizophrenia can sometimes have trouble distinguishing actual reality from this altered reality that their brain is telling them.`,
         `:diamond_shape_with_a_dot_inside:Next we have __**Dissociative Disorders**__. There are currently *five* identified. These are **Depersonalization Disorder, Dissociative Amnesia, Dissociative Fugue, Dissociative Identity Disorder, and Dissociative Disorder Not Otherwise Specified (NOS).**`,
         `:diamond_shape_with_a_dot_inside:There is also __**Selective Mutism**__ which is a type of anxiety disorder whose main distinguishing characteristic is the persistent failure to speak in specific social situations (e.g., at school or with playmates) where speaking is expected, despite speaking in other situations.`,
+        `\n`,
+        `__**Awareness is the first step to ending the stigma.**__`,
+        `:blue_heart: If you would like to learn more about any of these, please feel free to use **!b google** followed by the one you would like to look into!`,
         { split: true }
       )
       .then(() => message.channel.stopTyping())
