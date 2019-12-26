@@ -9,19 +9,40 @@ module.exports = new Command({
   category: "currency",
   aliases: ["eco"],
   async run(message, args, call) {
-    const sum = await Profile.aggregate([
+    const [{ money }] = await Profile.aggregate([
       { $group: { _id: "", money: { $sum: "$money" } } },
       { $project: { _id: 0, money: "$money" } }
     ]);
+
+    const top5Profiles = await Profile.find({})
+      .limit(5)
+      .sort({ money: -1 })
+      .exec();
+
     const blooProfile = await Profile.findOne({
       userId: "643338599281983501"
     }).exec();
-    const allMoney = sum[0]["money"];
+
     const blooMoney = blooProfile.money;
-    this.send(
-      `There is currently **${allMoney}${INK_EMOJI}** in the economy.`,
-      `And I have **${blooMoney}${INK_EMOJI}** c:`,
-      { split: true }
-    );
+
+    const top5 = top5Profiles.map((p, i) => {
+      const medals = {
+        "0": ":first_place:",
+        "1": ":second_place:",
+        "2": ":third_place:",
+        "3": ":small_blue_diamond:",
+        "4": ":small_blue_diamond:"
+      };
+      const u = this.client.users.get(p.userId);
+      return `${medals["" + i]}**${u ? u.tag : 'Unknown'}:** ${p.money}`;
+    });
+
+    const msg = [];
+
+    msg.push(`__There is currently **${money}${INK_EMOJI}** in the economy.__`);
+    top5.forEach(top5Person => msg.push(top5Person));
+    msg.push(`:blue_heart: And I have **${blooMoney}${INK_EMOJI}** :smiling_face_with_3_hearts:`);
+
+    this.send(...msg, { split: true });
   }
 });

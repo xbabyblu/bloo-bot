@@ -27,7 +27,7 @@ module.exports = new Command({
       return;
     }
 
-    if (Number.isNaN(amount)) {
+    if (Number.isNaN(amount) || amount < 1) {
       const msg = await this.send(':no_entry_sign: That amount is not a valid number!');
       deleteIn(msg, 4000);
       return;
