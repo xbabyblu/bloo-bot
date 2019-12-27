@@ -76,4 +76,15 @@ petSchema.methods.givePat = async function givePat() {
   return this.save();
 }
 
+petSchema.methods.giveExp = async function giveExp(amount) {
+  this.experience += amount;
+
+  while (xp.expToNextLevel(this.level) < this.experience) {
+    this.experience -= xp.expToNextLevel(this.level);
+    this.level += 1;
+  }
+
+  return this.save();
+}
+
 module.exports = mongoose.model('Pet', petSchema);
