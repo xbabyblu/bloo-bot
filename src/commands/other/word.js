@@ -1,5 +1,6 @@
 const { Command, Text } = require('chop-tools');
 const WordPOS = require('wordpos');
+
 const words = new WordPOS();
 
 module.exports = new Command({
