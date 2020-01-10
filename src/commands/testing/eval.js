@@ -18,6 +18,6 @@ module.exports = new Command({
   async run(message, args, call) {
     const result = eval(call.content);
     message.channel.send("Done.");
-    message.channel.send(result).catch(() => {/*meh*/});
+    message.channel.send(result).catch(() => {/* meh */});
   }
 });
