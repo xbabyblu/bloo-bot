@@ -13,6 +13,6 @@ module.exports = new Command({
   async run(message, args, call) {
     const poke = createInteractionCommand(`${call.callerTag} poked you :yum:`, 'poke', message);
 
-    poke().catch(console.log);
+    poke().catch(err => this.client.emit('error', err));
   },
 });

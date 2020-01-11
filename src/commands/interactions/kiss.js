@@ -22,6 +22,6 @@ module.exports = new Command({
       message,
     );
 
-    kiss().catch(console.log);
+    kiss().catch(err => this.client.emit('error', err));
   },
 });

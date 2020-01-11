@@ -17,6 +17,6 @@ module.exports = new Command({
       message,
     );
 
-    cuddle().catch(console.log);
+    cuddle().catch(err => this.client.emit('error', err));
   },
 });
