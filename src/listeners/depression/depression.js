@@ -19,6 +19,10 @@ module.exports = new Listener({
       userId: message.author.id,
     });
 
+    if (!userResponse) {
+      return true;
+    }
+
     // if not yes
     if(!stringMatch(userResponse.first(), [COMMON_EXPRESSIONS.yes])) {
       send(message)('Well, I am glad to hear that you don\'t have depression, it\'s a pretty sucky thing to have. :(');
