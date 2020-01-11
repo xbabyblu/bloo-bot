@@ -51,7 +51,7 @@ blooSchema.pre('save', function preSave(next) {
   }
 });
 
-blooSchema.pre('save', function(next) {
+blooSchema.pre('save', function preSave(next) {
   this.updatedAt = Date.now();
   next();
 });

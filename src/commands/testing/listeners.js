@@ -7,7 +7,7 @@ module.exports = new Command({
   aliases: ['list'],
   // delete: true,
   hidden: true,
-  run(message, args, call) {
+  run() {
     const list = [...this.client.listeners.values()].map(l => l.toString());
     // console.log(list);
     this.send("```" + JSON.stringify(list, null, 2) + "```", true);

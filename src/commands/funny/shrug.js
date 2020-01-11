@@ -6,7 +6,7 @@ module.exports = new Command({
   aliases: ['meh'],
   category: 'funny',
   delete: true,
-  run(message) {
+  run() {
     this.send('¯\\_(ツ)_/¯');
   },
 });

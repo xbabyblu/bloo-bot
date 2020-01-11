@@ -1,7 +1,6 @@
 const { Listener } = require('chop-tools');
 
 const sentiment = require('../../services/sentiment');
-const format = require('../../util/format');
 const send = require('../../services/safeSend');
 
 module.exports = new Listener({

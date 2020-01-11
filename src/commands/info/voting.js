@@ -5,7 +5,7 @@ module.exports = new Command({
   description: 'Vote for bloo!',
   category: 'info',
   aliases: ['voting'],
-  run(message, args, call) {
+  run() {
     this.send(
       "I'm so **happy** you want to vote for me! I promise I'll remember this~ 💙",
       "You can vote for me every 12 hours. c:",

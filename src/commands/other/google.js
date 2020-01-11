@@ -7,7 +7,7 @@ module.exports = new Command({
   category: 'other',
   aliases: ['search'],
   args: ['search'],
-  run(message, args, call) {
+  run(message, args) {
     const { content } = message;
 
     const google = 'https://www.google.com/search?q=';

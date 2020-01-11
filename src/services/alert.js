@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const nodemailer = require('nodemailer');
 
 const Bloo = require('../models/bloo');
+const logger = require('../services/logger');
 
 const messages = {
   0: 'Possibly suicidal message detected.',
@@ -69,9 +70,9 @@ module.exports = class Alert {
       },
       (err, info) => {
         if (err) {
-          console.log(err);
+          logger.error(err);
         } else {
-          console.log(info);
+          logger.info(info);
         }
       },
     );
