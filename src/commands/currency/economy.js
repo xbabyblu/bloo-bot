@@ -33,8 +33,10 @@ module.exports = new Command({
         "3": ":small_blue_diamond:",
         "4": ":small_blue_diamond:"
       };
+      // if !u this user does not share a server with Bloo.
+      // TODO: Check profiles database for this user.
       const u = this.client.users.get(p.userId);
-      return `${medals["" + i]}**${u ? u.tag : 'Unknown'}:** ${p.money}`;
+      return `${medals["" + i]}**${u ? u.tag : 'Anonymous Bloo Baby'}:** ${p.money}`;
     });
 
     const msg = [];
