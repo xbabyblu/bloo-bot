@@ -27,16 +27,19 @@ const LETTERS = {
   x: ':regional_indicator_x:',
   y: ':regional_indicator_y:',
   z: ':regional_indicator_z:',
-  1: ':one:',
-  2: ':two:',
-  3: ':three:',
-  4: ':four:',
-  5: ':five:',
-  6: ':six:',
-  7: ':seven:',
-  8: ':eight:',
-  9: ':nine:',
-  0: ':zero:',
+  0: '0⃣',
+  1: '1⃣',
+  2: '2⃣',
+  3: '3⃣',
+  4: '4⃣',
+  5: '5⃣',
+  6: '6⃣',
+  7: '7⃣',
+  8: '8⃣',
+  9: '9⃣',
+  10: '🔟',
+  '#': '#⃣',
+  '*': '*⃣',
   '!': ':heart_exclamation:',
   '.': ':radio_button:',
   '?': ':grey_question:',
@@ -51,7 +54,7 @@ module.exports = new Command({
   category: 'funny',
   aliases: ['scream'],
   delete: true,
-  run(message, args, call) {
+  run(message, args) {
     if (!args[0]) return;
     const content =
       '' +
@@ -69,15 +72,15 @@ module.exports = new Command({
         })
         .replace(/\s+/, ' ')
         // eslint-disable-next-line no-useless-escape
-        .replace(/[^a-zA-Z0-9\s!\.\?]/g, '');
+        .replace(/[^a-zA-Z0-9#*\s!\.\?]/g, '');
 
     if (content.length < 1) return;
 
     const theYELL = content
-    .split('')
-    .map(l => LETTERS[l] || ' ')
-    .join('');
-    
+      .split('')
+      .map(l => LETTERS[l] || ' ')
+      .join('');
+
     if (theYELL.length > 1999) {
       this.send('That is too long to yell. :c');
       return;
