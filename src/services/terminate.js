@@ -22,6 +22,7 @@ function terminate(web, discord, options = { timeout: 500 }) {
           discord,
           `Omg <@517599684961894400> is going to be so mad :cold_sweat:
         \`\`\`${err}\`\`\``,
+        // eslint-disable-next-line no-console
         ).catch(console.error);
         // lets not kill Bloo for an unhandledRejection
         return;
@@ -32,7 +33,8 @@ function terminate(web, discord, options = { timeout: 500 }) {
         discord,
         `Omg <@517599684961894400> is going to be so mad :cold_sweat:
         \`\`\`${err.message}\n\n${err.stack}\`\`\``,
-      ).catch(console.error); // console.error because this is termination
+      // eslint-disable-next-line no-console
+      ).catch(console.error); // console here because termination
     }
 
     // Try a graceful shutdown

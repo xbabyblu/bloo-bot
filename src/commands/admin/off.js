@@ -6,7 +6,7 @@ module.exports = new Command({
   category: 'admin',
   hidden: true,
   delete: true,
-  run(message) {
+  run() {
     this.send(
       'Hi, offing my self, i\'m dad.',
     );

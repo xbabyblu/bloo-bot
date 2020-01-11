@@ -10,7 +10,7 @@ module.exports = new Command({
   category: 'testing',
   // delete: true,
   hidden: true,
-  async run(message, args, call) {
+  async run(message, args) {
     let [channel] = getChannelsInMessage(message);
     // send a test alert
     if (args[0] && ['send', 'test', 'testing'].includes(args[0].toLowerCase())) {

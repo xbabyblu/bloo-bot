@@ -8,7 +8,7 @@ module.exports = new Command({
   description: "Info about the Bloo economy, duh~",
   category: "currency",
   aliases: ["eco"],
-  async run(message, args, call) {
+  async run() {
     const [{ money }] = await Profile.aggregate([
       { $group: { _id: "", money: { $sum: "$money" } } },
       { $project: { _id: 0, money: "$money" } }

@@ -1,7 +1,6 @@
 const { Command } = require('chop-tools');
 
 const Currency = require('../../services/currency');
-const format = require('../../util/format');
 const { INK_EMOJI } = require('../../util/constants');
 
 module.exports = new Command({

@@ -39,7 +39,7 @@ guildSettingsSchema.statics.getOrCreate = async function getOrCreate(guildId) {
     await gSettings.save();
     return gSettings;
   } catch (err) {
-    console.log(`[GuildSettings] Could not get settings for guild with id: ${guildId}`, err);
+    err.stack = `[GuildSettings] Could not get settings for guild with id: ${guildId}\n\n` + err.stack;
     throw err;
   }
 };

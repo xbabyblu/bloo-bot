@@ -249,12 +249,11 @@ module.exports = new Command({
 
       // 2.25?? - which pet lol?
       const whichPetToRename = "Which pet would you like to rename? **{0}**?";
-      const userEnteredAPetNameThatTheyDontOwnMessage =
-        "I do not see a pet under that name, maybe check to see that you are spelling it correctly?";
-      /* should we reroute the command when someone incorrectly spells to where it says the above then gives the option again? 
-      like " i do not see this name ...." then person says " pet name example " then bloo says "oh 'Pet Name' right?"
-      alright! 😃:D oop
-      */
+      
+      // this message is not needed since we are bestMatching
+      // const userEnteredAPetNameThatTheyDontOwnMessage =
+      //   "I do not see a pet under that name, maybe check to see that you are spelling it correctly?";
+      
       let petToRename = null;
 
       // more than 1 pet

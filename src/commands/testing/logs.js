@@ -9,7 +9,7 @@ module.exports = new Command({
   category: 'admin',
   aliases: ['log'],
   hidden: true,
-  async run(message, args, call) {
+  async run(message) {
     let [channel] = getChannelsInMessage(message);
     // configure the channel
     const blooConfig = await Bloo.findOne({}).exec();

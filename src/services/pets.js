@@ -27,7 +27,7 @@ module.exports = class Pets {
     return `${random(FIRST_NAMES)} ${random(LAST_NAMES)}`;
   }
 
-  static generateImageRecipe(species) {
+  static generateImageRecipe() {
     const base = random(parts.base);
     const eyes = random(parts.eyes);
 

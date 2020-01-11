@@ -18,6 +18,9 @@ module.exports = new Command({
     } else {
       result = random(args);
     }
+
+    // msg is indeed being used. 🤦
+    // eslint-disable-next-line no-unused-vars
     let msg = await this.send(
       `:page_facing_up: **| ${message.author.username}** asked me to pick something.\n:1234: And I pick`,
     );
