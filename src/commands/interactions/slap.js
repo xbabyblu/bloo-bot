@@ -17,6 +17,6 @@ module.exports = new Command({
       message,
     );
 
-    slap().catch(console.log);
+    slap().catch(err => this.client.emit('error', err));
   },
 });

@@ -18,6 +18,6 @@ module.exports = new Command({
       message,
     );
 
-    hold().catch(console.log);
+    hold().catch(err => this.client.emit('error', err));
   },
 });

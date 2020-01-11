@@ -19,6 +19,6 @@ module.exports = new Command({
       message,
     );
 
-    cute().catch(console.log);
+    cute().catch(err => this.client.emit('error', err));
   },
 });

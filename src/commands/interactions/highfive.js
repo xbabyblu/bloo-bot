@@ -17,7 +17,7 @@ module.exports = new Command({
       message,
     );
 
-    highfive().catch(console.log);
+    highfive().catch(err => this.client.emit('error', err));
   },
 });
 // nice :ok_hand: 👌
