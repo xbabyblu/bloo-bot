@@ -8,7 +8,7 @@ module.exports = new Command({
   description: "Info about the Bloo economy, duh~",
   category: "currency",
   aliases: ["eco"],
-  async run(message, args, call) {
+  async run() {
     const [{ money }] = await Profile.aggregate([
       { $group: { _id: "", money: { $sum: "$money" } } },
       { $project: { _id: 0, money: "$money" } }
@@ -33,8 +33,10 @@ module.exports = new Command({
         "3": ":small_blue_diamond:",
         "4": ":small_blue_diamond:"
       };
+      // if !u this user does not share a server with Bloo.
+      // TODO: Check profiles database for this user.
       const u = this.client.users.get(p.userId);
-      return `${medals["" + i]}**${u ? u.tag : 'Unknown'}:** ${p.money}`;
+      return `${medals["" + i]}**${u ? u.tag : 'Anonymous Bloo Baby'}:** ${p.money}`;
     });
 
     const msg = [];

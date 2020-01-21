@@ -7,7 +7,7 @@ module.exports = new Command({
   description: 'Test the gifs api',
   category: 'testing',
   hidden: true,
-  run(message, args, call) {
+  run(message, args) {
     Gif.random(args)
       .then(gifUrl => {
         message.channel.send('Done!');

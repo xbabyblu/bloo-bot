@@ -17,6 +17,6 @@ module.exports = new Command({
       message,
     );
 
-    gay().catch(console.log);
+    gay().catch(err => this.client.emit('error', err));
   },
 });

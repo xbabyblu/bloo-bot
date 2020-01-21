@@ -6,7 +6,7 @@ module.exports = new Command({
   aliases: ['yeehaw'],
   delete: true,
   category: 'funny',
-  run(message) {
+  run() {
     // Yeeeeeeeeeeeeeeeeeeeehaw! 🐄
     this.send('Yeehaw!').then(msg => {
       msg.react('🤠').catch(() => {});

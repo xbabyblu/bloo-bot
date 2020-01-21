@@ -1,4 +1,5 @@
 const request = require('request-promise-native');
+const logger = require('../services/logger');
 
 class API {
   constructor(TOKEN) {
@@ -6,7 +7,7 @@ class API {
   }
 
   random(tags, bestMatch = true) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       tags = Array.isArray(tags) ? tags.join(',') : String(tags);
       request({
         uri: 'https://chop-gifs.herokuapp.com/gif/random',
@@ -17,7 +18,7 @@ class API {
           resolve(res.url);
         })
         .catch(err => {
-          console.error(err.message);
+          logger.error(err);
           resolve('https://cdn.chop.coffee/confused/0.gif');
         });
     });

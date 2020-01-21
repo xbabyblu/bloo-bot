@@ -17,6 +17,6 @@ module.exports = new Command({
       message,
     );
 
-    lick().catch(console.log);
+    lick().catch(err => this.client.emit('error', err));
   },
 });

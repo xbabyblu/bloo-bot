@@ -14,6 +14,6 @@ module.exports = new Command({
   async run(message, args, call) {
     const pat = createInteractionCommand(`*pat-pat* \n${call.callerTag} has pat you c:`, 'pat', message);
 
-    pat().catch(console.log);
+    pat().catch(err => this.client.emit('error', err));
   },
 });

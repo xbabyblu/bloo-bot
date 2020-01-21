@@ -12,11 +12,12 @@ module.exports = new Command({
     const arg = args[0].toLowerCase();
 
     if (arg === 'exception') {
+      // eslint-disable-next-line no-undef
       be.cool.about.it();
     }
 
     if (arg === 'rejection') {
-      Promise.reject('Throw command was used by ' + call.callerTag).then(() => {});
+      Promise.reject(new Error('Throw command was used by ' + call.callerTag)).then(() => {});
       return;
     }
 

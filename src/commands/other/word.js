@@ -1,5 +1,6 @@
 const { Command, Text } = require('chop-tools');
 const WordPOS = require('wordpos');
+
 const words = new WordPOS();
 
 module.exports = new Command({
@@ -7,9 +8,8 @@ module.exports = new Command({
   description: 'Shows information about a word.',
   category: 'other',
   aliases: ['define', 'dictionary'],
-  async run(message, args, call) {
-    const { prefix } = this.client.options;
-    const lookup = args[0] ? args[0].replace(/[^a-zA-Z]/g, '') : null;
+  async run(message, args) {
+    const lookup = args[0] ? args[0].replace(/[^a-zA-Z ]/g, '').trim() : null;
     if (!lookup) {
       this.send(`Hey! You have to pass a valid word for me to look up.`);
       return;

@@ -8,7 +8,7 @@ module.exports = new Command({
   category: 'testing',
   aliases: ['exp'],
   hidden: true,
-  run(message, args, call) {
+  run(message, args) {
     const [currentLevel] = Text.numbers(message.content);
 
     if (args[0] && args[0].toLowerCase() === 'bruh') {

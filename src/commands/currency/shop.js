@@ -1,4 +1,4 @@
-const { Command, Text } = require("chop-tools");
+const { Command } = require("chop-tools");
 const { MessageEmbed } = require("discord.js");
 
 const { INK_EMOJI } = require("../../BLOO_GLOBALS");

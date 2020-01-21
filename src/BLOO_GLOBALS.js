@@ -1,3 +1,7 @@
+// BLOO
+
+exports.SUPPORT_SERVER = 'https://discord.gg/9JPmfkP';
+
 // CURRENCY
 
 exports.INK_EMOJI = '<:blue:647188962376417280>';
