@@ -24,6 +24,9 @@ const profileSchema = new Schema({
     type: Number,
     default: 0,
   },
+  brb: {
+    type: String,
+  },
 });
 
 profileSchema.statics.getOrCreate = async function getOrCreate(userId) {
@@ -38,7 +41,7 @@ profileSchema.statics.getOrCreate = async function getOrCreate(userId) {
     await profile.save();
     return profile;
   } catch (err) {
-    console.log(`[Profile/getProfile] Could not get profile for id: ${userId}`, err);
+    err.stack = `[Profile/getProfile] Could not get profile for id: ${userId}\n` + err.stack;
     throw err;
   }
 };

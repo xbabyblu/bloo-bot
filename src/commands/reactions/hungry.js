@@ -3,7 +3,6 @@ const { Command } = require('chop-tools');
 const makeEmbed = require('../../util/makeEmbed');
 const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
-const format = require('../../util/format');
 
 const images = [
   'https://imgur.com/a/mbOwLaV',
@@ -24,11 +23,7 @@ const images = [
   'https://imgur.com/a/fZjUJ6c',
   'https://imgur.com/a/Y9jeMRN',
 ];
-/*
-for (let i = 0; i <= 28; i++) {
-  images.push(`http://cdn.chop.coffee/hungry/${i}.gif`);
-}
-*/
+
 module.exports = new Command({
   name: 'hungry',
   description: "we all get a little hungry sometimes",

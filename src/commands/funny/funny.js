@@ -7,8 +7,7 @@ module.exports = new Command({
   category: 'funny',
   delete: true,
   cooldown: 5,
-  // usage: '[test]',
-  run(message) {
+  run() {
     this.send("The only thing funny here is your face c':");
   },
 });

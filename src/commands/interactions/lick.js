@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -14,10 +13,10 @@ module.exports = new Command({
   async run(message, args, call) {
     const lick = createInteractionCommand(
       `Well.. How do I say this..\n \n${call.callerTag} has licked you. And now, I will proceed to walk away... :zany_face: `,
-      gifs.lick(),
+      'lick',
       message,
     );
 
-    lick().catch(console.log);
+    lick().catch(err => this.client.emit('error', err));
   },
 });

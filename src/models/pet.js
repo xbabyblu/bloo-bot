@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const { PET_PAT_EXP } = require('../BLOO_GLOBALS');
+const xp = require('../util/magicformula');
+
 const { Schema } = mongoose;
 
 const petSchema = new Schema({
@@ -17,7 +20,7 @@ const petSchema = new Schema({
     required: true,
     default: 0,
   },
-  // TODO: Pet species
+  // unused
   species: {
     type: String,
     required: true,
@@ -47,13 +50,6 @@ const petSchema = new Schema({
   }
 });
 
-/*
-stats
-random image
-random species
-
-*/
-
 petSchema.pre('save', function preSave(next) {
   if (this.isModified('createdAt')) {
     throw new Error('Creation field is read only!');
@@ -66,5 +62,29 @@ petSchema.pre('save', function preSave(next) {
   this.updatedAt = Date.now();
   next();
 });
+
+petSchema.methods.givePat = async function givePat() {
+  this.pats.count += 1;
+  this.pats.time = Date.now();
+  this.experience += PET_PAT_EXP;
+
+  while (xp.expToNextLevel(this.level) < this.experience) {
+    this.experience -= xp.expToNextLevel(this.level);
+    this.level += 1;
+  }
+
+  return this.save();
+}
+
+petSchema.methods.giveExp = async function giveExp(amount) {
+  this.experience += amount;
+
+  while (xp.expToNextLevel(this.level) < this.experience) {
+    this.experience -= xp.expToNextLevel(this.level);
+    this.level += 1;
+  }
+
+  return this.save();
+}
 
 module.exports = mongoose.model('Pet', petSchema);

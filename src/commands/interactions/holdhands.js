@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -15,10 +14,10 @@ module.exports = new Command({
   async run(message, args, call) {
     const hold = createInteractionCommand(
       `I was sent by \n${call.callerTag} to ask if you'd like to hold their hand :smiling_face_with_3_hearts:`,
-      gifs.holdhands(),
+      'holdhands',
       message,
     );
 
-    hold().catch(console.log);
+    hold().catch(err => this.client.emit('error', err));
   },
 });

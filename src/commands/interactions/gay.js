@@ -1,5 +1,4 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const createInteractionCommand = require('../../util/createInteractionCommand');
 
@@ -14,10 +13,10 @@ module.exports = new Command({
   async run(message, args, call) {
     const gay = createInteractionCommand(
       `\n${call.callerTag} called you gay ;p`,
-      gifs.laugh(),
+      'laugh',
       message,
     );
 
-    gay().catch(console.log);
+    gay().catch(err => this.client.emit('error', err));
   },
 });

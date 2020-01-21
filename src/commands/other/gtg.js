@@ -9,7 +9,7 @@ module.exports = new Command({
   category: 'other',
   delete: true,
   hidden: true,
-  run(message, args, call) {
+  run(message) {
     if (itsNotBlu(this.client, message)) return;
     this.send("xlilblu has said 'Gotta Blast!':rocket: ");
   },

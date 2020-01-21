@@ -1,0 +1,1 @@
+module.exports = milliseconds => Number((''+milliseconds).replace(/\d\d\d$/, () => '000'));

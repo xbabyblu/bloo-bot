@@ -1,9 +1,9 @@
 const { Command } = require('chop-tools');
 
 const makeEmbed = require('../../util/makeEmbed');
-const random = require('../../util/random');
 const findPerson = require('../../util/findPerson');
-const format = require('../../util/format');
+
+const Gifs = require('../../services/gifs');
 
 const images = [];
 
@@ -28,7 +28,7 @@ module.exports = new Command({
       msg = `<@${call.caller}>'s blushing :flushed:`;
     }
 
-    const embed = makeEmbed(msg, random(images), message);
+    const embed = makeEmbed(msg, await Gifs.random(['blush']), message);
 
     this.send({ embed });
   },

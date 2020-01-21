@@ -1,8 +1,8 @@
 const { Command } = require('chop-tools');
-const gifs = require('chop-gifs');
 
 const makeEmbed = require('../../util/makeEmbed');
 const findPerson = require('../../util/findPerson');
+const Gifs = require('../../services/gifs');
 
 module.exports = new Command({
   name: 'laugh',
@@ -22,7 +22,7 @@ module.exports = new Command({
 
     const embed = makeEmbed(
       msg,
-      gifs.laugh(),
+      await Gifs.random('laugh'),
       message,
     );
 

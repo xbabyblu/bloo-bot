@@ -15,6 +15,7 @@ const web = require('./web');
 
 const guildCreate = require('./events/guildCreate');
 const vote = require('./events/vote');
+const mention = require('./events/mention');
 
 const logger = require('./services/logger');
 const logCommands = require('./middleware/logCommands');
@@ -107,6 +108,7 @@ database(() => {
       client,
       `Omg <@517599684961894400> is going to be so mad :cold_sweat:
     \`\`\`${err.message}\n\n${err.stack}\`\`\``,
+    // eslint-disable-next-line no-console
     ).catch(console.error); // console.error instead of emit('error') or we could end up in a loop
   });
 
@@ -117,6 +119,7 @@ database(() => {
   // Events
   client.on('guildCreate', guildCreate(client));
   client.on('vote', vote(client));
+  client.on('message', mention(client));
 
   // Middleware
   client.use(logCommands);

@@ -15,7 +15,7 @@ function web(client) {
     });
 
   // top.gg votes webhook
-  app.post('/vote', bodyParser.json(), (req, res, next) => {
+  app.post('/vote', bodyParser.json(), (req, res) => {
     const auth = req.get('Authorization');
     if (!auth || auth !== process.env.TOPGG_PASS) {
       res.status(403).json({ message: 'Authentication Failed' });

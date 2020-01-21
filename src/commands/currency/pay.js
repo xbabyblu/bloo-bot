@@ -1,7 +1,6 @@
 const { Command } = require('chop-tools');
 
 const Currency = require('../../services/currency');
-const format = require('../../util/format');
 const { INK_EMOJI } = require('../../util/constants');
 
 module.exports = new Command({
@@ -27,7 +26,7 @@ module.exports = new Command({
       return;
     }
 
-    if (Number.isNaN(amount)) {
+    if (Number.isNaN(amount) || amount < 1) {
       const msg = await this.send(':no_entry_sign: That amount is not a valid number!');
       deleteIn(msg, 4000);
       return;
