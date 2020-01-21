@@ -22,18 +22,11 @@ const flatSeconds = require("../../util/flatSeconds");
 const xp = require("../../util/magicformula");
 
 module.exports = new Command({
-<<<<<<< HEAD
   name: 'pet',
   description: 'Trade your bloo ink for a pet that you can earn xp and feed!Use \"!b pet adopt\" to adopt your very own pet!',
   category: 'pets',
   aliases: ['p', 'pets'],
   hidden: true,
-=======
-  name: "pet",
-  description: "Trade your bloo ink for a pet that you can earn xp and feed!",
-  category: "pets",
-  aliases: ["p", "pets"],
->>>>>>> 99e1e2109fefb3639e240a3cfc7d7810de9e205b
   async run(message, args, call) {
     const pets = await Pet.find({ owner: call.caller }).exec();
 
