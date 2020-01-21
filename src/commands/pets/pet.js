@@ -23,7 +23,7 @@ const xp = require("../../util/magicformula");
 
 module.exports = new Command({
   name: "pet",
-  description: "Trade your bloo ink for a pet that you can earn xp and feed!",
+  description: "Trade your bloo ink for a pet that you can earn xp and feed! Use \"!b pet adopt\" to adopt your very own pet!",
   category: "pets",
   aliases: ["p", "pets"],
   async run(message, args, call) {
