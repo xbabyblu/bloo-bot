@@ -26,7 +26,6 @@ module.exports = new Command({
   description: 'Trade your bloo ink for a pet that you can earn xp and feed!Use \"!b pet adopt\" to adopt your very own pet!',
   category: 'pets',
   aliases: ['p', 'pets'],
-  hidden: true,
   async run(message, args, call) {
     const pets = await Pet.find({ owner: call.caller }).exec();
 
