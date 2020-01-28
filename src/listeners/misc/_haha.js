@@ -5,7 +5,7 @@ const send = require('../../services/safeSend');
 module.exports = new Listener({
   words: ['(haha|lmao|lmfao|lol|rofl|teehee|lel)'],
   category: 'haha',
-  cooldown: 2,
+  cooldown: 20,
   priority: 0,
   run(message) {
     send(message)("The only thing funny here is your face (': ");
