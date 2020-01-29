@@ -19,6 +19,7 @@ module.exports = client => async vote => {
     profile.votes.time = Date.now();
     await profile.save();
 
+    // TODO: Also check profiles on database
     const user = client.users.get(vote.user);
 
     if (!user) {
