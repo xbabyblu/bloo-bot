@@ -9,6 +9,7 @@ const words = {
   // depressed: -5,
   // 'yeet': -5,
   kms: -5, // for suicide_10.js
+  'fucc': -2,
 };
 
 // Sentiment IIFE to save a reference to the client and log sentiment usage.
