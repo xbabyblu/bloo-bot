@@ -1,7 +1,7 @@
 const path = require('path');
 const sharp = require('sharp');
 
-const random = require('../util/random');
+const random = require('../../util/random');
 
 const NAMES = require('./pet_names.json');
 
