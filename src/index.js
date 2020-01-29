@@ -6,7 +6,7 @@ const database = require('./services/database');
 const terminate = require('./services/terminate');
 const Alert = require('./services/alert');
 const Metrics = require('./services/metrics');
-const sentiment = require('./services/sentiment');
+const sentiment = require('./services/language/sentiment');
 
 const GuildSettings = require('./models/guildSettings');
 const Bloo = require('./models/bloo');

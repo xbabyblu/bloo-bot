@@ -1,6 +1,6 @@
 const { Command } = require('chop-tools');
 
-const sentiment = require('../../services/sentiment');
+const sentiment = require('../../services/language/sentiment');
 
 
 module.exports = new Command({
