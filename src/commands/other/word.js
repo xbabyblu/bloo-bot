@@ -4,10 +4,10 @@ const WordPOS = require('wordpos');
 const words = new WordPOS();
 
 module.exports = new Command({
-  name: 'word',
+  name: 'define',
   description: 'Shows information about a word.',
   category: 'other',
-  aliases: ['define', 'dictionary'],
+  aliases: ['word', 'dictionary'],
   async run(message, args) {
     const lookup = args[0] ? args[0].replace(/[^a-zA-Z ]/g, '').trim() : null;
     if (!lookup) {
