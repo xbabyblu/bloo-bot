@@ -12,7 +12,6 @@ module.exports = new Command({
   category: 'reactions',
   usage: '[target]',
   examples: [' ', '@Lar#9547', '@Xlilblu#5239'],
-  hidden: true,
   async run(message, args, call) {
     const target = await findPerson(message.mentions.members.first());
 
