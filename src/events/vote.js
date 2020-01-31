@@ -33,8 +33,16 @@ module.exports = client => async vote => {
     return;
   }
 
+  const currentDate = new Date();
+  const currentMonthAndYear = `${currentDate.getMonth()}/${currentDate.getFullYear()}`;
+
   profile.votes.count += 1;
-  profile.votes.time = Date.now();
+  profile.votes.time = currentDate;
+
+  const userVotesThisMonth = profile.votes.countPerMonth[currentMonthAndYear];
+
+  profile.votes.countPerMonth[currentMonthAndYear] = userVotesThisMonth ? userVotesThisMonth + 1 : 1;
+
   try {
     if (process.env.NODE_ENV === 'production') {
       await profile.save();
@@ -90,7 +98,6 @@ module.exports = client => async vote => {
     '＼(^。^ )',
     'ﾍ(￣▽￣*)ﾉ',
     '＼(^ω^＼)',
-    '',
   ];
 
   const hearts = [

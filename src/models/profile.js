@@ -18,6 +18,10 @@ const profileSchema = new Schema({
   },
   votes: {
     count: { type: Number, default: 0 },
+    countPerMonth: {
+      type: Object,
+      default: {},
+    },
     time: { type: Date, default: new Date('1970-01-01') },
   },
   money: {
@@ -28,6 +32,15 @@ const profileSchema = new Schema({
     type: String,
   },
 });
+
+profileSchema.methods.getVoteCountThisMonth = function getVoteCountThisMonth() {
+  const currentDate = new Date();
+  const currentMonthAndYear = `${currentDate.getMonth()}/${currentDate.getFullYear()}`;
+
+  const userVotesThisMonth = this.votes.countPerMonth[currentMonthAndYear];
+
+  return userVotesThisMonth || 0;
+}
 
 profileSchema.statics.getOrCreate = async function getOrCreate(userId) {
   let profile;
