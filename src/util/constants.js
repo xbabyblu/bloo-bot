@@ -10,6 +10,7 @@ const CATEGORY_EMOJIS = {
   reactions: ':pleading_face:',
   currency: ':diamond_shape_with_a_dot_inside:',
   admin: ':card_box:',
+  pets: ':dog:',
 };
 
 module.exports = {
