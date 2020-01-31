@@ -35,6 +35,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "mongoose": "^5.8.3",
+    "mongoose-unique-validator": "^2.0.3",
     "multilang-sentiment": "^1.2.0",
     "natural": "^0.6.3",
     "nodemailer": "^6.3.1",
@@ -43,7 +44,7 @@
     "sharp": "^0.23.3",
     "string-similarity": "^3.0.0",
     "twemoji-parser": "^12.1.1",
-    "wordpos": "^1.2.0"
+    "wordpos": "^2.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
