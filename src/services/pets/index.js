@@ -20,7 +20,7 @@ const getRandomModulateOptions = () => {
   };
 };
 
-const pathToPart = p => path.join(__dirname, `../../assets/${p}.png`);
+const pathToPart = p => path.join(__dirname, `../../../assets/${p}.png`);
 
 module.exports = class Pets {
   static generateRandomName() {
