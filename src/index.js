@@ -107,9 +107,6 @@ database(() => {
 
   // custom prefixes
   client.on('message', message => {
-    if (message.content.startsWith(client.options.prefix)) {
-      return;
-    }
     // eslint-disable-next-line no-underscore-dangle
     client._commandRunner.onMessage(message, client.prefixes);
   });
