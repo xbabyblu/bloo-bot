@@ -8,11 +8,12 @@ module.exports = new Command({
   admin: true,
   async run(message, args, call) {
     const hasCustomPrefix = !!call.settings.prefixSettings.prefix;
+    const defaultPrefix = this.client.options.prefix;
     if (!args[0]) {
       if (hasCustomPrefix) {
         this.send(`My prefix on this server is **${call.settings.prefixSettings.prefix}**`);
       } else {
-        this.send(`My prefix on this server is the default one **${this.client.options.prefix}**.`);
+        this.send(`My prefix on this server is the default one **${defaultPrefix}**.`);
       }
       return;
     }
@@ -26,6 +27,17 @@ module.exports = new Command({
 
     if (!isValidPrefix) {
       this.send('That is not a valid prefix!');
+      return;
+    }
+
+    if (['!b', 'remove', 'delete'].includes(newPrefix)) {
+      call.settings.prefixSettings = undefined;
+
+      await call.settings.save();
+
+      this.client.prefixes.unloadOne(call.settings.guildId);
+
+      this.send(`Removed! My prefix on this server is back to the default **${defaultPrefix}**`);
       return;
     }
 
