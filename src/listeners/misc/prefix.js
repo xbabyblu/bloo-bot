@@ -3,7 +3,7 @@ const { Listener, Text } = require('chop-tools');
 module.exports = new Listener({
   words: ['bloo', 'prefix'],
   category: 'bloo',
-  cooldown: 900000,
+  cooldown: 30,
   priority: 0,
   run(message) {
     const prefix = this.client.prefixes.get(message.guild.id) || this.client.options.prefix;
