@@ -33,7 +33,7 @@
     "loglevel-plugin-prefix": "^0.8.4",
     "mal-scraper": "^2.6.8",
     "moment": "^2.25.3",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.29",
     "mongoose": "^5.9.13",
     "mongoose-unique-validator": "^2.0.3",
     "multilang-sentiment": "^1.2.0",
