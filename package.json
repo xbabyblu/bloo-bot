@@ -31,7 +31,7 @@
     "humanize-duration": "^3.22.0",
     "loglevel": "^1.6.8",
     "loglevel-plugin-prefix": "^0.8.4",
-    "mal-scraper": "^2.6.8",
+    "mal-scraper": "^2.11.3",
     "moment": "^2.25.3",
     "moment-timezone": "^0.5.28",
     "mongoose": "^5.9.13",
